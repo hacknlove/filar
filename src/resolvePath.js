@@ -2,10 +2,10 @@ const { join } = require('path');
 
 function resolvePath (path) {
   if (path.endsWith('/')) {
-    path += 'index.html'
+    path += 'index.route.html'
   }
-  if (!path.endsWith('.html')) {
-    path += '.html';
+  if (!path.endsWith('.route.html')) {
+    path += '.route.html';
   }
   path = join(process.cwd(), path)
 
