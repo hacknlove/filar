@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const { readFile } = require('fs-extra');
 const { resolvePath } = require('./resolvePath');
+app.use(express.static('./public'))
 
 app.use(async (req, res) => {
     const filePath = resolvePath(req.path);
