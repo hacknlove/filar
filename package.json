@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "cd playground && node ../src/index.js"
+    "dev": "cd playground && node --watch ../src/index.js"
   },
   "author": "",
   "license": "ISC",
