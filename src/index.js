@@ -18,8 +18,8 @@ app.use(async (req, res) => {
 
 async function initializeAll() {
     await Promise.all([
-        initializeCustomComponents,
-        initializeDirectives
+        initializeCustomComponents(),
+        initializeDirectives()
     ]);
 
     app.listen(3000, () => {
