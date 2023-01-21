@@ -3,6 +3,7 @@ const app = express();
 const { resolvePath } = require('./resolvePath');
 const { initializeCustomComponents } = require('./customComponents/customComponents');
 const { processPage } = require('./pages');
+const { initializeDirectives } = require('./directives/directives');
 
 app.use(express.static('./public'))
 
