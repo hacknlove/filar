@@ -28,7 +28,6 @@ exports.initializeCustomComponents = initializeCustomComponents;
 exports.customComponents = new Proxy(customComponents, {
     get(target, name) {
         name = name.toLocaleLowerCase();
-        console.log(name)
         if (!target.has(name)) {
             return `<!-- ${name} does not exists -->`;
         }
