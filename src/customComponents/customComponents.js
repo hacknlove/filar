@@ -4,11 +4,11 @@ const { promisify } = require('util');
 
 const globAsync = promisify(glob);
 
-const extractComponentNameRegExp = /(?<componentName>[^/]+-[^/]+).component.html$/;
+const extractComponentNameRegExp = /(?<componentName>[a-z]+-[a-z]+).component.html$/;
 
-const customComponens = new Map();
+const customComponents = new Map();
 
-async function customComponentsInit() {
+async function initializeCustomComponents() {
     const files = await globAsync('**/*.component.html');
 
     for (const filePath of files) {
@@ -19,14 +19,16 @@ async function customComponentsInit() {
             continue;
         }
 
-        customComponens.set(filePathParsed.groups.componentName, await readFile(filePath, 'utf8'))
+        customComponents.set(filePathParsed.groups.componentName, await readFile(filePath, 'utf8'))
     }
 }
 
-exports.customComponentsInit = customComponentsInit;
+exports.initializeCustomComponents = initializeCustomComponents;
 
-exports.customComponents = new Proxy(customComponens, {
+exports.customComponents = new Proxy(customComponents, {
     get(target, name) {
+        name = name.toLocaleLowerCase();
+        console.log(name)
         if (!target.has(name)) {
             return `<!-- ${name} does not exists -->`;
         }
@@ -34,3 +36,7 @@ exports.customComponents = new Proxy(customComponens, {
         return target.get(name);
     }
 });
+
+exports.__test__ = {
+    customComponentsMap: customComponents
+};

@@ -4,11 +4,18 @@ const directives = {}
 
 const directiveNameRegExp = /(?<directiveName>[^/]+).directive.js$/;
 
-glob(`${__dirname}/**/*.directive.js`, (err, files) => {
-    for (const file of files) {
-        const directiveName = file.match(directiveNameRegExp).groups.directiveName;
-        directives[directiveName] = require(file)[directiveName];
-    }
-})
+async function initializeDirectives() {
+    return new Promise((resolve, reject) => {
+        glob(`${__dirname}/**/*.directive.js`, (err, files) => {
+            for (const file of files) {
+                const directiveName = file.match(directiveNameRegExp).groups.directiveName;
+                directives[directiveName] = require(file)[directiveName];
+            }
+            resolve();
+        });
+    });
+}
+
 
 exports.directives = directives;
+exports.initializeDirectives = initializeDirectives;

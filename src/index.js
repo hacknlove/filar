@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { resolvePath } = require('./resolvePath');
-const { customComponentsInit } = require('./customComponents/customComponents');
+const { initializeCustomComponents } = require('./customComponents/customComponents');
 const { processPage } = require('./pages');
 
 app.use(express.static('./public'))
@@ -15,8 +15,15 @@ app.use(async (req, res) => {
     }
 });
 
-customComponentsInit().then(() => {
+async function initializeAll() {
+    await Promise.all([
+        initializeCustomComponents,
+        initializeDirectives
+    ]);
+
     app.listen(3000, () => {
         console.info('Server listening on port 3000!');
     });
-});
+}
+
+initializeAll();
