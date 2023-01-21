@@ -1,13 +1,13 @@
-const { join } = require('path');
+const { join } = require("path");
 
-function resolvePath (path) {
-  if (path.endsWith('/')) {
-    path += 'index.route.html'
+function resolvePath(path) {
+  if (path.endsWith("/")) {
+    path += "index.route.html";
   }
-  if (!path.endsWith('.route.html')) {
-    path += '.route.html';
+  if (!path.endsWith(".route.html")) {
+    path += ".route.html";
   }
-  path = join(process.cwd(), path)
+  path = join(process.cwd(), path);
 
   return path;
 }

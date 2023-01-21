@@ -5,16 +5,22 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "cd playground && node --watch ../src/index.js"
+    "dev": "cd playground && node --watch ../src/index.js",
+    "lint": "eslint src --fix",
+    "prettier": "prettier --write src/**/*.{js,css,scss,html,json,md}",
+    "preprettier": "npm run lint"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "eslint-plugin-jest": "^27.2.1",
     "express": "^4.18.2",
     "fs-extra": "^11.1.0",
-    "linkedom": "^0.14.21"
+    "linkedom": "^0.14.21",
+    "prettier": "^2.8.3"
   },
   "devDependencies": {
+    "eslint": "^8.32.0",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1"
   }
