@@ -12,3 +12,11 @@ At this moment it's just a proof of concept, that I am developing on live sessio
 npm install
 npm run dev
 ```
+
+## Approach
+
+This is going to be very agile. No planning or anything. 
+
+The framework will be developed alongside a web app using it, in the playground folder.
+
+From this, the ideas about how the framework should be, will emerge.
