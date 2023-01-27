@@ -3,8 +3,9 @@ const { readFile } = require("fs-extra");
 
 const {
   initializeCustomComponents,
-  customComponents,
-} = require("./customComponents");
+} = require("./initialize");
+
+const { customComponents } = require("./common");
 
 jest.mock("glob", () => jest.fn());
 jest.mock("fs-extra", () => ({
@@ -33,14 +34,6 @@ describe("initializeCustomComponents", () => {
 
     expect(console.warn).toHaveBeenCalledWith(
       "File testComponent.html does not match the component naming convention"
-    );
-  });
-});
-
-describe("customComponents", () => {
-  it("should return a warning if the component does not exist", () => {
-    expect(customComponents["wrong-component"]).toBe(
-      "<!-- wrong-component does not exists -->"
     );
   });
 });

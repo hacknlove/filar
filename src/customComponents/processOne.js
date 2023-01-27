@@ -1,4 +1,4 @@
-const { customComponents } = require("./customComponents");
+const { customComponents } = require("./");
 
 async function processCustomComponent(component) {
   const customComponent = customComponents[component.tagName];

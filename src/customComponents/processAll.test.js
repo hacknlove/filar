@@ -1,8 +1,8 @@
-const { processCustomComponents } = require("./processCustomComponents");
-const { processCustomComponent } = require("./processCustomComponent");
+const { processCustomComponents } = require("./processAll");
+const { processCustomComponent } = require("./processOne");
 const { parseHTML } = require("linkedom");
 
-jest.mock("./processCustomComponent", () => ({
+jest.mock("./processOne", () => ({
   processCustomComponent: jest.fn(),
 }));
 

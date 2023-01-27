@@ -1,4 +1,4 @@
-const { processCustomComponent } = require("./processCustomComponent");
+const { processCustomComponent } = require("./processOne");
 
 async function processCustomComponents(element) {
   if (element.nextSibling) {

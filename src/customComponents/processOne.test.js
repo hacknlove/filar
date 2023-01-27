@@ -1,9 +1,9 @@
-const processCustomComponent = require("./processCustomComponent");
-const { __test__ } = require("./customComponents");
+const processCustomComponent = require("./processOne");
+const { customComponentsMap } = require("./common");
 
 describe("processCustomComponent", () => {
   it("should replace the component with the custom component", () => {
-    __test__.customComponentsMap.set(
+    customComponentsMap.set(
       "test-component",
       "test component content"
     );
