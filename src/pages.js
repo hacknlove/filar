@@ -1,9 +1,9 @@
 const { readFile } = require("fs-extra");
 const { DOMParser } = require("linkedom");
 const { processDirectives } = require("./directives/processDirectives");
-const {
-  processCustomComponents,
-} = require("./customComponents/processCustomComponents");
+const { processCustomComponents } = require("./customComponents/processAll");
+
+const parser = new DOMParser();
 
 async function processPage(req, res, filePath) {
   const file = await readFile(filePath, "utf8").catch((error) => {
@@ -26,11 +26,11 @@ async function processPage(req, res, filePath) {
     return file.error;
   }
 
-  const document = new DOMParser().parseFromString(file);
+  const document = parser.parseFromString(file).firstChild;
 
   processDirectives(req, res, document);
 
-  processCustomComponents(document);
+  await processCustomComponents(document);
 
   return document.toString();
 }

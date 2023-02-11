@@ -1,11 +1,19 @@
 const express = require("express");
 const app = express();
 const { resolvePath } = require("./resolvePath");
-const {
-  initializeCustomComponents,
-} = require("./customComponents/customComponents");
+const { initializeCustomComponents } = require("./customComponents/initialize");
 const { processPage } = require("./pages");
 const { initializeDirectives } = require("./directives/directives");
+
+const argvSet = new Set(process.argv);
+
+if (argvSet.has("--watch")) {
+  require("./customComponents/watch").watchCustomComponents();
+}
+
+if (argvSet.has("--livereload")) {
+  app.use(require("./dev/livereload").liveReload);
+}
 
 app.use(express.static("./public"));
 

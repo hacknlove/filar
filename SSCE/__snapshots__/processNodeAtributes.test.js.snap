@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`processNodeAttributes should replace placeholders in attributes 1`] = `"<div title="My title" width="1920" />"`;

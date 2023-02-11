@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`prepareSSR adds a script tag with the context 1`] = `"<SSR><script class="ssr" type="application/json">{"Title":"old title"}</script>{{Title}}</SSR>"`;
+
+exports[`prepareSSR skips the script tag if it already exists 1`] = `"<SSR><script type="application/json" class="ssr" />{{title}}</SSR>"`;

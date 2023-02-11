@@ -1,7 +1,8 @@
+const { childrenIterator } = require("../helpers/childrenIterator");
 const { processDirective } = require("./processDirective");
 
 function processDirectives(req, res, document) {
-  for (const node of document.childNodes) {
+  for (const node of childrenIterator(document)) {
     if (!node.tagName) {
       continue;
     }

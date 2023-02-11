@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`processAllElements does not replaces the context in text for SSR 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+  <html>
+    <head>
+      <title>My title</title>
+    </head>
+    <body>
+      <SSR><script class="ssr" type="application/json">{"Title":"My title"}</script>
+        <h1>{{Title}}</h1>
+      </SSR>
+    </body>
+  </html>
+  "
+`;
+
+exports[`processAllElements evaluates expressions in text nodes and attributes 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+      <div>
+        <a href="/My-title">MY TITLE</a>
+      </div>
+    "
+`;
+
+exports[`processAllElements processes custom elements 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+      <div>
+        <div class="MyComponent">
+        <header>
+          <h1>My title</h1>
+        </header>
+        <main>
+          <p>Lorem Ipsum</p>
+        </main>
+        <aside>
+          
+          some text without slot
+          <p>some text without slot</p>
+        </aside>
+        <footer>
+          <a href="/some-page">Go to page</a>
+        </footer>
+      </div>
+      </div>
+    "
+`;
+
+exports[`processAllElements replaces text in atrributes 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+      <div>
+        <img src="/img.jpg" alt="My title">
+      </img></div>
+    "
+`;
+
+exports[`processAllElements replaces the context in texts 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+<html>
+  <head>
+    <title>My title</title>
+  </head>
+  <body>
+  </body>
+</html>
+"
+`;
+
+exports[`processAllElements skips comments 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+  <html>
+    <body>
+      <!-- <h1>{{Title}}</h1> -->
+    </body>
+  </html>
+  "
+`;

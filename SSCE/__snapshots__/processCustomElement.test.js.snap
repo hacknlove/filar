@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`processCustomElement adds children to template if slot not found 1`] = `
+"<div>
+      <div class="CustomElement">
+    <div>content</div></div>
+    </div>"
+`;
+
+exports[`processCustomElement duplicates child in multiple slots with the same name 1`] = `
+"<div>
+      <div class="CustomElement">
+      <h1>
+        <div>slot1 content</div>
+      </h1>
+      <h2>
+        <div>slot1 content</div>
+      </h2>
+    </div>
+    </div>"
+`;
+
+exports[`processCustomElement processes the js custom elements 1`] = `"<div><div>processed custom element</div></div>"`;
+
+exports[`processCustomElement replaces the element with the custom element 1`] = `"<div><div class="CustomElement">custom element content</div></div>"`;
+
+exports[`processCustomElement slot children 1`] = `
+"<div>
+        <div class="CustomElement">
+        <div>slot1 content</div>
+      </div>
+      </div>"
+`;
+
+exports[`processCustomElement slot children into unnamed slot 1`] = `
+"<div>
+      <div class="CustomElement">
+      <div>slot1 content</div>
+    </div>
+    </div>"
+`;
+
+exports[`processCustomElement uses the default value of the slot if no child is provided 1`] = `
+"<div>
+        <div class="CustomElement">
+        <p>default slot content</p>
+          And some more content
+        
+      </div>
+      </div>"
+`;
+
+exports[`processCustomElement warns if slot not found 1`] = `
+"<div>
+      <div class="CustomElement">
+      
+    </div>
+    </div>"
+`;

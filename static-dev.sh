@@ -1,0 +1,1 @@
+node --watch ./static/index.js --from $1 --to $2 --watch 
