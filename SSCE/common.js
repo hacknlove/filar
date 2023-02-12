@@ -3,13 +3,14 @@ const { DOMParser } = require("linkedom");
 
 const parser = new DOMParser();
 
-const extractElementNameRegExp = /(?<elementName>([A-Z][a-z]+)+)\.se\.(html|js)$/;
+const extractElementNameRegExp =
+  /(?<elementName>([A-Z][a-z]+)+)\.se\.(html|js)$/;
 
 const customElementsMap = new Map();
 
 const emptyComment = parser.parseFromString("<!-- -->").firstChild;
 
-const getElementName = (filePath) => {
+function getElementName(filePath) {
   const filePathParsed = filePath.match(extractElementNameRegExp);
 
   if (!filePathParsed) {
@@ -79,5 +80,5 @@ module.exports = {
   customElements,
   addOrChange,
   remove,
-  customElementsMap
-}
+  customElementsMap,
+};

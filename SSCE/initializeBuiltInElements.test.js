@@ -1,9 +1,7 @@
 const glob = require("glob");
 const { join } = require("path");
 
-const {
-  initializeBuiltInElements,
-} = require("./initializeBuiltInElements");
+const { initializeBuiltInElements } = require("./initializeBuiltInElements");
 
 const { addOrChange } = require("./common");
 
@@ -22,8 +20,12 @@ describe("initializeBuiltInElements", () => {
     });
 
     await initializeBuiltInElements();
-    
-    expect(addOrChange).toHaveBeenCalledWith(join(__dirname, "builtInElements", "TestElement.se.html"));
-    expect(addOrChange).toHaveBeenCalledWith(join(__dirname, "builtInElements", "TestElement2.se.js"));
+
+    expect(addOrChange).toHaveBeenCalledWith(
+      join(__dirname, "builtInElements", "TestElement.se.html")
+    );
+    expect(addOrChange).toHaveBeenCalledWith(
+      join(__dirname, "builtInElements", "TestElement2.se.js")
+    );
   });
 });

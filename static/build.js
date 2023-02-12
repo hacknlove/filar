@@ -18,7 +18,7 @@ async function build({ from, to, filePath }) {
 
   const document = parser.parseFromString(file).firstElementChild;
 
-  await processAllElements(document);
+  await processAllElements(document, { from, filePath });
 
   await outputFile(join(to, filePath), document.toString());
 }

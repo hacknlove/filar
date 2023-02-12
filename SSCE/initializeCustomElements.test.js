@@ -1,8 +1,6 @@
 const glob = require("glob");
 
-const {
-  initializeCustomElements,
-} = require("./initializeCustomElements");
+const { initializeCustomElements } = require("./initializeCustomElements");
 
 const { addOrChange } = require("./common");
 
@@ -20,8 +18,8 @@ describe("initializecustomElements", () => {
       callback(null, ["TestElement.se.html", "TestElement2.se.html"]);
     });
 
-    await initializeCustomElements({ from: 'test' });
-    
+    await initializeCustomElements({ from: "test" });
+
     expect(addOrChange).toHaveBeenCalledWith("test/TestElement.se.html");
     expect(addOrChange).toHaveBeenCalledWith("test/TestElement2.se.html");
   });

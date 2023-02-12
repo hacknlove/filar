@@ -15,7 +15,7 @@ npm run dev
 
 ## Approach
 
-This is going to be very agile. No planning or anything. 
+This is going to be very agile. No planning or anything.
 
 The framework will be developed alongside a web app using it, in the playground folder.
 

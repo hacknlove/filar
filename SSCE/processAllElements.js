@@ -1,4 +1,3 @@
-
 const { childrenIterator } = require("../helpers/childrenIterator");
 const { processTextNode } = require("./processTextNode");
 const { prepareSSR } = require("./prepareSSR");
@@ -8,24 +7,23 @@ const { processCustomElement } = require("./processCustomElement");
 
 const isCustomComponentRegex = /^([A-Z][a-z]+)+$/;
 
-
-async function processAllElements(element, context = {}) {  
+async function processAllElements(element, context = {}) {
   for (const node of childrenIterator(element)) {
     if (node.nodeType === 3) {
       processTextNode(node, context);
       continue;
     }
-    
-    if (!node.tagName ) {
+
+    if (!node.tagName) {
       continue;
     }
 
     if (node.tagName === "SSR") {
       prepareSSR(node, context);
-      continue
+      continue;
     }
 
-    const newContext = getNewContext(node, context)
+    const newContext = getNewContext(node, context);
 
     processNodeAttributes(node, context);
 

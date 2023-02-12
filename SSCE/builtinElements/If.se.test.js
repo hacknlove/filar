@@ -5,10 +5,9 @@ const parser = new DOMParser();
 
 const If = require("./If.se");
 
-
-describe('If', () => {
-    it('renders the content if the condition is truthy', async () => {
-        const document = parser.parseFromString(`
+describe("If", () => {
+  it("renders the content if the condition is truthy", async () => {
+    const document = parser.parseFromString(`
             <html>
                 <body Condition="{|true|}">
                     <If key="Condition">
@@ -18,14 +17,14 @@ describe('If', () => {
             </html>
         `);
 
-        customElementsMap.set('If', If);
+    customElementsMap.set("If", If);
 
-        await processAllElements(document);
+    await processAllElements(document);
 
-        expect(document.toString()).toMatchSnapshot();
-    });
-    it('does not render the content if the condition is falsy', async () => {
-        const document = parser.parseFromString(`
+    expect(document.toString()).toMatchSnapshot();
+  });
+  it("does not render the content if the condition is falsy", async () => {
+    const document = parser.parseFromString(`
             <html>
                 <body Condition="{|false|}">
                     <If key="Condition">
@@ -35,14 +34,14 @@ describe('If', () => {
             </html>
         `);
 
-        customElementsMap.set('If', If);
+    customElementsMap.set("If", If);
 
-        await processAllElements(document);
+    await processAllElements(document);
 
-        expect(document.toString()).toMatchSnapshot();
-    });
-    it('renders the content if the condition is truthy (expression)', async () => {
-        const document = parser.parseFromString(`
+    expect(document.toString()).toMatchSnapshot();
+  });
+  it("renders the content if the condition is truthy (expression)", async () => {
+    const document = parser.parseFromString(`
             <html>
                 <body>
                     <If key="Condition" Condition="{|5 > 4|}">
@@ -52,15 +51,15 @@ describe('If', () => {
             </html>
         `);
 
-        customElementsMap.set('If', If);
+    customElementsMap.set("If", If);
 
-        await processAllElements(document);
+    await processAllElements(document);
 
-        expect(document.toString()).toMatchSnapshot();
-    });
+    expect(document.toString()).toMatchSnapshot();
+  });
 
-    it('does not render the content if the condition is falsy (expression)', async () => {
-        const document = parser.parseFromString(`
+  it("does not render the content if the condition is falsy (expression)", async () => {
+    const document = parser.parseFromString(`
             <html>
                 <body>
                     <If key="Condition" Condition="{|5 < 4|}">
@@ -70,10 +69,10 @@ describe('If', () => {
             </html>
         `);
 
-        customElementsMap.set('If', If);
+    customElementsMap.set("If", If);
 
-        await processAllElements(document);
+    await processAllElements(document);
 
-        expect(document.toString()).toMatchSnapshot();
-    });
+    expect(document.toString()).toMatchSnapshot();
+  });
 });

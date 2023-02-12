@@ -51,11 +51,11 @@ describe("processAllElements", () => {
     </body>
   </html>
   `;
-  const document = parser.parseFromString(html);
+    const document = parser.parseFromString(html);
 
-  await processAllElements(document);
+    await processAllElements(document);
 
-  expect(document.toString()).toMatchSnapshot();
+    expect(document.toString()).toMatchSnapshot();
   });
 
   it("replaces text in atrributes", async () => {
@@ -113,7 +113,7 @@ describe("processAllElements", () => {
           <a href="{{Href}}">Go to page</a>
         </footer>
       </div>
-    `
+    `;
 
     const document = parser.parseFromString(html);
     const myComponent = parser.parseFromString(MyComponent).firstElementChild;

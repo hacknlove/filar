@@ -1,7 +1,7 @@
 const { childrenIterator } = require("../helpers/childrenIterator");
 const { customElements } = require("./");
 
-function getTemplateSlots (template) {
+function getTemplateSlots(template) {
   const slots = new Map();
 
   slots.set(" no unnamed slot ", { name: "", elements: [], used: false });
@@ -19,7 +19,7 @@ function getTemplateSlots (template) {
   return slots;
 }
 
-function sendChildToSlot ({ child, templateSlots, customElement, component }) {
+function sendChildToSlot({ child, templateSlots, customElement, component }) {
   const slotName = child.getAttribute?.("slot") ?? "";
   child.removeAttribute?.("slot");
   child.remove();
@@ -28,7 +28,9 @@ function sendChildToSlot ({ child, templateSlots, customElement, component }) {
 
   if (!slotGroup) {
     if (slotName) {
-      console.warn(`Slot "${slotName}" not found in custom element "${component.tagName}"`);
+      console.warn(
+        `Slot "${slotName}" not found in custom element "${component.tagName}"`
+      );
       return;
     }
 
@@ -43,7 +45,7 @@ function sendChildToSlot ({ child, templateSlots, customElement, component }) {
   }
 }
 
-function defaultSlots (templateSlots) {
+function defaultSlots(templateSlots) {
   for (const slotGroup of templateSlots.values()) {
     if (slotGroup.used) {
       for (const slot of slotGroup.elements) {
@@ -68,7 +70,11 @@ async function processCustomElement(component, context, processElements) {
   const customElement = customElements[component.tagName];
 
   if (customElement.processCustomElement) {
-    await customElement.processCustomElement(component, context, processElements);
+    await customElement.processCustomElement(
+      component,
+      context,
+      processElements
+    );
     return;
   }
 

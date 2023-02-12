@@ -35,8 +35,8 @@ describe("addOrChange", () => {
     expect(customElements["TestElement"]).toMatchSnapshot();
   });
 
-  it('warns if element name does not match the convention', async () => {
-    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => { });
+  it("warns if element name does not match the convention", async () => {
+    const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
 
     await addOrChange("testElement.html");
 
@@ -51,7 +51,7 @@ describe("addOrChange", () => {
     await addOrChange("./test/TestJsElement.se.js");
 
     expect(customElements["TestJsElement"]).toBe(jsElement);
-  })
+  });
 });
 
 describe("remove", () => {
@@ -65,8 +65,8 @@ describe("remove", () => {
     );
   });
 
-  it('warns if element name does not match the convention', async () => {
-    const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => { });
+  it("warns if element name does not match the convention", async () => {
+    const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
 
     await remove("testElement.html");
 
@@ -75,4 +75,3 @@ describe("remove", () => {
     );
   });
 });
-

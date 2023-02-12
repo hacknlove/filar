@@ -7,7 +7,7 @@
     "test": "jest",
     "dev": "cd playground && node --watch ../src/index.js",
     "lint": "eslint src --fix",
-    "prettier": "prettier --write {src,static,helpers}/**/*.{js,css,scss,html,json,md}",
+    "prettier": "prettier --write **/*.{js,css,scss,html,json,md}",
     "preprettier": "npm run lint"
   },
   "author": "",

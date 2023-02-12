@@ -1,3 +1,3 @@
 exports.processCustomElement = function (element) {
-    return element.remove();
-}
+  return element.remove();
+};
