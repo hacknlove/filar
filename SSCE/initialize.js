@@ -1,9 +1,6 @@
-const glob = require("glob");
-const { promisify } = require("util");
-
 const { globPattern, addOrChange } = require("./common");
 
-const globAsync = promisify(glob);
+const { globAsync } = require("../helpers/globAsync");
 
 async function initializeCustomElements({ from }) {
   const files = await globAsync(globPattern, {

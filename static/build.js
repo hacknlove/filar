@@ -3,8 +3,8 @@ const { DOMParser } = require("linkedom");
 const { join } = require("path");
 
 const {
-  processCustomComponents,
-} = require("../src/customComponents/processAll");
+  processAllElements,
+} = require("../SSCE/processAllElements");
 const parser = new DOMParser();
 
 async function build({ from, to, filePath }) {
@@ -18,9 +18,9 @@ async function build({ from, to, filePath }) {
     return;
   }
 
-  const document = parser.parseFromString(file).firstChild;
+  const document = parser.parseFromString(file).firstElementChild;
 
-  await processCustomComponents(document);
+  await processAllElements(document);
 
   await outputFile(join(to, filePath), document.toString());
 }

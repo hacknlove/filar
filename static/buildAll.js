@@ -1,5 +1,4 @@
-const { promisify } = require("util");
-const globAsync = promisify(require("glob"));
+const { globAsync } = require("../helpers/globAsync");
 
 const { build } = require("./build");
 
