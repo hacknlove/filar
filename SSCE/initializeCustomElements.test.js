@@ -2,7 +2,7 @@ const glob = require("glob");
 
 const {
   initializeCustomElements,
-} = require("./initialize");
+} = require("./initializeCustomElements");
 
 const { addOrChange } = require("./common");
 
