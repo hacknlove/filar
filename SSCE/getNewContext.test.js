@@ -17,4 +17,34 @@ describe("getNewContext", () => {
             FooBar: "bar",
         });
     });
+
+    it("takes the value from the context if the value is a key", () => {
+        const node = parser.parseFromString("<div NewField='{{Content}}'></div>").firstChild;
+
+        const context = {
+            Content: ["some array"],
+        };
+
+        const newContext = getNewContext(node, context);
+
+        expect(newContext).toEqual({
+            Content: ["some array"],
+            NewField: ["some array"],
+        });
+    });
+
+    it("takes the value from the context if the value is an expression", () => {
+        const node = parser.parseFromString("<div NewField='{|Content[0]|}'></div>").firstChild;
+
+        const context = {
+            Content: ["some array"],
+        };
+
+        const newContext = getNewContext(node, context);
+
+        expect(newContext).toEqual({
+            Content: ["some array"],
+            NewField: "some array",
+        });
+    });
 });

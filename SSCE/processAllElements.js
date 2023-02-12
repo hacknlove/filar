@@ -25,9 +25,9 @@ async function processAllElements(element, context = {}) {
       continue
     }
 
-    processNodeAttributes(node, context);
-
     const newContext = getNewContext(node, context)
+
+    processNodeAttributes(node, context);
 
     if (isCustomComponentRegex.test(node.tagName)) {
       await processCustomElement(node, newContext, processAllElements);
