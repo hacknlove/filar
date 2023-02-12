@@ -75,7 +75,7 @@ const customElements = new Proxy(customElementsMap, {
 });
 
 module.exports = {
-  globPattern: "**/*.sc.html",
+  globPattern: "**/*.se.html",
   customElements,
   addOrChange,
   remove,
