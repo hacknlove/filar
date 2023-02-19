@@ -72,9 +72,9 @@ export const proxyHandler = {
   },
 };
 
-export function manageDynamicNoce ({ node, island, rawState }) {
+export function manageDynamicNoce({ node, island, rawState }) {
   if (node.showTimeEventListeners) {
-    return
+    return;
   }
   node.showTimeEventListeners = [];
 
@@ -124,37 +124,37 @@ export function initShowTimeIsland(island, rawState) {
         route: "",
       },
       proxyHandler
-    )
-  }
+    ),
+  };
 }
 
-export function manageDynamicNodes (island, rawState) {
+export function manageDynamicNodes(island, rawState) {
   const observer = new MutationObserver((mutations) => {
-    for(const mutation of mutations) {
+    for (const mutation of mutations) {
       if (mutation.type !== "childList") {
         continue;
       }
 
-      for(const node of mutation.removedNodes) {
+      for (const node of mutation.removedNodes) {
         if (!node.showTimeEventListeners) {
           continue;
         }
 
-        for(const { events, eventHandler } of node.showTimeEventListeners) {
-          for(const event of events) {
+        for (const { events, eventHandler } of node.showTimeEventListeners) {
+          for (const event of events) {
             island.removeEventListener(event, eventHandler);
           }
         }
       }
 
-      for(const node of mutation.addedNodes) {
+      for (const node of mutation.addedNodes) {
         if (node.dataset.showtime) {
           manageDynamicNoce({ node, island, rawState });
         }
       }
     }
   });
-  
+
   observer.observe(document.body, {
     childList: true,
     subtree: true,
@@ -164,10 +164,12 @@ export function manageDynamicNodes (island, rawState) {
 export async function getIslandState(script) {
   const src = script.getAttribute("src");
   if (src) {
-    return fetch(src).then((response) => response.json()).catch(() => {
-      console.warn(`Failed to fetch ${src}`);
-      return {};
-    });
+    return fetch(src)
+      .then((response) => response.json())
+      .catch(() => {
+        console.warn(`Failed to fetch ${src}`);
+        return {};
+      });
   }
   return JSON.parse(script.textContent);
 }

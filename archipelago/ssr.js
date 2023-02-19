@@ -1,3 +1,1 @@
-function render (element, showtimestate) {
-    
-}
+function render(element, showtimestate) {}

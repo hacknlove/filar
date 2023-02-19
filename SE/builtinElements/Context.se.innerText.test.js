@@ -60,4 +60,3 @@ describe("Context inner text", () => {
     await expect(() => processAllElements(document)).rejects.toThrow();
   });
 });
-

@@ -49,17 +49,20 @@ async function fromFile(src, context) {
   }
 
   if (!isAModule(expandedSrc)) {
-    throw new Error(`${expandedSrc} cannot be found`, {cause: { src, context }});
+    throw new Error(`${expandedSrc} cannot be found`, {
+      cause: { src, context },
+    });
   }
   let required;
   try {
     required = require(expandedSrc);
   } catch (error) {
-    throw new Error(`${expandedSrc} cannot be parsed`, { cause: {
-      src,
-      context,
-      error,
-    }
+    throw new Error(`${expandedSrc} cannot be parsed`, {
+      cause: {
+        src,
+        context,
+        error,
+      },
     });
   }
 
@@ -79,9 +82,6 @@ async function fromFile(src, context) {
 }
 
 async function processCustomElement(element, context) {
-  console.log('SSR', element.getAttribute("ssr"))
-  console.log('build', !element.getAttribute("build"))
-
   if (element.getAttribute("ssr") && !element.getAttribute("build")) {
     return;
   }
@@ -101,3 +101,7 @@ async function processCustomElement(element, context) {
 }
 
 exports.processCustomElement = processCustomElement;
+
+exports.__test__ = {
+  fromFile,
+};

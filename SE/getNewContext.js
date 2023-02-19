@@ -16,12 +16,16 @@ exports.getNewContext = function getNewContext(node, context) {
     node.removeAttribute(attr);
 
     try {
-      newContext[attr] = vm.runInNewContext(
-        value,
-        context
-      );
+      newContext[attr] = vm.runInNewContext(value, context);
     } catch (error) {
-      console.warn("Wrong context expression", { attr, value, context, error });
+      throw new Error("Wrong context expression", {
+        cause: {
+          attr,
+          value,
+          context,
+          error,
+        },
+      });
     }
   }
 

@@ -1,4 +1,20 @@
 describe("ShowtimeState", () => {
+  afterEach(async () => {
+    const { state } = await import("./showtimestate.mjs");
+
+    for (const key in state) {
+      delete state[key];
+    }
+  });
+  it("gives the keys", async () => {
+    const { showtimestate } = await import("./showtimestate.mjs");
+
+    showtimestate.foo = {};
+    showtimestate.bar = {};
+    showtimestate.buz = {};
+
+    expect(showtimestate.__keys__).toEqual(["foo", "bar", "buz"]);
+  });
   it("dispatches events", async () => {
     const { showtimestate } = await import("./showtimestate.mjs");
 
@@ -114,5 +130,15 @@ describe("ShowtimeState", () => {
     showtimestate.foo.bar.buz = { buz: true };
 
     expect(showtimestate.foo.bar.buz.__route__).toBe("foo.bar.buz");
+  });
+
+  it("gives the keys", async () => {
+    const { showtimestate } = await import("./showtimestate.mjs");
+
+    showtimestate.foo = {};
+    showtimestate.bar = {};
+    showtimestate.buz = {};
+
+    expect(showtimestate.__keys__).toEqual(["foo", "bar", "buz"]);
   });
 });
