@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`If key does not render the content if context[key] is falsy 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <html>
+                <body>
+                    
+                </body>
+            </html>
+        "
+`;
+
+exports[`If key does not render the content if the condition is falsy (expression) 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <html>
+                <body>
+                    
+                </body>
+            </html>
+        "
+`;
+
+exports[`If key renders the content if the context[key] is truthy 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <html>
+                <body>
+                    
+                        <span>content</span>
+                    
+                </body>
+            </html>
+        "
+`;
+
+exports[`If key works for local context (truthy) 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <html>
+                <body>
+                    4&gt;
+                        <span>content</span>
+                    
+                </body>
+            </html>
+        "
+`;
+
+exports[`if condition does not renders the content if the condition evaluates to falsy 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <html>
+                <body>
+                    
+                </body>
+            </html>
+        "
+`;
+
+exports[`if condition renders the content if the condition evaluates to truthy 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <html>
+                <body>
+                    
+                        <span>content</span>
+                    
+                </body>
+            </html>
+        "
+`;

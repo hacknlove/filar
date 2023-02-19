@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Context ssr skips only ssr context 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+    <div>
+        <Context src="/test/context.js" ssr="true" />
+        <h1>My title</h1>
+    </div>
+"
+`;

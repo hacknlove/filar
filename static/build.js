@@ -2,7 +2,7 @@ const { readFile, outputFile } = require("fs-extra");
 const { DOMParser } = require("linkedom");
 const { join } = require("path");
 
-const { processAllElements } = require("../SSCE/processAllElements");
+const { processAllElements } = require("../SE/processAllElements");
 const parser = new DOMParser();
 
 async function build({ from, to, filePath }) {

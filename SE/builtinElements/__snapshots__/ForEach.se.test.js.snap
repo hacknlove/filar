@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForEach filters out with the filter 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+        <div>
+          <ul>
+            
+              <li>three</li>
+            
+              <li>four</li>
+            
+              <li>five</li>
+            
+          </ul>
+        </div>
+    "
+`;
+
+exports[`ForEach renders the children for each item in the iterator 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+        <div>
+          <ul>
+            
+              <li>one</li>
+            
+              <li>two</li>
+            
+              <li>three</li>
+            
+          </ul>
+        </div>
+    "
+`;

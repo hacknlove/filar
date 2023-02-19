@@ -8,7 +8,7 @@ const { customElementsMap } = require("./common");
 describe("processAllElements", () => {
   it("replaces the context in texts", async () => {
     const html = `
-<html Title="My title">
+<html Title="'My title'">
   <head>
     <title>{{Title}}</title>
   </head>
@@ -25,7 +25,7 @@ describe("processAllElements", () => {
 
   it("does not replaces the context in text for SSR", async () => {
     const html = `
-  <html Title="My title">
+  <html Title="'My title'">
     <head>
       <title>{{Title}}</title>
     </head>
@@ -45,7 +45,7 @@ describe("processAllElements", () => {
 
   it("skips comments", async () => {
     const html = `
-  <html Title="My title">
+  <html Title="'My title'">
     <body>
       <!-- <h1>{{Title}}</h1> -->
     </body>
@@ -60,8 +60,8 @@ describe("processAllElements", () => {
 
   it("replaces text in atrributes", async () => {
     const html = `
-      <div AltText="My title" ImgSrc="/img.jpg">
-        <img src="{{ImgSrc}}" alt="{{AltText}}">
+      <div AltText="'My title'" ImgSrc="'/img.jpg'">
+        <img src={{ImgSrc}} alt={{AltText}}>
       </div>
     `;
 
@@ -74,8 +74,8 @@ describe("processAllElements", () => {
 
   it("evaluates expressions in text nodes and attributes", async () => {
     const html = `
-      <div Title="My title">
-        <a href="/{|Title.replaceAll(' ', '-')|}">{|Title.toUpperCase()|}</a>
+      <div Title="'My title'">
+        <a href="/{{Title.replaceAll(' ', '-')}}">{{Title.toUpperCase()}}</a>
       </div>
     `;
 
@@ -88,8 +88,8 @@ describe("processAllElements", () => {
 
   it("processes custom elements", async () => {
     const html = `
-      <div Title="My title">
-        <MyComponent Title="{{Title}}" Content="Lorem Ipsum" Href="/some-page">
+      <div Title="'My title'">
+        <MyComponent Title="'Title'" Content="'Lorem Ipsum'" Href="'/some-page'">
           <h1 slot="title">{{Title}}</h1>
           <p slot="content">{{Content}}</p>
           some text without slot
@@ -110,7 +110,7 @@ describe("processAllElements", () => {
           <slot></slot>
         </aside>
         <footer>
-          <a href="{{Href}}">Go to page</a>
+          <a href={{Href}}>Go to page</a>
         </footer>
       </div>
     `;

@@ -28,7 +28,7 @@ exports[`processAllElements processes custom elements 1`] = `
       <div>
         <div class="MyComponent">
         <header>
-          <h1>My title</h1>
+          <h1>Title</h1>
         </header>
         <main>
           <p>Lorem Ipsum</p>

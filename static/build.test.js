@@ -6,7 +6,7 @@ jest.mock("fs-extra", () => ({
   outputFile: jest.fn(),
 }));
 
-jest.mock("../SSCE/processAllElements", () => ({
+jest.mock("../SE/processAllElements", () => ({
   processAllElements: jest.fn(),
 }));
 

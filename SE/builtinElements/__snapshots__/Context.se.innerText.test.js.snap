@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Context inner text changes parent context from JSON 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <div>
+                
+                <h1>My Updated title</h1>
+                <h2>Other</h2>
+            </div>
+        "
+`;
+
+exports[`Context inner text changes parent context from js 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <div>
+                
+                <h1>My Updated title</h1>
+            </div>
+        "
+`;
