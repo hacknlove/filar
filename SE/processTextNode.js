@@ -1,13 +1,13 @@
 const { replaceIslandPlaceholders } = require("./replaceIslandPlaceholders");
 const { replaceStaticPlaceholders } = require("./replaceStaticPlaceholders");
 
-function getChildNumber (node) {
+function getChildNumber(node) {
   let i = 0;
-  for(;(node = node.previousSibling);i++);
+  for (; (node = node.previousSibling); i++);
   return i;
 }
 
-function findIsland (node) {
+function findIsland(node) {
   while (node && !node.island) {
     node = node.parentNode;
   }
@@ -19,24 +19,21 @@ exports.processTextNode = function (node, context) {
   node.textContent = replaceStaticPlaceholders({
     text: node.textContent,
     context,
-    island
+    island,
   });
 
   if (!island) return;
 
   const childNumber = getChildNumber(node);
 
-  const {
-    text,
-    serialized
-  } = replaceIslandPlaceholders({
+  const { text, serialized } = replaceIslandPlaceholders({
     text: node.textContent,
     island,
-    childNumber
+    childNumber,
   });
 
   if (!serialized) {
-    return
+    return;
   }
 
   node.textContent = text;
@@ -44,5 +41,13 @@ exports.processTextNode = function (node, context) {
   previousSerialized.push(serialized);
   node.parentNode.serialized = previousSerialized;
 
-  node.parentNode.setAttribute("data-island", JSON.stringify(previousSerialized));
+  node.parentNode.setAttribute(
+    "data-island",
+    JSON.stringify(previousSerialized)
+  );
+};
+
+exports.__test__ = {
+  getChildNumber,
+  findIsland,
 };

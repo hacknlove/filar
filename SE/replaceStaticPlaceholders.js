@@ -7,18 +7,18 @@ function replaceStaticPlaceholders({ text, context, island = {} }) {
     try {
       return vm.runInNewContext(expresion, {
         ...context,
-        ...island
-      })
+        ...island,
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
       throw new Error("Error while evaluating static expression", {
         reason: {
           text,
           expresion,
           context,
-          island
-        }
-      })
+          island,
+        },
+      });
     }
   });
 }

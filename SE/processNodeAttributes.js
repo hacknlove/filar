@@ -6,7 +6,7 @@ exports.processNodeAttributes = function processNodeAttributes(node, context) {
       attr,
       replaceStaticPlaceholders({
         text: node.getAttribute(attr),
-        context
+        context,
       })
     );
   }

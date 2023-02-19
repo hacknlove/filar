@@ -8,35 +8,38 @@ function replaceIslandPlaceholders({ text, island, childNumber }) {
   let offset = 0;
 
   const newText = text.replace(contextRegexp, (match, expresion, from) => {
-
-    let replacement
+    let replacement;
     try {
-      replacement = vm.runInNewContext(expresion, island)
+      replacement = vm.runInNewContext(expresion, island);
     } catch (error) {
       throw new Error("Error while evaluating island", {
         reason: {
           text,
           expresion,
-          island
-        }
-      })
+          island,
+        },
+      });
     }
 
     serialized.push([
       childNumber,
       from + offset,
       replacement.length,
-      expresion
-    ])
+      expresion,
+    ]);
 
     offset += replacement.length - match.length;
     return replacement;
   });
 
   if (!serialized.length) {
-    return {}
+    return {};
   }
 
+  return {
+    text: newText,
+    serialized,
+  };
 }
 
 exports.replaceIslandPlaceholders = replaceIslandPlaceholders;

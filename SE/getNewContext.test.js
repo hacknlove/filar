@@ -56,4 +56,16 @@ describe("getNewContext", () => {
       parentContext: expect.any(Object),
     });
   });
+
+  it("throws if the expresion is wrong", () => {
+    const node = parser.parseFromString(
+      "<div NewField=Foo+Bar=FooBar></div>"
+    ).firstChild;
+
+    const context = {
+      Content: ["some array"],
+    };
+
+    expect(() => getNewContext(node, context)).toThrow();
+  });
 });
