@@ -5,9 +5,6 @@ console.log(`Building from ${argv.from} to ${argv.to}...`);
 const { buildAll } = require("./buildAll");
 
 const { initializeServerElements } = require("../SE/initializeServerElements");
-const {
-  initializeBuiltin,
-} = require("../SE/builtIn/initializeBuiltin");
 
 if (argv.watch) {
   console.log("Watch mode enabled...");
@@ -18,12 +15,9 @@ if (argv.watch) {
 }
 
 async function main() {
-  await Promise.all([
-    initializeBuiltin(),
-    initializeServerElements({
-      from: argv.from,
-    }),
-  ]);
+  await initializeServerElements({
+    from: argv.from,
+  });
 
   return buildAll({
     from: argv.from,
