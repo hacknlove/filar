@@ -1,6 +1,6 @@
 const { DOMParser } = require("linkedom");
 const { processAllElements } = require("../processAllElements");
-const { customElementsMap } = require("../common");
+const { ServerElementsMap } = require("../common");
 
 const parser = new DOMParser();
 
@@ -15,10 +15,10 @@ describe("Context from file", () => {
             </div>
         `);
 
-    customElementsMap.set("Context", Context);
+    ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "SE/builtinElements",
+      from: "SE/builtIn",
       filePath: "test/index.html",
     });
 
@@ -33,10 +33,10 @@ describe("Context from file", () => {
     </div>
 `);
 
-    customElementsMap.set("Context", Context);
+    ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "SE/builtinElements",
+      from: "SE/builtIn",
       filePath: "test/index.html",
     });
 
@@ -51,10 +51,10 @@ describe("Context from file", () => {
     </div>
 `);
 
-    customElementsMap.set("Context", Context);
+    ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "SE/builtinElements",
+      from: "SE/builtIn",
       filePath: "test/index.html",
     });
 
@@ -69,10 +69,10 @@ describe("Context from file", () => {
     </div>
 `);
 
-    customElementsMap.set("Context", Context);
+    ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "SE/builtinElements",
+      from: "SE/builtIn",
       filePath: "test/index.html",
     });
 
@@ -84,7 +84,7 @@ describe("Context fromFile", () => {
   it("throws if the src cannot be found", async () => {
     await expect(
       Context.__test__.fromFile("/cannot/be/found", {
-        from: "SE/builtinElements",
+        from: "SE/builtIn",
         filePath: "test/index.html",
       })
     ).rejects.toThrow();
@@ -93,7 +93,7 @@ describe("Context fromFile", () => {
   it("throws if the src cannot be parsed", async () => {
     await expect(
       Context.__test__.fromFile("/test/wrong.json", {
-        from: "SE/builtinElements",
+        from: "SE/builtIn",
         filePath: "test/index.html",
       })
     ).rejects.toThrow();
@@ -102,7 +102,7 @@ describe("Context fromFile", () => {
   it("throws if there is a transform function, and it errors", async () => {
     await expect(
       Context.__test__.fromFile("/test/wrongTransform.js", {
-        from: "SE/builtinElements",
+        from: "SE/builtIn",
         filePath: "test/index.html",
       })
     ).rejects.toThrow();

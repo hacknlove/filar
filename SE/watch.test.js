@@ -1,6 +1,6 @@
 const { addOrChange, remove } = require("./common");
 const { __chokidarWatcher } = require("chokidar");
-const { watchCustomElements } = require("./watch");
+const { watchServerElements } = require("./watch");
 
 jest.mock("chokidar", () => {
   const __chokidarWatcher = {
@@ -18,11 +18,11 @@ jest.mock("./common", () => ({
   remove: jest.fn(),
 }));
 
-describe("watchCustomElements", () => {
+describe("watchServerElements", () => {
   it("should watch for changes", async () => {
     const buildAll = jest.fn();
 
-    watchCustomElements({ from: "from", to: "to", buildAll });
+    watchServerElements({ from: "from", to: "to", buildAll });
 
     expect(__chokidarWatcher.on).toHaveBeenCalledTimes(3);
 

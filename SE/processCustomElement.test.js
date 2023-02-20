@@ -1,5 +1,5 @@
 const processCustomElement = require("./processCustomElement");
-const { customElementsMap } = require("./common");
+const { ServerElementsMap } = require("./common");
 
 const { DOMParser } = require("linkedom");
 const parser = new DOMParser();
@@ -9,7 +9,7 @@ describe("processCustomElement", () => {
     const document = parser.parseFromString(
       `<div><CustomElement /></div>`
     ).firstElementChild;
-    customElementsMap.set(
+    ServerElementsMap.set(
       "CustomElement",
       parser.parseFromString(`<div>custom element content</div>`)
         .firstElementChild
@@ -28,7 +28,7 @@ describe("processCustomElement", () => {
     const document = parser.parseFromString(
       `<div><CustomElement /></div>`
     ).firstElementChild;
-    customElementsMap.set(
+    ServerElementsMap.set(
       "CustomElement",
       parser.parseFromString(`<div>custom element content</div>`)
         .firstElementChild
@@ -49,7 +49,7 @@ describe("processCustomElement", () => {
     const document = parser.parseFromString(
       `<div><CustomElement /></div>`
     ).firstElementChild;
-    customElementsMap.set("CustomElement", {
+    ServerElementsMap.set("CustomElement", {
       processCustomElement: jest.fn((component) =>
         component.parentNode.replaceChild(
           parser.parseFromString(`<div>processed custom element</div>`)
@@ -68,7 +68,7 @@ describe("processCustomElement", () => {
     );
 
     expect(
-      customElementsMap.get("CustomElement").processCustomElement
+      ServerElementsMap.get("CustomElement").processCustomElement
     ).toHaveBeenCalled();
     expect(document.toString()).toMatchSnapshot();
   });
@@ -82,7 +82,7 @@ describe("processCustomElement", () => {
       </div>
     `).firstElementChild;
 
-    customElementsMap.set(
+    ServerElementsMap.set(
       "CustomElement",
       parser.parseFromString(`
       <div>
@@ -109,7 +109,7 @@ describe("processCustomElement", () => {
     </div>
   `).firstElementChild;
 
-    customElementsMap.set(
+    ServerElementsMap.set(
       "CustomElement",
       parser.parseFromString(`
     <div>
@@ -136,7 +136,7 @@ describe("processCustomElement", () => {
     </div>
   `).firstElementChild;
 
-    customElementsMap.set(
+    ServerElementsMap.set(
       "CustomElement",
       parser.parseFromString(`
     <div>
@@ -166,7 +166,7 @@ describe("processCustomElement", () => {
     </div>
   `).firstElementChild;
 
-    customElementsMap.set(
+    ServerElementsMap.set(
       "CustomElement",
       parser.parseFromString(`
     <div>
@@ -192,7 +192,7 @@ describe("processCustomElement", () => {
     </div>
   `).firstElementChild;
 
-    customElementsMap.set(
+    ServerElementsMap.set(
       "CustomElement",
       parser.parseFromString(`
     <div>
@@ -222,7 +222,7 @@ describe("processCustomElement", () => {
       </div>
     `).firstElementChild;
 
-    customElementsMap.set(
+    ServerElementsMap.set(
       "CustomElement",
       parser.parseFromString(`
       <div>

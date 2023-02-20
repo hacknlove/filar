@@ -2,7 +2,7 @@ const { globPattern, addOrChange } = require("./common");
 
 const { globAsync } = require("../helpers/globAsync");
 
-async function initializeCustomElements({ from }) {
+async function initializeServerElements({ from }) {
   const files = await globAsync(globPattern, {
     cwd: from,
   });
@@ -12,4 +12,4 @@ async function initializeCustomElements({ from }) {
   );
 }
 
-exports.initializeCustomElements = initializeCustomElements;
+exports.initializeServerElements = initializeServerElements;

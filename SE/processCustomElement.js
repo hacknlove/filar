@@ -1,5 +1,5 @@
 const { childrenIterator } = require("../helpers/childrenIterator");
-const { customElements } = require("./");
+const { ServerElements } = require("./");
 
 function getTemplateSlots(template) {
   const slots = new Map();
@@ -67,7 +67,7 @@ function defaultSlots(templateSlots) {
 }
 
 async function processCustomElement(component, context, processElements) {
-  const customElement = customElements[component.tagName];
+  const customElement = ServerElements[component.tagName];
 
   if (customElement.processCustomElement) {
     await customElement.processCustomElement(

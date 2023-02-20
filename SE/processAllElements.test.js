@@ -3,7 +3,7 @@ const { processAllElements } = require("./processAllElements");
 const { DOMParser } = require("linkedom");
 const parser = new DOMParser();
 
-const { customElementsMap } = require("./common");
+const { ServerElementsMap } = require("./common");
 
 describe("processAllElements", () => {
   it("replaces the context in texts", async () => {
@@ -118,7 +118,7 @@ describe("processAllElements", () => {
     const document = parser.parseFromString(html);
     const myComponent = parser.parseFromString(MyComponent).firstElementChild;
 
-    customElementsMap.set("MyComponent", myComponent);
+    ServerElementsMap.set("MyComponent", myComponent);
 
     await processAllElements(document);
 

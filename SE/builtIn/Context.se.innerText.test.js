@@ -1,6 +1,6 @@
 const { DOMParser } = require("linkedom");
 const { processAllElements } = require("../processAllElements");
-const { customElementsMap } = require("../common");
+const { ServerElementsMap } = require("../common");
 const parser = new DOMParser();
 
 const Context = require("./Context.se");
@@ -20,7 +20,7 @@ describe("Context inner text", () => {
             </div>
         `);
 
-    customElementsMap.set("Context", Context);
+    ServerElementsMap.set("Context", Context);
 
     await processAllElements(document);
 
@@ -37,7 +37,7 @@ describe("Context inner text", () => {
             </div>
         `);
 
-    customElementsMap.set("Context", Context);
+    ServerElementsMap.set("Context", Context);
 
     await processAllElements(document);
 
@@ -55,7 +55,7 @@ describe("Context inner text", () => {
             </div>
         `);
 
-    customElementsMap.set("Context", Context);
+    ServerElementsMap.set("Context", Context);
 
     await expect(() => processAllElements(document)).rejects.toThrow();
   });

@@ -1,3 +1,3 @@
-const { customElements } = require("./common");
+const { ServerElements } = require("./common");
 
-exports.customElements = customElements;
+exports.ServerElements = ServerElements;

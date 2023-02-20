@@ -5,22 +5,22 @@ jest.mock("fs-extra", () => ({
 }));
 
 const {
-  customElements,
+  ServerElements,
   addOrChange,
   remove,
-  customElementsMap,
+  ServerElementsMap,
 } = require("./common");
 
-describe("customElements", () => {
+describe("ServerElements", () => {
   it("returns a warning if the element does not exist", () => {
-    expect(customElements["WrongElement"].toString()).toBe(
+    expect(ServerElements["WrongElement"].toString()).toBe(
       "<!--WrongElement does not exists-->"
     );
   });
   it("returns a warning if the element is not a custom element", () => {
-    customElementsMap.set("WrongElement", {});
+    ServerElementsMap.set("WrongElement", {});
 
-    expect(customElements["WrongElement"].toString()).toBe(
+    expect(ServerElements["WrongElement"].toString()).toBe(
       "<!--WrongElement is not a valid custom element-->"
     );
   });
@@ -32,7 +32,7 @@ describe("addOrChange", () => {
 
     await addOrChange("TestElement.se.html");
 
-    expect(customElements["TestElement"]).toMatchSnapshot();
+    expect(ServerElements["TestElement"]).toMatchSnapshot();
   });
 
   it("warns if element name does not match the convention", async () => {
@@ -50,17 +50,17 @@ describe("addOrChange", () => {
 
     await addOrChange("./test/TestJsElement.se.js");
 
-    expect(customElements["TestJsElement"]).toBe(jsElement);
+    expect(ServerElements["TestJsElement"]).toBe(jsElement);
   });
 });
 
 describe("remove", () => {
   it("should remove a element", async () => {
-    customElementsMap.set("TestElement", "test element content");
+    ServerElementsMap.set("TestElement", "test element content");
 
     await remove("TestElement.se.html");
 
-    expect(customElements["TestElement"].toString()).toBe(
+    expect(ServerElements["TestElement"].toString()).toBe(
       "<!--TestElement does not exists-->"
     );
   });

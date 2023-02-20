@@ -2,7 +2,7 @@ const chokidar = require("chokidar");
 
 const { globPattern, addOrChange, remove } = require("./common");
 
-async function watchCustomElements({ from, to, buildAll }) {
+async function watchServerElements({ from, to, buildAll }) {
   const watcher = chokidar.watch(globPattern, {
     cwd: from,
     ignoreInitial: true,
@@ -22,4 +22,4 @@ async function watchCustomElements({ from, to, buildAll }) {
   });
 }
 
-exports.watchCustomElements = watchCustomElements;
+exports.watchServerElements = watchServerElements;

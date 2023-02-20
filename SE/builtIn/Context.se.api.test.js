@@ -1,6 +1,6 @@
 const { DOMParser } = require("linkedom");
 const { processAllElements } = require("../processAllElements");
-const { customElementsMap } = require("../common");
+const { ServerElementsMap } = require("../common");
 const parser = new DOMParser();
 
 const Context = require("./Context.se");
@@ -27,10 +27,10 @@ describe("Context from api", () => {
       })
     );
 
-    customElementsMap.set("Context", Context);
+    ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "SE/builtinElements",
+      from: "SE/builtin",
       filePath: "test/index.html",
     });
 

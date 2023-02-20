@@ -1,6 +1,6 @@
 const { DOMParser } = require("linkedom");
 const { processAllElements } = require("../processAllElements");
-const { customElementsMap } = require("../common");
+const { ServerElementsMap } = require("../common");
 const parser = new DOMParser();
 
 const If = require("./If.se");
@@ -17,7 +17,7 @@ describe("If key", () => {
             </html>
         `);
 
-    customElementsMap.set("If", If);
+    ServerElementsMap.set("If", If);
 
     await processAllElements(document);
 
@@ -34,7 +34,7 @@ describe("If key", () => {
             </html>
         `);
 
-    customElementsMap.set("If", If);
+    ServerElementsMap.set("If", If);
 
     await processAllElements(document);
 
@@ -51,7 +51,7 @@ describe("If key", () => {
             </html>
         `);
 
-    customElementsMap.set("If", If);
+    ServerElementsMap.set("If", If);
 
     await processAllElements(document);
 
@@ -69,7 +69,7 @@ describe("If key", () => {
             </html>
         `);
 
-    customElementsMap.set("If", If);
+    ServerElementsMap.set("If", If);
 
     await processAllElements(document);
 
@@ -89,7 +89,7 @@ describe("if condition", () => {
             </html>
         `);
 
-    customElementsMap.set("If", If);
+    ServerElementsMap.set("If", If);
 
     await processAllElements(document);
 
@@ -106,7 +106,7 @@ describe("if condition", () => {
             </html>
         `);
 
-    customElementsMap.set("If", If);
+    ServerElementsMap.set("If", If);
 
     await processAllElements(document);
 

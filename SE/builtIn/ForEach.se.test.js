@@ -1,6 +1,6 @@
 const { DOMParser } = require("linkedom");
 const { processAllElements } = require("../processAllElements");
-const { customElementsMap } = require("../common");
+const { ServerElementsMap } = require("../common");
 const parser = new DOMParser();
 
 const ForEach = require("./ForEach.se");
@@ -17,7 +17,7 @@ describe("ForEach", () => {
                 </div>
             `);
 
-    customElementsMap.set("ForEach", ForEach);
+    ServerElementsMap.set("ForEach", ForEach);
 
     await expect(() => processAllElements(document)).rejects.toThrow();
   });
@@ -33,7 +33,7 @@ describe("ForEach", () => {
         </div>
     `);
 
-    customElementsMap.set("ForEach", ForEach);
+    ServerElementsMap.set("ForEach", ForEach);
 
     await processAllElements(document);
 
@@ -51,7 +51,7 @@ describe("ForEach", () => {
         </div>
     `);
 
-    customElementsMap.set("ForEach", ForEach);
+    ServerElementsMap.set("ForEach", ForEach);
 
     await processAllElements(document);
 

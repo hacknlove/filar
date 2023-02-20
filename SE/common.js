@@ -6,7 +6,7 @@ const parser = new DOMParser();
 const extractElementNameRegExp =
   /(?<elementName>([A-Z][a-z]+)+)\.se\.(html|js)$/;
 
-const customElementsMap = new Map();
+const ServerElementsMap = new Map();
 
 const emptyComment = parser.parseFromString("<!-- -->").firstChild;
 
@@ -31,11 +31,11 @@ async function addOrChange(filePath) {
   }
 
   if (filePath.endsWith(".js")) {
-    customElementsMap.set(elementName, require(filePath));
+    ServerElementsMap.set(elementName, require(filePath));
     return;
   }
 
-  customElementsMap.set(
+  ServerElementsMap.set(
     elementName,
     parser.parseFromString(await readFile(filePath, "utf8")).firstChild
   );
@@ -48,10 +48,10 @@ function remove(filePath) {
     return;
   }
 
-  customElementsMap.delete(elementName);
+  ServerElementsMap.delete(elementName);
 }
 
-const customElements = new Proxy(customElementsMap, {
+const ServerElements = new Proxy(ServerElementsMap, {
   get(target, name) {
     if (!target.has(name)) {
       const response = emptyComment.cloneNode(true);
@@ -77,8 +77,8 @@ const customElements = new Proxy(customElementsMap, {
 
 module.exports = {
   globPattern: "**/*.se.html",
-  customElements,
+  ServerElements,
   addOrChange,
   remove,
-  customElementsMap,
+  ServerElementsMap,
 };

@@ -1,6 +1,6 @@
 const glob = require("glob");
 
-const { initializeCustomElements } = require("./initializeCustomElements");
+const { initializeServerElements } = require("./initializeServerElements");
 
 const { addOrChange } = require("./common");
 
@@ -12,13 +12,13 @@ jest.mock("./common", () => ({
   addOrChange: jest.fn(),
 }));
 
-describe("initializecustomElements", () => {
+describe("initializeServerElements", () => {
   it("calls addOrChange for all components", async () => {
     glob.mockImplementationOnce((pattern, options, callback) => {
       callback(null, ["TestElement.se.html", "TestElement2.se.html"]);
     });
 
-    await initializeCustomElements({ from: "test" });
+    await initializeServerElements({ from: "test" });
 
     expect(addOrChange).toHaveBeenCalledWith("test/TestElement.se.html");
     expect(addOrChange).toHaveBeenCalledWith("test/TestElement2.se.html");
