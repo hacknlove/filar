@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "cd playground && node --watch ../src/index.js",
+    "dev": "./static-dev.sh ./playground ./build",
     "lint": "eslint src --fix",
     "prettier": "prettier --write **/*.{mjs,js,css,scss,html,json,md}",
     "preprettier": "npm run lint"

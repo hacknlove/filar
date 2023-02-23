@@ -2,12 +2,6 @@ const vm = require("vm");
 const { childrenIterator } = require("../../helpers/childrenIterator");
 
 async function processCustomElement(element, context, processAllElements) {
-  const key = element.getAttribute("key");
-  if (key && !context[key]) {
-    element.remove();
-    return;
-  }
-
   const condition = element.getAttribute("condition");
 
   if (condition) {

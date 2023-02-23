@@ -2,10 +2,10 @@ const { globPattern, addOrChange } = require("./common");
 
 const { globAsync } = require("../helpers/globAsync");
 
-const { initializeBuiltIn } = require("./builtIn/initializeBuiltIn")
+const { initializeBuiltIn } = require("./builtIn/initializeBuiltIn");
 
 async function initializeServerElements({ from }) {
-  const builtInPromise = initializeBuiltIn()  
+  const builtInPromise = initializeBuiltIn();
   const files = await globAsync(globPattern, {
     cwd: from,
   });

@@ -14,11 +14,11 @@ function isAModule(src) {
   }
 }
 
-function fromInnerHtml(element, context) {
-  const innerHTML = element.innerHTML;
+function frominnerText(element, context) {
+  const innerText = element.innerText;
 
   try {
-    const json = JSON.parse(innerHTML);
+    const json = JSON.parse(innerText);
     Object.assign(context, json);
     return;
   } catch {
@@ -26,14 +26,14 @@ function fromInnerHtml(element, context) {
   }
 
   try {
-    vm.runInNewContext(innerHTML, { context: context });
+    vm.runInNewContext(innerText, { context: context });
     return;
   } catch {
     // Not JS
   }
 
-  throw new Error("Context innerHTML must be JSON or JS", {
-    innerHTML,
+  throw new Error("Context innerText must be JSON or JS", {
+    innerText,
   });
 }
 
@@ -91,8 +91,10 @@ async function processCustomElement(element, context) {
     fromAPI(src, context.parentContext);
   } else if (src) {
     fromFile(src, context.parentContext);
-  } else {
-    fromInnerHtml(element, context.parentContext);
+  }
+
+  if (element.innerText.trim()) {
+    frominnerText(element, context.parentContext);
   }
 
   if (!element.getAttribute("ssr")) {

@@ -52,9 +52,8 @@ describe("processTextNode", () => {
 
     processTextNode(textNode, {}, island.island);
 
-    expect(document.toString()).toMatchSnapshot()
+    expect(document.toString()).toMatchSnapshot();
   });
-
 });
 
 describe("getChildNumber", () => {
