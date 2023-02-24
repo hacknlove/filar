@@ -35,14 +35,8 @@ describe("addOrChange", () => {
     expect(ServerElements["TestElement"]).toMatchSnapshot();
   });
 
-  it("warns if element name does not match the convention", async () => {
-    const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
-
-    await addOrChange("testElement.html");
-
-    expect(warnSpy).toHaveBeenCalledWith(
-      "File testElement.html does not match the element naming convention"
-    );
+  it("throws if element name does not match the convention", async () => {
+    await expect(() => addOrChange("testElement.html")).rejects.toThrow();
   });
 
   it("adds js elements", async () => {
@@ -65,13 +59,7 @@ describe("remove", () => {
     );
   });
 
-  it("warns if element name does not match the convention", async () => {
-    const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
-
-    await remove("testElement.html");
-
-    expect(warnSpy).toHaveBeenCalledWith(
-      "File testElement.html does not match the element naming convention"
-    );
+  it("throws if element name does not match the convention", async () => {
+    expect(() => remove("testElement.html")).toThrow();
   });
 });

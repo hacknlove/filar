@@ -14,10 +14,11 @@ function getElementName(filePath) {
   const filePathParsed = filePath.match(extractElementNameRegExp);
 
   if (!filePathParsed) {
-    console.warn(
-      `File ${filePath} does not match the element naming convention`
-    );
-    return;
+    throw new Error("Wrong custom element name", {
+      cause: {
+        filePath,
+      },
+    });
   }
 
   return filePathParsed.groups.elementName;
@@ -25,10 +26,6 @@ function getElementName(filePath) {
 
 async function addOrChange(filePath) {
   const elementName = getElementName(filePath);
-
-  if (!elementName) {
-    return;
-  }
 
   if (filePath.endsWith(".js")) {
     ServerElementsMap.set(elementName, require(filePath));
@@ -43,10 +40,6 @@ async function addOrChange(filePath) {
 
 function remove(filePath) {
   const elementName = getElementName(filePath);
-
-  if (!elementName) {
-    return;
-  }
 
   ServerElementsMap.delete(elementName);
 }
