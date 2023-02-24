@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "dev": "./static-dev.sh ./playground ./build",
-    "lint": "eslint src --fix",
+    "lint": "eslint . --fix",
     "prettier": "prettier --write **/*.{mjs,js,css,scss,html,json,md}",
     "preprettier": "npm run lint"
   },
