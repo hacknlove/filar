@@ -23,16 +23,15 @@ describe("build", () => {
     expect(readFile).toHaveBeenCalledWith("from/filePath", "utf8");
     expect(outputFile).toHaveBeenCalledWith("to/filePath", "<div />");
   });
-  it("warns on error", async () => {
+  it("throwns on error", async () => {
     readFile.mockRejectedValue("error");
-    jest.spyOn(console, "error").mockImplementation(() => {});
 
-    await build({
-      from: "from",
-      to: "to",
-      filePath: "filePath",
-    });
-
-    expect(console.error).toHaveBeenCalledWith("error");
+    await expect(() =>
+      build({
+        from: "from",
+        to: "to",
+        filePath: "filePath",
+      })
+    ).rejects.toThrow();
   });
 });

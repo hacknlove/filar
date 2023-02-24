@@ -12,8 +12,13 @@ async function build({ from, to, filePath }) {
   }));
 
   if (file.error) {
-    console.error(file.error);
-    return;
+    throw new Error("HTMl file cannot be read", {
+      cause: {
+        from,
+        filePath,
+        error: file.eror,
+      },
+    });
   }
 
   const document = parser.parseFromString(file).firstElementChild;
