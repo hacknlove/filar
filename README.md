@@ -424,7 +424,7 @@ Renders
 
 It creates a reactive state for the client side runtime.
 
-At server side, the island set the state values from expresions that are evaluated within the context.
+At server side, the island set the state values from expressions that are evaluated within the context.
 
 The island interpolation is done with `{(` and `)}`, like `{(some expresion here)}` syntax, to keep it different from the build time and server side interpolation.
 
@@ -483,16 +483,75 @@ The client side runtime will update the DOM to
 </div>
 ```
 
+##### Nesting
+
+Islands can be nested, but state is not inherit.
+
+Child islands Server Custom Element's Attributes can access clossest parent's island state through the helper `parent(expression)`
+
+Example
+
+```html
+<div>
+  <Island foo="42">
+    <p>{(foo)}</p>
+    <!-- evaluates to <p>42</p> -->
+    <div>
+      <Island bar="parent(foo * 2)">
+        <p>{(bar)}</p>
+        <!-- evaluates to <p>84</p> -->
+        <p>{(foo)}</p>
+        <!-- Errors. because foo is not defined -->
+      </Island>
+    </div>
+  </Island>
+</div>
+```
+
+##### Cross island
+
+You can also share state between islands by its ID with the helper `from(islandId, expression)`
+
+Example
+
+```html
+<div>
+  <Island id="island1" foo="42">
+    <p>{(foo)}</p>
+    <!-- evaluates to <p>42</p> -->
+  </Island>
+</div>
+<div>
+  <Island id="island2" bar="from('island1', foo * 2)">
+    <p>{(bar)}</p>
+    <!-- evaluates to <p>84</p> -->
+    <p>{(foo)}</p>
+    <!-- Errors. because foo is not defined -->
+  </Island>
+</div>
+```
+
+You can only access Islands that are already initialized.
+
+Build time and SSR time, initializes Islands from top to bottom. For this reason, Islands can only access other islands that are above, and can be accessed only by islands that are below. Except of SSR. Islands initialized at build time cannot access islands initialized at SSR time.
+
+For client-side, islands created at runtime can access any island created at build and SSR time, and can be accessed by islands created later.
+
+##### Events
+
+Events are set by an especial attribute `on:eventName=expression` where `expression` should evaluate to a function in the context of the island, if any, but there is no required by the element to be on an island.
+
+The event handler receives the following parameters:
+
+- event
+- island element if any
+
+The scope of the event handlers includes the island state if any and the helpers `parent` and `from`
+
+In the case of event handlers, it's possible to access any other island state, no matter the order of initialization, because there is no risk of infinite reaction chain loops.
+
 #### WIP - Ideas
 
-Should Islands be nestable?
-If they are nestable:
-
-- All the parent's state is inherited directly?
-- Is it accessible through `parent.key` approach?
-- The inherit keys need to be explicit added with attributes on the child island referencing the parent island keys?
-- Should event handlers live in the island state?
-- Do we need some special syntax for event handlers?
 - Do we need some special syntax for enhance the island at run time with API calls, or js imports?
 
 ### Custom Elements
