@@ -28,10 +28,12 @@ function sendChildToSlot({ child, templateSlots, customElement, component }) {
 
   if (!slotGroup) {
     if (slotName) {
-      console.warn(
-        `Slot "${slotName}" not found in custom element "${component.tagName}"`
-      );
-      return;
+      throw new Error("Slot not found", {
+        cause: {
+          slotName,
+          tagName: component.tagName,
+        },
+      });
     }
 
     customElement.appendChild(child);

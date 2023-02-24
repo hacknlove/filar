@@ -127,7 +127,7 @@ describe("processCustomElement", () => {
     expect(document.toString()).toMatchSnapshot();
   });
 
-  it("warns if slot not found", () => {
+  it("throws if slot not found", async () => {
     const document = parser.parseFromString(`
     <div>
       <CustomElement>
@@ -145,16 +145,13 @@ describe("processCustomElement", () => {
   `).firstElementChild
     );
 
-    jest.spyOn(console, "warn").mockImplementation(() => {});
-
-    processCustomElement.processCustomElement(
-      document.querySelector("CustomElement"),
-      {},
-      () => {}
-    );
-
-    expect(document.toString()).toMatchSnapshot();
-    expect(console.warn).toHaveBeenCalled();
+    await expect(() =>
+      processCustomElement.processCustomElement(
+        document.querySelector("CustomElement"),
+        {},
+        () => {}
+      )
+    ).rejects.toThrow();
   });
 
   it("adds children to template if slot not found", () => {

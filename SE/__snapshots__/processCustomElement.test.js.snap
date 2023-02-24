@@ -49,11 +49,3 @@ exports[`processCustomElement uses the default value of the slot if no child is 
       </div>
       </div>"
 `;
-
-exports[`processCustomElement warns if slot not found 1`] = `
-"<div>
-      <div class="CustomElement">
-      
-    </div>
-    </div>"
-`;
