@@ -27,7 +27,7 @@ describe("ForEach", () => {
     const document = parser.parseFromString(`
         <div Title="'My title'">
           <ul>
-            <ForEach key="Item" iterator="['one', 'two', 'three']">
+            <ForEach key="Item" of="['one', 'two', 'three']">
               <li>{{Item}}</li>
             </ForEach>
           </ul>
@@ -45,7 +45,7 @@ describe("ForEach", () => {
     const document = parser.parseFromString(`
         <div Title="'My title'">
           <ul>
-            <ForEach key="Item" iterator="['one', 'two', 'three', 'four', 'five', 'six']" filter="Item.length > 3">
+            <ForEach key="Item" of="['one', 'two', 'three', 'four', 'five', 'six']" filter="Item.length > 3">
               <li>{{Item}}</li>
             </ForEach>
           </ul>

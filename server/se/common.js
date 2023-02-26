@@ -47,9 +47,11 @@ function remove(filePath) {
 const ServerElements = new Proxy(ServerElementsMap, {
   get(target, name) {
     if (!target.has(name)) {
-      const response = emptyComment.cloneNode(true);
-      response.textContent = `${name} does not exists`;
-      return response;
+      throw new Error("Custom element not found", {
+        cause: {
+          name,
+        },
+      });
     }
 
     const element = target.get(name);
@@ -69,7 +71,7 @@ const ServerElements = new Proxy(ServerElementsMap, {
 });
 
 module.exports = {
-  globPattern: "**/*.se.html",
+  globPattern: "**/*.se.{html,js}",
   ServerElements,
   addOrChange,
   remove,

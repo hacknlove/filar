@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "dev": "./static-dev.sh ./playground ./build",
     "lint": "eslint . --fix",
     "prettier": "prettier --write **/*.{mjs,js,css,scss,html,json,md}",

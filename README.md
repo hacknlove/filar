@@ -365,7 +365,7 @@ It iterates over an array and renders the children for each item.
 It accepts the following attributes:
 
 - `key`: The key used to store the item in the context.
-- `iterator`: an expression that evaluates to an iterable object. It can be just the name of a variable that stores the iterable, or a more complex expression.
+- `of`: an expression that evaluates to an iterable object. It can be just the name of a variable that stores the iterable, or a more complex expression.
 - `filter`: (Optional) an expression that evaluates to a boolean. It can be just the name of a variable that stores the boolean, or a more complex expression. If the expression evaluates to `false`, the item will not be rendered.
 
 Example:
@@ -373,7 +373,7 @@ Example:
 
 ```html
 <div>
-  <ForEach key="item" iterator="[1, 2, 3, 4, 5]" filter="item % 2">
+  <ForEach key="item" of="[1, 2, 3, 4, 5]" filter="item % 2">
     <p>{{item}}</p>
   </ForEach>
 </div>

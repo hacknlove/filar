@@ -4,7 +4,7 @@ const { childrenIterator } = require("../../common/childrenIterator");
 
 async function processCustomElement(element, context, processAllElements) {
   const key = element.getAttribute("key");
-  const iterator = element.getAttribute("iterator");
+  const iterator = element.getAttribute("of");
   const filter = element.getAttribute("filter");
 
   if (!iterator || !key) {
@@ -26,9 +26,14 @@ async function processCustomElement(element, context, processAllElements) {
       continue;
     }
 
+    const div = element.ownerDocument.createElement("div");
+
     for (const child of children) {
       const newChild = child.cloneNode(true);
-      await processAllElements(newChild, newContext);
+      div.appendChild(newChild);
+    }
+    await processAllElements(div, newContext);
+    for (const newChild of childrenIterator(div)) {
       element.parentNode.insertBefore(newChild, element);
     }
   }

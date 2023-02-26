@@ -12,10 +12,8 @@ const {
 } = require("./common");
 
 describe("ServerElements", () => {
-  it("returns a warning if the element does not exist", () => {
-    expect(ServerElements["WrongElement"].toString()).toBe(
-      "<!--WrongElement does not exists-->"
-    );
+  it("throws if the element does not exist", () => {
+    expect(() => ServerElements["WrongElement"]).toThrow();
   });
   it("returns a warning if the element is not a custom element", () => {
     ServerElementsMap.set("WrongElement", {});
@@ -54,9 +52,7 @@ describe("remove", () => {
 
     await remove("TestElement.se.html");
 
-    expect(ServerElements["TestElement"].toString()).toBe(
-      "<!--TestElement does not exists-->"
-    );
+    expect(() => ServerElements["TestElement"]).toThrow();
   });
 
   it("throws if element name does not match the convention", async () => {

@@ -88,9 +88,9 @@ async function processCustomElement(element, context) {
   const src = element.getAttribute("src");
 
   if (httpRegex.test(src)) {
-    fromAPI(src, context.parentContext);
+    await fromAPI(src, context.parentContext);
   } else if (src) {
-    fromFile(src, context.parentContext);
+    await fromFile(src, context.parentContext);
   }
 
   if (element.innerText.trim()) {

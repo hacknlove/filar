@@ -4,7 +4,7 @@ exports[`Context from api changes parent context from a get API call 1`] = `
 "<?xml version="1.0" encoding="utf-8"?>
             <div>
                 
-                <h1>My title</h1>
+                <h1>My Updated title</h1>
             </div>
         "
 `;
