@@ -7,7 +7,7 @@ function replaceIslandPlaceholders({ text, island, childNumber }) {
 
   let offset = 0;
 
-  const newText = text.replace(contextRegexp, (match, expresion, from) => {
+  const newText = text.replace(contextRegexp, (match, expresion, index) => {
     let replacement;
     try {
       replacement = vm.runInNewContext(expresion, island);
@@ -23,7 +23,7 @@ function replaceIslandPlaceholders({ text, island, childNumber }) {
 
     serialized.push([
       childNumber,
-      from + offset,
+      index + offset,
       replacement.length,
       expresion,
     ]);

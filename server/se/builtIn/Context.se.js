@@ -5,6 +5,8 @@ async function fromAPI(src, context) {
   Object.assign(context, await fetch(src).then((response) => response.json()));
 }
 
+const { from } = require("../../config");
+
 function isAModule(src) {
   try {
     require.resolve(src);
@@ -40,10 +42,10 @@ function frominnerText(element, context) {
 async function fromFile(src, context) {
   let expandedSrc = src;
   if (src[0] === "/") {
-    expandedSrc = join(process.cwd(), context.from, src);
+    expandedSrc = join(process.cwd(), from, src);
   } else if (src[0] === ".") {
     expandedSrc = resolve(
-      dirname(join(process.cwd(), context.from, context.filePath)),
+      dirname(join(process.cwd(), from, context.filePath)),
       src
     );
   }

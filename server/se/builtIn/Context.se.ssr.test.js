@@ -5,6 +5,10 @@ const parser = new DOMParser();
 
 const Context = require("./Context.se");
 
+jest.mock("../../config", () => ({
+  from: "server/se/builtIn",
+}));
+
 describe("Context ssr", () => {
   it("skips only ssr context", async () => {
     const document = parser.parseFromString(`
@@ -17,7 +21,6 @@ describe("Context ssr", () => {
     ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "SE/builtIn",
       filePath: "test/index.html",
     });
 

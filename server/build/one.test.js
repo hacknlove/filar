@@ -10,28 +10,32 @@ jest.mock("../tree/processAllElements", () => ({
   processAllElements: jest.fn(),
 }));
 
+jest.mock("../config", () => ({
+  from: "from",
+}));
+
 describe("buildOne", () => {
-  it("should buildOne", async () => {
+  it("output static files to static folder", async () => {
     readFile.mockResolvedValue("<div />");
 
-    await buildOne({
-      from: "from",
-      to: "to",
-      filePath: "filePath",
-    });
+    await buildOne("filePath");
 
     expect(readFile).toHaveBeenCalledWith("from/filePath", "utf8");
-    expect(outputFile).toHaveBeenCalledWith("to/filePath", "<div />");
+    expect(outputFile).toHaveBeenCalledWith("from/.build/static/filePath", "<div />");
+  });
+  it("output ssr files to ssr folder", async () => {
+    readFile.mockResolvedValue("<div><SSR><div /></SSR></div>");
+
+    await buildOne("filePath");
+
+    expect(readFile).toHaveBeenCalledWith("from/filePath", "utf8");
+    expect(outputFile).toHaveBeenCalledWith("from/.build/ssr/filePath", "<div><SSR><div /></SSR></div>");
   });
   it("throwns on error", async () => {
     readFile.mockRejectedValue("error");
 
     await expect(() =>
-      buildOne({
-        from: "from",
-        to: "to",
-        filePath: "filePath",
-      })
+      buildOne("filePath")
     ).rejects.toThrow();
   });
 });

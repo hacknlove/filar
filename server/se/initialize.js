@@ -4,7 +4,9 @@ const { globAsync } = require("../common/globAsync");
 
 const { initializeBuiltIn } = require("./builtIn/initializeBuiltIn");
 
-async function initializeServerElements({ from }) {
+const { from } = require("../config");
+
+async function initializeServerElements() {
   const builtInPromise = initializeBuiltIn();
   const files = await globAsync(globPattern, {
     cwd: from,

@@ -2,24 +2,17 @@ const chokidar = require("chokidar");
 
 const { globPattern, addOrChange, remove } = require("./common");
 
-async function watchServerElements({ from, to, buildAll }) {
+const { from } = require("../config");
+
+async function watchServerElements(cb) {
   const watcher = chokidar.watch(globPattern, {
     cwd: from,
     ignoreInitial: true,
   });
 
-  watcher.on("add", async (file) => {
-    await addOrChange(`${from}/${file}`);
-    buildAll({ from, to });
-  });
-  watcher.on("change", async (file) => {
-    await addOrChange(`${from}/${file}`);
-    buildAll({ from, to });
-  });
-  watcher.on("unlink", async (file) => {
-    await remove(`${from}/${file}`);
-    buildAll({ from, to });
-  });
+  watcher.on("add", file => addOrChange(`${from}/${file}`).then(cb));
+  watcher.on("change", file => addOrChange(`${from}/${file}`).then(cb));
+  watcher.on("unlink", file => remove(`${from}/${file}`).then(cb));
 }
 
 exports.watchServerElements = watchServerElements;

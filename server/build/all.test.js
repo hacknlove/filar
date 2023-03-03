@@ -14,20 +14,9 @@ describe("all", () => {
   it("should build all", async () => {
     globAsync.mockResolvedValue(["file1.html", "file2.html"]);
 
-    await buildAll({
-      from: "from",
-      to: "to",
-    });
+    await buildAll();
 
-    expect(buildOne).toHaveBeenCalledWith({
-      from: "from",
-      to: "to",
-      filePath: "file1.html",
-    });
-    expect(buildOne).toHaveBeenCalledWith({
-      from: "from",
-      to: "to",
-      filePath: "file2.html",
-    });
+    expect(buildOne).toHaveBeenCalledWith("file1.html", 0, ["file1.html", "file2.html"]);
+    expect(buildOne).toHaveBeenCalledWith("file2.html", 1, ["file1.html", "file2.html"]);
   });
 });

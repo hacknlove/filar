@@ -5,7 +5,9 @@ const { join } = require("path");
 const { processAllElements } = require("../tree/processAllElements");
 const parser = new DOMParser();
 
-async function buildOne({ from, to, filePath }) {
+const { from } = require("../config");
+
+async function buildOne(filePath) {
   console.log(`Building ${filePath}...`);
   const file = await readFile(join(from, filePath), "utf8").catch((error) => ({
     error,
@@ -23,9 +25,13 @@ async function buildOne({ from, to, filePath }) {
 
   const document = parser.parseFromString(file).firstElementChild;
 
-  await processAllElements(document, { from, filePath });
+  await processAllElements(document, { filePath });
 
-  await outputFile(join(to, filePath), document.toString());
+  await outputFile(join(
+    from,
+    '.build',
+    document.querySelector('SSR') ? 'ssr' : 'static',
+    filePath), document.toString());
 }
 
 exports.buildOne = buildOne;

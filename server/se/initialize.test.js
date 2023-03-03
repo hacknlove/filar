@@ -16,13 +16,17 @@ jest.mock("./common", () => ({
 
 jest.mock("./builtIn/initializeBuiltIn");
 
+jest.mock("../config", () => ({
+  from: "test",
+}));
+
 describe("initializeServerElements", () => {
   it("calls addOrChange for all components", async () => {
     glob.mockImplementationOnce((pattern, options, callback) => {
       callback(null, ["TestElement.se.html", "TestElement2.se.html"]);
     });
 
-    await initializeServerElements({ from: "test" });
+    await initializeServerElements();
 
     expect(addOrChange).toHaveBeenCalledWith("test/TestElement.se.html");
     expect(addOrChange).toHaveBeenCalledWith("test/TestElement2.se.html");

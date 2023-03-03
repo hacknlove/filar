@@ -30,7 +30,6 @@ describe("Context from api", () => {
     ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "SE/builtin",
       filePath: "test/index.html",
     });
 

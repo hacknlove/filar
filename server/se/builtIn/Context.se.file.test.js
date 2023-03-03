@@ -6,6 +6,10 @@ const parser = new DOMParser();
 
 const Context = require("./Context.se");
 
+jest.mock("../../config", () => ({
+  from: "server/se/builtIn",
+}));
+
 describe("Context from file", () => {
   it("changes parent context from a json file", async () => {
     const document = parser.parseFromString(`
@@ -18,7 +22,6 @@ describe("Context from file", () => {
     ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "server/se/builtIn",
       filePath: "test/index.html",
     });
 
@@ -36,7 +39,6 @@ describe("Context from file", () => {
     ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "server/se/builtIn",
       filePath: "test/index.html",
     });
 
@@ -54,7 +56,6 @@ describe("Context from file", () => {
     ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "server/se/builtIn",
       filePath: "test/index.html",
     });
 
@@ -72,7 +73,6 @@ describe("Context from file", () => {
     ServerElementsMap.set("Context", Context);
 
     await processAllElements(document, {
-      from: "server/se/builtIn",
       filePath: "test/index.html",
     });
 
@@ -84,7 +84,6 @@ describe("Context fromFile", () => {
   it("throws if the src cannot be found", async () => {
     await expect(
       Context.__test__.fromFile("/cannot/be/found", {
-        from: "server/se/builtIn",
         filePath: "test/index.html",
       })
     ).rejects.toThrow();
@@ -93,7 +92,6 @@ describe("Context fromFile", () => {
   it("throws if the src cannot be parsed", async () => {
     await expect(
       Context.__test__.fromFile("/test/wrong.json", {
-        from: "server/se/builtIn",
         filePath: "test/index.html",
       })
     ).rejects.toThrow();
@@ -102,7 +100,6 @@ describe("Context fromFile", () => {
   it("throws if there is a transform function, and it errors", async () => {
     await expect(
       Context.__test__.fromFile("/test/wrongTransform.js", {
-        from: "server/se/builtIn",
         filePath: "test/index.html",
       })
     ).rejects.toThrow();
