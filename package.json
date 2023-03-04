@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "dev": "./static-dev.sh ./playground ./build",
+    "build": "node cli/build --from ./playground",
     "lint": "eslint . --fix",
     "prettier": "prettier --write **/*.{mjs,js,css,scss,html,json,md}",
     "preprettier": "npm run lint"
+  },
+  "bin": {
+    "filar-build": "./cli/build.js"
   },
   "author": "",
   "license": "ISC",

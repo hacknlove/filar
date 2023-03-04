@@ -1,1 +1,0 @@
-node --experimental-vm-modules --watch ./cli/build.js --from $1 --watch 
