@@ -1,5 +1,5 @@
 const { buildOne } = require("./one");
-const { buildAll } = require("./all");
+const { build } = require("./index");
 const { globAsync } = require("../common/globAsync");
 
 jest.mock("./one", () => ({
@@ -10,11 +10,11 @@ jest.mock("../common/globAsync", () => ({
   globAsync: jest.fn(),
 }));
 
-describe("all", () => {
-  it("should build all", async () => {
+describe("build", () => {
+  it("should build", async () => {
     globAsync.mockResolvedValue(["file1.html", "file2.html"]);
 
-    await buildAll();
+    await build();
 
     expect(buildOne).toHaveBeenCalledWith("file1.html", 0, [
       "file1.html",

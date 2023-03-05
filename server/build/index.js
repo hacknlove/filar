@@ -4,7 +4,7 @@ const { buildOne } = require("./one");
 
 const config = require("../config");
 
-async function buildAll() {
+async function build() {
   const files = await globAsync("**/*.html", {
     cwd: config.from,
     ignore: "**/*.{se,ce}.html",
@@ -13,4 +13,4 @@ async function buildAll() {
   return Promise.all(files.map(buildOne));
 }
 
-exports.buildAll = buildAll;
+exports.build = build;
