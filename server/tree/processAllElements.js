@@ -1,6 +1,6 @@
 const { childrenIterator } = require("../common/childrenIterator");
 const { processTextNode } = require("../context/processTextNode");
-const { prepareSSR } = require("../ssr/prepareSSR");
+const { prepareSSR } = require("../build/prepareSSR");
 const { processNodeAttributes } = require("../context/processNodeAttributes");
 const { getNewContext } = require("../context/getNewContext");
 const { processCustomElement } = require("../se/processCustomElement");
