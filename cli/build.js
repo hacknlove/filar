@@ -3,7 +3,7 @@ const { rmdir } = require("node:fs/promises");
 const { join } = require("node:path");
 
 const { generateConfig } = require("./argv");
-const { buildAll } = require("../server/build/all");
+const { build } = require("../server/build");
 const { initializeServerElements } = require("../server/se/initialize");
 
 async function main() {
@@ -18,7 +18,7 @@ async function main() {
 
   await initializeServerElements();
 
-  return buildAll();
+  return build();
 }
 
 module.exports = main();

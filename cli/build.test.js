@@ -1,10 +1,10 @@
-const { buildAll } = require("../server/build/all");
+const { build } = require("../server/build");
 const { initializeServerElements } = require("../server/se/initialize");
 const { watchServerElements } = require("../server/se/watch");
 const { rmdir } = require("node:fs/promises");
 
 jest.mock("../server/se/initialize");
-jest.mock("../server/build/all");
+jest.mock("../server/build");
 jest.mock("../server/se/watch");
 
 jest.mock("node:fs/promises", () => ({
@@ -25,6 +25,6 @@ test("main no watch", async () => {
     force: true,
   });
   expect(initializeServerElements).toHaveBeenCalledTimes(1);
-  expect(buildAll).toHaveBeenCalledTimes(1);
+  expect(build).toHaveBeenCalledTimes(1);
   expect(watchServerElements).toHaveBeenCalledTimes(0);
 });
