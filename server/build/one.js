@@ -27,11 +27,15 @@ async function buildOne(filePath) {
 
   await processAllElements(document, { filePath });
 
-  await outputFile(join(
-    from,
-    '.build',
-    document.querySelector('SSR') ? 'ssr' : 'static',
-    filePath), document.toString());
+  await outputFile(
+    join(
+      from,
+      ".build",
+      document.querySelector("SSR") ? "ssr" : "static",
+      filePath
+    ),
+    document.toString()
+  );
 }
 
 exports.buildOne = buildOne;

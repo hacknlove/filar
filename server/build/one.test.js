@@ -21,7 +21,10 @@ describe("buildOne", () => {
     await buildOne("filePath");
 
     expect(readFile).toHaveBeenCalledWith("from/filePath", "utf8");
-    expect(outputFile).toHaveBeenCalledWith("from/.build/static/filePath", "<div />");
+    expect(outputFile).toHaveBeenCalledWith(
+      "from/.build/static/filePath",
+      "<div />"
+    );
   });
   it("output ssr files to ssr folder", async () => {
     readFile.mockResolvedValue("<div><SSR><div /></SSR></div>");
@@ -29,13 +32,14 @@ describe("buildOne", () => {
     await buildOne("filePath");
 
     expect(readFile).toHaveBeenCalledWith("from/filePath", "utf8");
-    expect(outputFile).toHaveBeenCalledWith("from/.build/ssr/filePath", "<div><SSR><div /></SSR></div>");
+    expect(outputFile).toHaveBeenCalledWith(
+      "from/.build/ssr/filePath",
+      "<div><SSR><div /></SSR></div>"
+    );
   });
   it("throwns on error", async () => {
     readFile.mockRejectedValue("error");
 
-    await expect(() =>
-      buildOne("filePath")
-    ).rejects.toThrow();
+    await expect(() => buildOne("filePath")).rejects.toThrow();
   });
 });

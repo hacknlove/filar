@@ -14,8 +14,8 @@ jest.mock("chokidar", () => {
 });
 
 jest.mock("./common", () => ({
-  addOrChange: jest.fn(() => Promise.resolve('addOrChange promise')),
-  remove: jest.fn(() => Promise.resolve('remove promise')),
+  addOrChange: jest.fn(() => Promise.resolve("addOrChange promise")),
+  remove: jest.fn(() => Promise.resolve("remove promise")),
 }));
 
 jest.mock("../config", () => ({
@@ -49,16 +49,16 @@ describe("watchServerElements", () => {
 
     await add("file");
     expect(addOrChange).toHaveBeenCalledWith("from/file");
-    expect(cb).toHaveBeenCalledWith('addOrChange promise');
+    expect(cb).toHaveBeenCalledWith("addOrChange promise");
     cb.mockClear();
 
     await change("file");
     expect(addOrChange).toHaveBeenCalledWith("from/file");
-    expect(cb).toHaveBeenCalledWith('addOrChange promise');
+    expect(cb).toHaveBeenCalledWith("addOrChange promise");
     cb.mockClear();
 
     await unlink("file");
     expect(remove).toHaveBeenCalledWith("from/file");
-    expect(cb).toHaveBeenCalledWith('remove promise');
+    expect(cb).toHaveBeenCalledWith("remove promise");
   });
 });
