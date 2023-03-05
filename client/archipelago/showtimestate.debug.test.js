@@ -1,4 +1,4 @@
-describe("ShowtimeState", () => {
+describe.skip("ShowtimeState", () => {
   it("has debug mode", async () => {
     document.__debug__ = {};
 

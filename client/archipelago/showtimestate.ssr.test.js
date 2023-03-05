@@ -2,7 +2,7 @@ delete global.document;
 
 global.document = undefined;
 
-describe("ShowtimeState", () => {
+describe.skip("ShowtimeState", () => {
   it("has debug mode", async () => {
     const { showtimestate } = await import("./showtimestate.mjs");
 

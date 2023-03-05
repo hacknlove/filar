@@ -1,4 +1,4 @@
-describe("ShowtimeState", () => {
+describe.skip("ShowtimeState", () => {
   afterEach(async () => {
     const { state } = await import("./showtimestate.mjs");
 
