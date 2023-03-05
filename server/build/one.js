@@ -5,18 +5,20 @@ const { join } = require("path");
 const { processAllElements } = require("../tree/processAllElements");
 const parser = new DOMParser();
 
-const { from } = require("../config");
+const config = require("../config");
 
 async function buildOne(filePath) {
   console.log(`Building ${filePath}...`);
-  const file = await readFile(join(from, filePath), "utf8").catch((error) => ({
-    error,
-  }));
+  const file = await readFile(join(config.from, filePath), "utf8").catch(
+    (error) => ({
+      error,
+    })
+  );
 
   if (file.error) {
     throw new Error("HTMl file cannot be read", {
       cause: {
-        from,
+        from: config.from,
         filePath,
         error: file.eror,
       },
@@ -29,7 +31,7 @@ async function buildOne(filePath) {
 
   await outputFile(
     join(
-      from,
+      config.from,
       ".build",
       document.querySelector("SSR") ? "ssr" : "static",
       filePath

@@ -8,7 +8,7 @@ jest.mock("../server/build/all");
 jest.mock("../server/se/watch");
 
 jest.mock("node:fs/promises", () => ({
-  rmdir: jest.fn(),
+  rmdir: jest.fn(() => Promise.resolve()),
 }));
 
 jest.mock("./argv", () => ({

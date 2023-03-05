@@ -11,7 +11,11 @@ async function main() {
 
   console.log(`Building from ${config.from}`);
 
-  await rmdir(join(config.from, ".build"), { recursive: true, force: true });
+  await rmdir(join(config.from, ".build"), {
+    recursive: true,
+    force: true,
+  }).catch(() => {});
+
   await initializeServerElements();
 
   return buildAll();

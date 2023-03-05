@@ -2,11 +2,11 @@ const { globAsync } = require("../common/globAsync");
 
 const { buildOne } = require("./one");
 
-const { from } = require("../config");
+const config = require("../config");
 
 async function buildAll() {
   const files = await globAsync("**/*.html", {
-    cwd: from,
+    cwd: config.from,
     ignore: "**/*.{se,ce}.html",
   });
 
