@@ -6,15 +6,7 @@ async function fromAPI(src, context) {
 }
 
 const { from } = require("../../config");
-
-function isAModule(src) {
-  try {
-    require.resolve(src);
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
+const { isAModule } = require("../../common/isAModule");
 
 function frominnerText(element, context) {
   const innerText = element.innerText;
