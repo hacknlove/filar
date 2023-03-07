@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getPage should return a cloned node if the page exists 1`] = `"<html><body>Hello World!</body></html>"`;

@@ -1,20 +1,18 @@
-const { readFile } = require("fs-extra");
+const { loadPage } = require("./pages");
 
 function sortAndMapRoutes(routes) {
-  const response = routes.map((route) => {
-    const file = readFile(route, "utf-8");
+  const response = routes.map((filePath) => {
+    loadPage(filePath);
 
-    if (route.includes("#")) {
+    if (filePath.includes("#")) {
         return {
-            file,
             forSort: '',
-            expressPath: null,
         };
     }
 
     // remove the extension and the name if it's index
 
-    let expressPath = '/' + route.replace(/\/?(index)?\.html$/, "");
+    let expressPath = '/' + filePath.replace(/\/?(index)?\.html$/, "");
 
     // replace the foo/[[...bar]] with foo/:bar*
     expressPath = expressPath.replace(/\[\[\.\.\.(\w+)\]\]$/, "foo/:$1*");
@@ -33,8 +31,7 @@ function sortAndMapRoutes(routes) {
 
 
     return {
-      file,
-      route,
+      filePath,
       forSort: expressPath.replaceAll(/:/g, "\uffff"),
       expressPath,
     };
@@ -55,12 +52,14 @@ function sortAndMapRoutes(routes) {
     });
   });
 
-  response.forEach((route) => {
+  return response.filter((route) => {
+    if (route.forSort === "") {
+      return false;
+    }
     delete route.forSort;
     delete route.route;
+    return true;
   });
-
-  return response;
 }
 
 exports.sortAndMapRoutes = sortAndMapRoutes;

@@ -1,7 +1,5 @@
 const { sortAndMapRoutes } = require("./sortAndMapRoutes");
-jest.mock("fs-extra", () => ({
-    readFile: jest.fn(filename => filename),
-}));
+jest.mock("./pages");
 
 describe("sortAndMapRoutes", () => {
   it("sorts the files by especificity", () => {
@@ -19,32 +17,28 @@ describe("sortAndMapRoutes", () => {
 
     expect(sortedRoutes).toEqual([
         {
-            expressPath: null,
-            file: "#/hidden.html",
-        },
-        {
             expressPath: "/",
-            file: "index.html",
+            filePath: "index.html",
         },
         {
             expressPath: "/blog",
-            file: "blog/index.html",
+            filePath: "blog/index.html",
         },
         {
             expressPath: "/blog/foo/:slug*",
-            file: "blog/[[...slug]].html",
+            filePath: "blog/[[...slug]].html",
         },
         {
             expressPath: "/blog/:slug",
-            file: "blog/[slug].html",
+            filePath: "blog/[slug].html",
         },
         {
             expressPath: "/foo/:slug+",
-            file: "[...slug].html",
+            filePath: "[...slug].html",
         },
         {
             expressPath: "/:slug",
-            file: "[slug].html",
+            filePath: "[slug].html",
         }
     ]);
   });
