@@ -1,11 +1,13 @@
 const config = require("../config");
 const { isAModule } = require("../common/isAModule");
+const { dirname } = require("path");
 
 async function getStaticContext(filePath) {
   const importPath = filePath.substring(0, filePath.length - 5); //.html length is 5
-
+  const dir = dirname(filePath);
   const context = {
     filePath,
+    dir,
   };
   if (isAModule(importPath)) {
     const requiredContext = require(importPath);
@@ -14,6 +16,7 @@ async function getStaticContext(filePath) {
         context,
         requiredContext({
           filePath,
+          dir,
           config,
         })
       );
@@ -27,6 +30,7 @@ async function getStaticContext(filePath) {
       context,
       config.context({
         filePath,
+        dir,
         config,
       })
     );

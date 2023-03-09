@@ -30,7 +30,11 @@ describe("getStaticContext", () => {
 
     await getStaticContext(filePath);
 
-    expect(config.context).toHaveBeenCalledWith({ filePath, config });
+    expect(config.context).toHaveBeenCalledWith({
+      filePath,
+      config,
+      dir: "../../test",
+    });
   });
 
   it("should include the result of the context function in the context", async () => {
@@ -54,7 +58,11 @@ describe("getStaticContext", () => {
 
     await getStaticContext(filePath);
 
-    expect(mockRequiredContext).toHaveBeenCalledWith({ filePath, config });
+    expect(mockRequiredContext).toHaveBeenCalledWith({
+      filePath,
+      config,
+      dir: "../../test",
+    });
   });
 
   it("should include the result of the requiredContext function in the context", async () => {
