@@ -7,15 +7,14 @@ const parser = new DOMParser();
 
 const config = require("../config");
 const { getStaticContext } = require("./getStaticContext");
+const { isStatic } = require("./isStatic");
 
 async function buildOne(filePath) {
   console.log(`Building ${filePath}...`);
   const fullFilePath = join(config.from, filePath);
-  const file = await readFile(fullFilePath, "utf8").catch(
-    (error) => ({
-      error,
-    })
-  );
+  const file = await readFile(fullFilePath, "utf8").catch((error) => ({
+    error,
+  }));
 
   if (file.error) {
     throw new Error("HTMl file cannot be read", {
@@ -37,7 +36,7 @@ async function buildOne(filePath) {
     join(
       config.from,
       ".build",
-      document.querySelector("SSR") ? "ssr" : "static",
+      isStatic(filePath, document) ? "static" : "ssr",
       filePath
     ),
     document.toString()
