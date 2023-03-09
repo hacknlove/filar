@@ -5,14 +5,14 @@ function sortAndMapRoutes(routes) {
     loadPage(filePath);
 
     if (filePath.includes("#")) {
-        return {
-            forSort: '',
-        };
+      return {
+        forSort: "",
+      };
     }
 
     // remove the extension and the name if it's index
 
-    let expressPath = '/' + filePath.replace(/\/?(index)?\.html$/, "");
+    let expressPath = "/" + filePath.replace(/\/?(index)?\.html$/, "");
 
     // replace the foo/[[...bar]] with foo/:bar*
     expressPath = expressPath.replace(/\[\[\.\.\.(\w+)\]\]$/, "foo/:$1*");
@@ -26,9 +26,8 @@ function sortAndMapRoutes(routes) {
     expressPath = expressPath.replaceAll(/\[(\w+)\]/g, ":$1");
 
     expressPath = expressPath.replaceAll(/\[\]/g, "(.*)");
-    
-    expressPath ||= "/";
 
+    expressPath ||= "/";
 
     return {
       filePath,
@@ -46,9 +45,7 @@ function sortAndMapRoutes(routes) {
     }
     console.error("Duplicate route", a.expressPath, a.route, b.route);
     throw new Error(`Duplicate route`, {
-        cause: { expressPath: a.expressPath,
-            filePaths: [a.route, b.route],
-        }
+      cause: { expressPath: a.expressPath, filePaths: [a.route, b.route] },
     });
   });
 

@@ -16,30 +16,30 @@ describe("sortAndMapRoutes", () => {
     const sortedRoutes = sortAndMapRoutes(routes);
 
     expect(sortedRoutes).toEqual([
-        {
-            expressPath: "/",
-            filePath: "index.html",
-        },
-        {
-            expressPath: "/blog",
-            filePath: "blog/index.html",
-        },
-        {
-            expressPath: "/blog/foo/:slug*",
-            filePath: "blog/[[...slug]].html",
-        },
-        {
-            expressPath: "/blog/:slug",
-            filePath: "blog/[slug].html",
-        },
-        {
-            expressPath: "/foo/:slug+",
-            filePath: "[...slug].html",
-        },
-        {
-            expressPath: "/:slug",
-            filePath: "[slug].html",
-        }
+      {
+        expressPath: "/",
+        filePath: "index.html",
+      },
+      {
+        expressPath: "/blog",
+        filePath: "blog/index.html",
+      },
+      {
+        expressPath: "/blog/foo/:slug*",
+        filePath: "blog/[[...slug]].html",
+      },
+      {
+        expressPath: "/blog/:slug",
+        filePath: "blog/[slug].html",
+      },
+      {
+        expressPath: "/foo/:slug+",
+        filePath: "[...slug].html",
+      },
+      {
+        expressPath: "/:slug",
+        filePath: "[slug].html",
+      },
     ]);
   });
   it('throws an error if there are duplicate routes', () => {
@@ -49,5 +49,5 @@ describe("sortAndMapRoutes", () => {
     ];
 
     expect(() => sortAndMapRoutes(routes)).toThrow();
-  })
+  });
 });
