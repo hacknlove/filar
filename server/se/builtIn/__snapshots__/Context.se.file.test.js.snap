@@ -2,36 +2,36 @@
 
 exports[`Context from file changes parent context from a js file 1`] = `
 "<?xml version="1.0" encoding="utf-8"?>
-    <div>
+      <div>
         
         <h1>My Updated title</h1>
-    </div>
-"
+      </div>
+  "
 `;
 
 exports[`Context from file changes parent context from a js file with absolute path 1`] = `
 "<?xml version="1.0" encoding="utf-8"?>
-    <div>
+      <div>
         
         <h1>My Updated title</h1>
-    </div>
-"
+      </div>
+  "
 `;
 
 exports[`Context from file changes parent context from a json file 1`] = `
 "<?xml version="1.0" encoding="utf-8"?>
-            <div>
-                
-                <h1>The new Title</h1>
-            </div>
-        "
+      <div>
+        
+        <h1>The new Title</h1>
+      </div>
+    "
 `;
 
 exports[`Context from file changes parent context from a transform js file 1`] = `
 "<?xml version="1.0" encoding="utf-8"?>
-    <div>
+      <div>
         
         <h1>My Updated title</h1>
-    </div>
-"
+      </div>
+  "
 `;

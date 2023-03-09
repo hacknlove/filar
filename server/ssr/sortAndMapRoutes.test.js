@@ -42,11 +42,8 @@ describe("sortAndMapRoutes", () => {
       },
     ]);
   });
-  it('throws an error if there are duplicate routes', () => {
-    const routes = [
-      "foo/index.html",
-      "foo.html",
-    ];
+  it("throws an error if there are duplicate routes", () => {
+    const routes = ["foo/index.html", "foo.html"];
 
     expect(() => sortAndMapRoutes(routes)).toThrow();
   });

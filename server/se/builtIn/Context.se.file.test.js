@@ -1,8 +1,7 @@
-const { DOMParser } = require("linkedom");
+const parser = new (require("linkedom").DOMParser)();
+
 const { processAllElements } = require("../../tree/processAllElements");
 const { ServerElementsMap } = require("../common");
-
-const parser = new DOMParser();
 
 const Context = require("./Context.se");
 
@@ -13,11 +12,11 @@ jest.mock("../../config", () => ({
 describe("Context from file", () => {
   it("changes parent context from a json file", async () => {
     const document = parser.parseFromString(`
-            <div Title="'My title'">
-                <Context src="./context.json"></Context>
-                <h1>{{Title}}</h1>
-            </div>
-        `);
+      <div Title="'My title'">
+        <Context src="./context.json"></Context>
+        <h1>{{Title}}</h1>
+      </div>
+    `);
 
     ServerElementsMap.set("Context", Context);
 
@@ -30,11 +29,11 @@ describe("Context from file", () => {
 
   it("changes parent context from a transform js file", async () => {
     const document = parser.parseFromString(`
-    <div Title="'My title'">
+      <div Title="'My title'">
         <Context src="./transform.js"></Context>
         <h1>{{Title}}</h1>
-    </div>
-`);
+      </div>
+  `);
 
     ServerElementsMap.set("Context", Context);
 
@@ -47,11 +46,11 @@ describe("Context from file", () => {
 
   it("changes parent context from a js file", async () => {
     const document = parser.parseFromString(`
-    <div Title="'My title'">
+      <div Title="'My title'">
         <Context src="./context.js"></Context>
         <h1>{{Title}}</h1>
-    </div>
-`);
+      </div>
+  `);
 
     ServerElementsMap.set("Context", Context);
 
@@ -64,11 +63,11 @@ describe("Context from file", () => {
 
   it("changes parent context from a js file with absolute path", async () => {
     const document = parser.parseFromString(`
-    <div Title="'My title'">
+      <div Title="'My title'">
         <Context src="/test/context.js"></Context>
         <h1>{{Title}}</h1>
-    </div>
-`);
+      </div>
+  `);
 
     ServerElementsMap.set("Context", Context);
 
