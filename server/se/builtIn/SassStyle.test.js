@@ -22,7 +22,7 @@ describe("processCustomElement", () => {
             <html>
                 <head></head>
                 <body>
-                    <SassStyle inline color1="red" color2="#fabada"/>
+                    <SassStyle embedded color1="red" color2="#fabada"/>
                 </body>
             </html>s
         `);

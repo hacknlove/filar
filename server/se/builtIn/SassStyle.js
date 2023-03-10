@@ -52,7 +52,7 @@ async function processCustomElement(element, context) {
   const head = getRoot(element).querySelector("head");
   element.remove();
 
-  if (element.getAttribute("inline") === "") {
+  if (element.getAttribute("embedded") === "") {
     head.appendChild(
       parser.parseFromString(`<style>${css}</style>`).firstElementChild
     );
