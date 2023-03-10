@@ -13,7 +13,7 @@ function replaceIslandPlaceholders({ text, island, childNumber }) {
       replacement = vm.runInNewContext(expresion, island);
     } catch (error) {
       throw new Error("Error while evaluating island", {
-        reason: {
+        cause: {
           text,
           expresion,
           island,

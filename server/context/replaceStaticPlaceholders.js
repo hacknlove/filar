@@ -10,8 +10,10 @@ function replaceStaticPlaceholders({ text, context, island = {} }) {
         ...island,
       });
     } catch (error) {
+      delete context.parentContext;
       throw new Error("Error while evaluating static expression", {
-        reason: {
+        cause: {
+          message: error.message,
           text,
           expresion,
           context,

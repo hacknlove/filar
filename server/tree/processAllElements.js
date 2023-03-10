@@ -10,7 +10,16 @@ const isCustomComponentRegex = /^([A-Z][a-z]+)+$/;
 async function processAllElements(element, context = {}) {
   for (const node of childrenIterator(element)) {
     if (node.nodeType === 3) {
-      processTextNode(node, context);
+      try {
+        processTextNode(node, context);
+      } catch (error) {
+        throw new Error("Error while processing text node", {
+          cause: {
+            ...error.cause,
+            element: element.parentElement.tagName,
+          }
+        })
+      }
       continue;
     }
 
