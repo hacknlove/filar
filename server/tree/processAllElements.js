@@ -17,8 +17,8 @@ async function processAllElements(element, context = {}) {
           cause: {
             ...error.cause,
             element: element.parentElement.tagName,
-          }
-        })
+          },
+        });
       }
       continue;
     }
