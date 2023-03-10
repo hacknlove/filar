@@ -5,7 +5,7 @@ function resolveSrc({ src, relative, root }) {
     relative = join(root, relative);
   }
 
-  if (src === null) {
+  if (src === null || src === undefined) {
     return root;
   }
   if (src === "") {

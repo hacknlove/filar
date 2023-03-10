@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`processCustomElement compiles and adds link to head 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <html>
+                <head><link rel="stylesheet" href="cb14b40216f1a7303bf59c768e9d616e8b5608db193cfe93324f4e159f4e2661.css" type="text/css" /></head>
+                <body>
+                    
+                </body>
+            </html>s
+        "
+`;
+
+exports[`processCustomElement compiles and adds style to head 1`] = `
+"<?xml version="1.0" encoding="utf-8"?>
+            <html>
+                <head><style>:root{--color1: red;--color2: #fabada}h1{color:var(--color1)}h2{color:var(--color2)}</style></head>
+                <body>
+                    
+                </body>
+            </html>s
+        "
+`;

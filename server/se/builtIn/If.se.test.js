@@ -5,6 +5,8 @@ const parser = new DOMParser();
 
 const If = require("./If.se");
 
+ServerElementsMap.set("If", If);
+
 describe("if condition", () => {
   it("renders the content if the condition evaluates to truthy", async () => {
     const document = parser.parseFromString(`
@@ -16,8 +18,6 @@ describe("if condition", () => {
                 </body>
             </html>
         `);
-
-    ServerElementsMap.set("If", If);
 
     await processAllElements(document);
 
@@ -33,8 +33,6 @@ describe("if condition", () => {
                 </body>
             </html>
         `);
-
-    ServerElementsMap.set("If", If);
 
     await processAllElements(document);
 
