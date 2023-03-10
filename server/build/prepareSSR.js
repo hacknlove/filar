@@ -8,10 +8,9 @@ const emptyScript = parser.parseFromString(
 ).firstChild;
 
 exports.prepareSSR = function prepareSSR(node, context) {
-  if (node.firstElementChild?.tagName === "script") {
-    if (node.firstChild.classList.has("ssr")) {
-      return;
-    }
+  const firstElementChild = node.firstElementChild;
+  if (firstElementChild && firstElementChild?.tagName === "script" && firstElementChild.classList.has("ssr")) {
+    return;
   }
   const newContextScript = emptyScript.cloneNode(true);
 
