@@ -5,8 +5,10 @@ const { ServerElementsMap } = require("../common");
 
 const Context = require("./Context.se");
 
+const config = require("../../config");
+
 jest.mock("../../config", () => ({
-  from: "server/se/builtIn",
+  from: `${process.cwd()}/server/se/builtIn`,
 }));
 
 describe("Context from file", () => {
@@ -22,6 +24,7 @@ describe("Context from file", () => {
 
     await processAllElements(document, {
       filePath: "test/index.html",
+      dir: `${config.from}/test`,
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -39,6 +42,7 @@ describe("Context from file", () => {
 
     await processAllElements(document, {
       filePath: "test/index.html",
+      dir: `${config.from}/test`,
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -56,6 +60,7 @@ describe("Context from file", () => {
 
     await processAllElements(document, {
       filePath: "test/index.html",
+      dir: `${config.from}/test`,
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -73,6 +78,7 @@ describe("Context from file", () => {
 
     await processAllElements(document, {
       filePath: "test/index.html",
+      dir: `${process.cwd()}/test`,
     });
 
     expect(document.toString()).toMatchSnapshot();

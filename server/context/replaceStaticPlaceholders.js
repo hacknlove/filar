@@ -4,13 +4,11 @@ function replaceStaticPlaceholders({ text, context, island = {} }) {
   const contextRegexp = /{{(.+?)}}/g;
 
   return text.replace(contextRegexp, (_match, expresion) => {
+    const vmContext = Object.create(context);
+    Object.assign(vmContext, island);
     try {
-      return vm.runInNewContext(expresion, {
-        ...context,
-        ...island,
-      });
+      return vm.runInNewContext(expresion, vmContext);
     } catch (error) {
-      delete context.parentContext;
       throw new Error("Error while evaluating static expression", {
         cause: {
           message: error.message,

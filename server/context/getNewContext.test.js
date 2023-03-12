@@ -17,7 +17,6 @@ describe("getNewContext", () => {
     expect(newContext).toEqual({
       Title: "new title",
       FooBar: "bar",
-      parentContext: expect.any(Object),
     });
   });
 
@@ -32,11 +31,8 @@ describe("getNewContext", () => {
 
     const newContext = getNewContext(node, context);
 
-    expect(newContext).toEqual({
-      Content: ["some array"],
-      NewField: ["some array"],
-      parentContext: expect.any(Object),
-    });
+    expect(newContext.NewField).toBe(newContext.Content);
+    expect(newContext.NewField).toEqual(["some array"]);
   });
 
   it("takes the value from the context if the value is an expression", () => {
@@ -50,11 +46,8 @@ describe("getNewContext", () => {
 
     const newContext = getNewContext(node, context);
 
-    expect(newContext).toEqual({
-      Content: ["some array"],
-      NewField: "some array",
-      parentContext: expect.any(Object),
-    });
+    expect(newContext.NewField).toBe(newContext.Content[0]);
+    expect(newContext.NewField).toBe("some array");
   });
 
   it("throws if the expresion is wrong", () => {

@@ -18,9 +18,14 @@ exports.prepareSSR = function prepareSSR(node, context) {
   }
   const newContextScript = emptyScript.cloneNode(true);
 
-  newContextScript.innerHTML = JSON.stringify(context, (key, value) =>
-    isCamelCaseRegex.test(key || "Start") ? value : undefined
-  );
+  const newContext = {};
+  for (const key in context) {
+    if (isCamelCaseRegex.test(key)) {
+      newContext[key] = context[key];
+    }
+  }
+
+  newContextScript.innerHTML = JSON.stringify(newContext);
 
   node.prepend(newContextScript);
 };

@@ -5,10 +5,10 @@ const { dirname } = require("path");
 async function getStaticContext(filePath) {
   const importPath = filePath.substring(0, filePath.length - 5); //.html length is 5
   const dir = dirname(filePath);
-  const context = {
+  const context = Object.create({
     filePath,
     dir,
-  };
+  });
   if (isAModule(importPath)) {
     const requiredContext = require(importPath);
     if (typeof requiredContext === "function") {
@@ -25,17 +25,17 @@ async function getStaticContext(filePath) {
     }
   }
 
-  if (typeof config.context === "function") {
+  if (config.context) {
     Object.assign(
       context,
-      config.context({
-        filePath,
-        dir,
-        config,
-      })
+      typeof config.context === "function"
+        ? config.context({
+            filePath,
+            dir,
+            config,
+          })
+        : config.context
     );
-  } else if (typeof config.context === "object") {
-    Object.assign(context, config.context);
   }
 
   return context;

@@ -20,7 +20,8 @@ async function processCustomElement(element, context, processAllElements) {
   const iterable = vm.runInNewContext(iterator, context);
 
   for (const item of iterable) {
-    const newContext = { ...context, [key]: item };
+    const newContext = Object.create(context);
+    newContext[key] = item;
 
     if (filter && !vm.runInNewContext(filter, newContext)) {
       continue;

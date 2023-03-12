@@ -3,10 +3,7 @@ const vm = require("node:vm");
 const isCamelCaseRegex = /^([A-Z][a-z]*)+[a-z][A-Z]*$/;
 
 exports.getNewContext = function getNewContext(node, context) {
-  const newContext = {
-    ...context,
-    parentContext: context,
-  };
+  const newContext = Object.create(context);
 
   for (const attr of node.getAttributeNames()) {
     if (!isCamelCaseRegex.test(attr)) {

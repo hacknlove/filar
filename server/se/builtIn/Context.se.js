@@ -1,11 +1,12 @@
-const { join, resolve, dirname } = require("path");
 const httpRegex = /^(https?:)?\/\//;
 const vm = require("vm");
+const { resolveSrc } = require("../../common/resolveSrc");
+
 async function fromAPI(src, context) {
   Object.assign(context, await fetch(src).then((response) => response.json()));
 }
 
-const { from } = require("../../config");
+const config = require("../../config");
 const { isAModule } = require("../../common/isAModule");
 
 function frominnerText(element, context) {
@@ -20,7 +21,7 @@ function frominnerText(element, context) {
   }
 
   try {
-    vm.runInNewContext(innerText, { context: context });
+    vm.runInNewContext(innerText, { context });
     return;
   } catch {
     // Not JS
@@ -32,15 +33,11 @@ function frominnerText(element, context) {
 }
 
 async function fromFile(src, context) {
-  let expandedSrc = src;
-  if (src[0] === "/") {
-    expandedSrc = join(process.cwd(), from, src);
-  } else if (src[0] === ".") {
-    expandedSrc = resolve(
-      dirname(join(process.cwd(), from, context.filePath)),
-      src
-    );
-  }
+  const expandedSrc = resolveSrc({
+    src,
+    root: config.from,
+    relative: context.dir,
+  });
 
   if (!isAModule(expandedSrc)) {
     throw new Error(`${expandedSrc} cannot be found`, {
@@ -81,14 +78,16 @@ async function processCustomElement(element, context) {
   }
   const src = element.getAttribute("src");
 
+  const parentContext = context.__proto__;
+
   if (httpRegex.test(src)) {
-    await fromAPI(src, context.parentContext);
+    await fromAPI(src, parentContext);
   } else if (src) {
-    await fromFile(src, context.parentContext);
+    await fromFile(src, parentContext);
   }
 
   if (element.innerText.trim()) {
-    frominnerText(element, context.parentContext);
+    frominnerText(element, parentContext);
   }
 
   if (!element.getAttribute("ssr")) {

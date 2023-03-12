@@ -49,13 +49,11 @@ async function processCustomElement(element, context) {
 
       return from(node.islandId, expression);
     };
+    const vmContext = Object.create(context);
+    Object.assign(vmContext, { parent, from });
     state[attribute] = await vm.runInNewContext(
       element.getAttribute(attribute),
-      {
-        ...context,
-        parent,
-        from,
-      }
+      vmContext
     );
   }
 
