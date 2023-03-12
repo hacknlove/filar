@@ -89,7 +89,8 @@ describe("Context fromFile", () => {
   it("throws if the src cannot be found", async () => {
     await expect(
       Context.__test__.fromFile("/cannot/be/found", {
-        filePath: "test/index.html",
+        filePath: `${config.from}/test/index.html`,
+        dir: `${config.from}/test`,
       })
     ).rejects.toThrow();
   });
@@ -97,7 +98,8 @@ describe("Context fromFile", () => {
   it("throws if the src cannot be parsed", async () => {
     await expect(
       Context.__test__.fromFile("/test/wrong.json", {
-        filePath: "test/index.html",
+        filePath: `${config.from}/test/index.html`,
+        dir: `${config.from}/test`,
       })
     ).rejects.toThrow();
   });
@@ -105,7 +107,8 @@ describe("Context fromFile", () => {
   it("throws if there is a transform function, and it errors", async () => {
     await expect(
       Context.__test__.fromFile("/test/wrongTransform.js", {
-        filePath: "test/index.html",
+        filePath: `${config.from}/test/index.html`,
+        dir: `${config.from}/test`,
       })
     ).rejects.toThrow();
   });
