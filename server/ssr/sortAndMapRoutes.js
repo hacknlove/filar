@@ -1,9 +1,5 @@
-const { loadPage } = require("./pages");
-
 function sortAndMapRoutes(routes) {
   const response = routes.map((filePath) => {
-    loadPage(filePath);
-
     if (filePath.includes("#")) {
       return {
         forSort: "",

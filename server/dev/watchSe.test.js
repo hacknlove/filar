@@ -1,6 +1,6 @@
-const { addOrChange, remove } = require("./common");
+const { addOrChange, remove } = require("../se/common");
 const { __chokidarWatcher } = require("chokidar");
-const { watchServerElements } = require("./watch");
+const { watchServerElements } = require("./watchSe");
 
 jest.mock("chokidar", () => {
   const __chokidarWatcher = {
@@ -13,7 +13,7 @@ jest.mock("chokidar", () => {
   };
 });
 
-jest.mock("./common", () => ({
+jest.mock("../se/common", () => ({
   addOrChange: jest.fn(() => Promise.resolve("addOrChange promise")),
   remove: jest.fn(() => Promise.resolve("remove promise")),
 }));
@@ -48,17 +48,17 @@ describe("watchServerElements", () => {
     );
 
     await add("file");
-    expect(addOrChange).toHaveBeenCalledWith("from/file");
+    expect(addOrChange).toHaveBeenCalledWith("file");
     expect(cb).toHaveBeenCalledWith("addOrChange promise");
     cb.mockClear();
 
     await change("file");
-    expect(addOrChange).toHaveBeenCalledWith("from/file");
+    expect(addOrChange).toHaveBeenCalledWith("file");
     expect(cb).toHaveBeenCalledWith("addOrChange promise");
     cb.mockClear();
 
     await unlink("file");
-    expect(remove).toHaveBeenCalledWith("from/file");
+    expect(remove).toHaveBeenCalledWith("file");
     expect(cb).toHaveBeenCalledWith("remove promise");
   });
 });

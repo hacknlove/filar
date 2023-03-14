@@ -7,12 +7,16 @@
     "test:client": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test": "jest",
     "build": "node cli/build --from ./playground",
+    "start": "node cli/start --from ./playground",
+    "dev": "node cli/dev --from ./playground",
+    "dev:watch": "node --watch cli/dev --from ./playground",
     "lint": "eslint . --fix",
     "prettier": "prettier --write **/*.{mjs,js,css,scss,html,json,md}",
     "preprettier": "npm run lint"
   },
   "bin": {
-    "filar-build": "./cli/build.js"
+    "filar-build": "./cli/build.js",
+    "filar-start": "./cli/start.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,7 +29,9 @@
     "linkedom": "^0.14.22",
     "livereload": "^0.9.3",
     "minimist": "^1.2.8",
-    "prettier": "^2.8.4"
+    "path-to-regexp": "^6.2.1",
+    "prettier": "^2.8.4",
+    "sass": "^1.58.3"
   },
   "devDependencies": {
     "eslint": "^8.34.0",
