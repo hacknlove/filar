@@ -12,7 +12,8 @@ async function build (req, res, next) {
   }
 
   req.filePath = filePath;
-  req.params = params;
+  // req.params cannot be used because express will overwrite it with its own route params
+  req.devparams = params.params;
   res.page = await prebuild(filePath);
 
   next()

@@ -14,7 +14,7 @@ async function ssr(req, res, next) {
         isSSR: true,
         body: req.body || {},
         query: req.query || {},
-        params: req.params || {},
+        params: req.devparams || {},
         cookies: req.cookies || {},
         headers: req.headers || {},
     };
@@ -30,7 +30,7 @@ async function ssr(req, res, next) {
 
         Object.assign(context, JSON.parse(newContextScript.innerHTML));
     
-        processAllElements(tag, context);
+        await processAllElements(tag, context);
     
         for (const newChild of childrenIterator(tag)) {
           tag.parentNode.insertBefore(newChild, tag);
