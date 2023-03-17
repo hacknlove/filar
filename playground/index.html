@@ -1,8 +1,22 @@
 <html>
   <body>
+    <script>
+      function clickthis(element, event) {
+        debugger
+        console.log('Hello world')
+      }
+    </script>
     <MainHeader />
     <p>
       Esto es un párrafo
-    </p> 
+    </p>
+    <div>
+      <Island clicks="1"/>
+      <p>
+        Esto es un párrafo dentro de una isla
+      </p>
+      <div>{{clicks}}</div>
+      <button onclick="clickthis(this, event)">+</button>
+    </div>
   </body>
 </html>

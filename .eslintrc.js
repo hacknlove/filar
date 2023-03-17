@@ -15,6 +15,18 @@ module.exports = {
         "jest/globals": true,
       },
     },
+    {
+      files: ['*.mjs'],
+      parserOptions: {
+        sourceType: 'module',
+      },
+    },
+    {
+      files: ['*.cjs'],
+      parserOptions: {
+        sourceType: 'script',
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: "latest",

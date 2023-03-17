@@ -12,9 +12,8 @@ const { ssr } = require("./ssr");
 require("./watchSe").watchServerElements();
 
 async function dev() {
-  app.use('/_', express.static(join(__dirname, "scripts"), {
-    extensions: ["mjs"],
-
+  app.use('/_', express.static(join(__dirname, "../../client"), {
+    extensions: ["mjs", "js"],
   }));
 
   app.get('/_/refresh', require("./autorefresh").autorefresh);

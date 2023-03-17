@@ -111,21 +111,18 @@ export function manageDynamicNoce({ node, island, rawState }) {
   }
 }
 
-export function initShowTimeIsland(island, rawState) {
+export function initShowTimeIsland(island) {
   if (island.showTimeIsland) {
     return;
   }
-  island.showtime = {
-    rawState,
-    state: new Proxy(
+  island.state = new Proxy(
       {
         island,
-        rawState,
+        rawState: island.island,
         route: "",
       },
       proxyHandler
-    ),
-  };
+    )
 }
 
 export function manageDynamicNodes(island, rawState) {
@@ -161,31 +158,17 @@ export function manageDynamicNodes(island, rawState) {
   });
 }
 
-export async function getIslandState(script) {
-  const src = script.getAttribute("src");
-  if (src) {
-    return fetch(src)
-      .then((response) => response.json())
-      .catch(() => {
-        console.warn(`Failed to fetch ${src}`);
-        return {};
-      });
-  }
-  return JSON.parse(script.textContent);
-}
-
 export async function init(root = document) {
-  const scripts = root.querySelectorAll("script.island");
+  const scripts = root.querySelectorAll(".island>script:first-child");
 
   for (const script of scripts) {
     const island = script.parentElement;
-    if (island.showTimeIsland) {
+    if (island.islandRuntime) {
       console.warn(`ShowTimeIsland already initialized`, root);
       continue;
     }
-    const rawState = await getIslandState(script);
 
-    initShowTimeIsland(island, rawState);
-    manageDynamicNodes(island, rawState);
+    initShowTimeIsland(island);
   }
 }
+
