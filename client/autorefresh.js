@@ -1,4 +1,3 @@
-new EventSource(`/_/refresh`).addEventListener('message', () => {
-    location.reload();
+new EventSource(`/_/refresh`).addEventListener("message", () => {
+  location.reload();
 });
-

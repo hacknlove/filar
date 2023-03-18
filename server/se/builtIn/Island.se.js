@@ -1,36 +1,19 @@
 const vm = require("vm");
-const { DOMParser } = require("linkedom");
-const parser = new DOMParser();
 const { getRoot } = require("../../tree/getRoot");
 
 let lastIslandId = 0;
-
-async function addIslandRuntime(root) {
-  if (root.querySelector('script[src="/_/island.mjs"]')) {
-    return
-  }
-
-  const container = root.head || root.body || root.querySelector("head") || root.querySelector("body") || root;
-
-
-    const islandRuntimeScript = parser.parseFromString(
-      `<script type="module" src="/_/island.mjs"> </script>`
-    ).firstElementChild;
-
-    container.appendChild(islandRuntimeScript);
-}
 
 async function processCustomElement(element, context) {
   const root = getRoot(element);
 
   const attributes = element.getAttributeNames();
-  const currentIslandId = `i-${lastIslandId++}`;
+  const parentNode = element.parentNode;
+  const currentIslandId =
+    parentNode.getAttribute("id") || `i-${lastIslandId++}`;
 
   const state = {};
 
   const external = [];
-
-
 
   for (const attribute of attributes) {
     const from = (islandId, expression) => {
@@ -75,21 +58,18 @@ async function processCustomElement(element, context) {
     );
   }
 
-  element.parentNode.classList.add("island");
+  if (!parentNode.getAttribute("id")) {
+    parentNode.setAttribute("id", currentIslandId);
+  }
 
-  const newContextScript = parser.parseFromString(
-    `<script id=${currentIslandId}> </script>`
-  ).firstElementChild;
-  const content = 
-  newContextScript.innerHTML = `(e=>{e.island=${JSON.stringify(
-    state
-  )};e.external=${JSON.stringify(external)}})(document.currentScript.parentNode)`
-
-  element.parentNode.insertBefore(newContextScript, element);
-  element.parentNode.island = state;
   element.remove();
 
-  addIslandRuntime(root);
+  context.__islands[currentIslandId] = {
+    state,
+    external,
+    expressions: {},
+    offsets: {},
+  };
 }
 
 exports.processCustomElement = processCustomElement;

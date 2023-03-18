@@ -3,19 +3,22 @@ const { replaceStaticPlaceholders } = require("./replaceStaticPlaceholders");
 
 function getChildNumber(node) {
   let i = 0;
-  for (; (node = node.previousSibling); i++);
+  for (; (node = node.previousSibling); node.nodeType === 3 && i++);
   return i;
 }
 
-function findIsland(node) {
-  while (node && !node.island) {
+function findIsland(node, context) {
+  while (node) {
+    if (context.__islands[node.id]) {
+      return context.__islands[node.id];
+    }
     node = node.parentNode;
   }
-  return node?.island;
+  return null;
 }
 
-exports.processTextNode = function (node, context) {
-  const island = findIsland(node);
+function processTextNode(node, context) {
+  const island = findIsland(node, context);
   node.textContent = replaceStaticPlaceholders({
     text: node.textContent,
     context,
@@ -26,26 +29,15 @@ exports.processTextNode = function (node, context) {
 
   const childNumber = getChildNumber(node);
 
-  const { text, serialized } = replaceIslandPlaceholders({
+  replaceIslandPlaceholders({
+    node,
     text: node.textContent,
     island,
-    childNumber,
+    attribute: `t-${childNumber}`,
   });
+}
 
-  if (!serialized) {
-    return;
-  }
-
-  node.textContent = text;
-  const previousSerialized = node.parentNode.serialized ?? [];
-  previousSerialized.push(serialized);
-  node.parentNode.serialized = previousSerialized;
-
-  node.parentNode.setAttribute(
-    "data-island",
-    JSON.stringify(previousSerialized)
-  );
-};
+exports.processTextNode = processTextNode;
 
 exports.__test__ = {
   getChildNumber,

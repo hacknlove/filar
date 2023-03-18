@@ -13,10 +13,11 @@ async function processAllElements(element, context = {}) {
       try {
         processTextNode(node, context);
       } catch (error) {
+        console.log(error);
         throw new Error("Error while processing text node", {
           cause: {
             ...error.cause,
-            element: element.parentElement.tagName,
+            element: element.parentNode?.tagName,
           },
         });
       }

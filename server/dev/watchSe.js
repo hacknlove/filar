@@ -11,9 +11,7 @@ async function watchServerElements(cb) {
   });
 
   watcher.on("add", (file) => addOrChange(file).then(cb));
-  watcher.on("change", (file) =>
-    addOrChange(file).then(cb)
-  );
+  watcher.on("change", (file) => addOrChange(file).then(cb));
   watcher.on("unlink", (file) => remove(file).then(cb));
 }
 

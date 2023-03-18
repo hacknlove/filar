@@ -8,23 +8,27 @@ const { context } = require("./context");
 
 const { build } = require("./build");
 const { ssr } = require("./ssr");
+const { addRuntime } = require("./addRuntime");
 
 require("./watchSe").watchServerElements();
 
 async function dev() {
-  app.use('/_', express.static(join(__dirname, "../../client"), {
-    extensions: ["mjs", "js"],
-  }));
+  app.use(
+    "/_",
+    express.static(join(__dirname, "../../client"), {
+      extensions: ["mjs", "js"],
+    })
+  );
 
-  app.get('/_/refresh', require("./autorefresh").autorefresh);
+  app.get("/_/refresh", require("./autorefresh").autorefresh);
 
   app.use(context);
 
   app.use((req, res, next) => {
-      if (!config.middleware) {
-        return next();
-      }
-      config.middleware(req, res, next);
+    if (!config.middleware) {
+      return next();
+    }
+    config.middleware(req, res, next);
   });
 
   app.use((req, res, next) => {
@@ -39,14 +43,16 @@ async function dev() {
   app.use(express.static(join(config.from, ".dev")));
 
   app.use(build);
-  app.use(ssr)
+  app.use(ssr);
 
   app.use((req, res, next) => {
     if (!config.postProcess) {
       return next();
     }
     config.postProcess(req, res, next);
-  })
+  });
+
+  app.use(addRuntime);
 
   app.use((req, res, next) => {
     if (res.page) {
@@ -58,9 +64,9 @@ async function dev() {
   /* eslint-disable-next-line no-unused-vars */
   app.use((err, req, res, next) => {
     console.error(err);
-    res.status(500)
+    res.status(500);
     res.send("Something broke!");
-  })
+  });
 
   app.listen(3000, () => {
     console.info("Server listening on port 3000!");

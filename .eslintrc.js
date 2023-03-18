@@ -16,15 +16,15 @@ module.exports = {
       },
     },
     {
-      files: ['*.mjs'],
+      files: ["*.mjs"],
       parserOptions: {
-        sourceType: 'module',
+        sourceType: "module",
       },
     },
     {
-      files: ['*.cjs'],
+      files: ["*.cjs"],
       parserOptions: {
-        sourceType: 'script',
+        sourceType: "script",
       },
     },
   ],

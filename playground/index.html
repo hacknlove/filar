@@ -2,21 +2,31 @@
   <body>
     <script>
       function clickthis(element, event) {
-        debugger
-        console.log('Hello world')
+        const state = closestIsland(element);
+        state.clicks = state.clicks + 1;
+      }
+
+      function setItem(element, event) {
+        const state = closestIsland(element);
+        state.item = element.value;
       }
     </script>
     <MainHeader />
-    <p>
-      Esto es un párrafo
-    </p>
     <div>
-      <Island clicks="1"/>
-      <p>
-        Esto es un párrafo dentro de una isla
-      </p>
-      <div>{{clicks}}</div>
-      <button onclick="clickthis(this, event)">+</button>
+      <Island clicks="1" item="''" />
+      <h2 class="count{(clicks)}">This is an island</h2>
+      <div>{(clicks)} {(item)} {(clicks)}</div>
+      <button onclick="clickthis(this)">+</button>
+      <input type="text" oninput="setItem(this)" />
+    </div>
+    <br />
+    <br />
+    <div>
+      <Island clicks="1" item="''" />
+      <h2 class="count{(clicks)}">This is another island</h2>
+      <div>{(clicks)} {(item)} {(clicks)}</div>
+      <button onclick="clickthis(this)">+</button>
+      <input type="text" oninput="setItem(this)" />
     </div>
   </body>
 </html>

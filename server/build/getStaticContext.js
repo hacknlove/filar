@@ -8,6 +8,7 @@ async function getStaticContext(filePath) {
   const context = Object.create({
     filePath,
     dir,
+    __islands: {},
   });
   if (isAModule(importPath)) {
     const requiredContext = require(importPath);
