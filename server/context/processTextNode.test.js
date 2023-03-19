@@ -10,6 +10,7 @@ describe("processTextNode", () => {
     };
     const context = {
       Name: "John",
+      __islands: {},
     };
     processTextNode(node, context);
     expect(node.textContent).toBe("Hello, John!");
@@ -24,13 +25,18 @@ describe("processTextNode", () => {
       </div>
     `);
 
-    const island = document.getElementById("island");
     const span = document.getElementById("span");
     const textNode = span.firstChild;
 
-    island.island = { foo: "Hola" };
-
-    processTextNode(textNode, {}, island.island);
+    processTextNode(textNode, {
+      __islands: {
+        island: {
+          state: { foo: "Hola" },
+          expressions: {},
+          offsets: {},
+        },
+      },
+    });
 
     expect(document).toMatchSnapshot();
   });
@@ -50,29 +56,39 @@ describe("processTextNode", () => {
 
     island.island = { foo: "Hola" };
 
-    processTextNode(textNode, {}, island.island);
+    processTextNode(textNode, {
+      __islands: {
+        island: {
+          state: { foo: "Hola" },
+          expressions: {},
+          offsets: {},
+        },
+      },
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });
 });
 
-describe("getChildNumber", () => {
+describe("getTextChildNumber", () => {
   it("counts the number of previous siblings", () => {
-    const document = parser.parseFromString(`
+    const ul = parser.parseFromString(`
       <ul>
-        <li id="li1" />
-        <li id="li2" />
-        <li id="li3" />
+        CERO
+        <br />
+        UNO
+        <br />
+        DOS
       </ul>
-    `);
+    `).firstElementChild;
 
-    const li1 = document.getElementById("li1");
-    const li2 = document.getElementById("li2");
-    const li3 = document.getElementById("li3");
+    const CERO = ul.childNodes[0];
+    const UNO = ul.childNodes[2];
+    const DOS = ul.childNodes[4];
 
-    expect(__test__.getChildNumber(li1)).toBe(1);
-    expect(__test__.getChildNumber(li2)).toBe(3);
-    expect(__test__.getChildNumber(li3)).toBe(5);
+    expect(__test__.getTextChildNumber(CERO)).toBe(0);
+    expect(__test__.getTextChildNumber(UNO)).toBe(1);
+    expect(__test__.getTextChildNumber(DOS)).toBe(2);
   });
 });
 
@@ -80,7 +96,7 @@ describe("findIsland", () => {
   it("returns the closest up island", () => {
     const document = parser.parseFromString(`
       <div id="root">
-        <div id="island">
+        <div id="the-island">
           <div>
             <div id="element" />
           </div>
@@ -88,13 +104,16 @@ describe("findIsland", () => {
       </div>
     `);
 
-    const root = document.getElementById("root");
-    const island = document.getElementById("island");
     const element = document.getElementById("element");
 
-    root.island = { name: "root" };
-    island.island = { closest: true };
-
-    expect(__test__.findIsland(element)).toBe(island.island);
+    expect(
+      __test__.findIsland(element, {
+        __islands: {
+          "the-island": { island: "the island" },
+        },
+      })
+    ).toEqual({
+      island: "the island",
+    });
   });
 });

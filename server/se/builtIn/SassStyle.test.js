@@ -35,6 +35,7 @@ describe("processCustomElement", () => {
     await processAllElements(document, {
       filePath: __filename,
       dir: __dirname,
+      __islands: {},
     });
 
     expect(document.querySelector("style")).not.toBeNull();
@@ -59,6 +60,7 @@ describe("processCustomElement", () => {
     await processAllElements(document, {
       filePath: __filename,
       dir: __dirname,
+      __islands: {},
     });
 
     expect(document.querySelector("style")).toBeNull();

@@ -2,6 +2,8 @@ const { build } = require("../server/build");
 const { initializeServerElements } = require("../server/se/initialize");
 const { rmdir } = require("node:fs/promises");
 
+jest.spyOn(console, "log").mockImplementation(() => {});
+
 jest.mock("../server/se/initialize");
 jest.mock("../server/build");
 

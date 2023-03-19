@@ -1,7 +1,7 @@
 const { replaceIslandPlaceholders } = require("./replaceIslandPlaceholders");
 const { replaceStaticPlaceholders } = require("./replaceStaticPlaceholders");
 
-function getChildNumber(node) {
+function getTextChildNumber(node) {
   let i = 0;
   for (; (node = node.previousSibling); node.nodeType === 3 && i++);
   return i;
@@ -22,12 +22,12 @@ function processTextNode(node, context) {
   node.textContent = replaceStaticPlaceholders({
     text: node.textContent,
     context,
-    island,
+    island: island?.state,
   });
 
   if (!island) return;
 
-  const childNumber = getChildNumber(node);
+  const childNumber = getTextChildNumber(node);
 
   replaceIslandPlaceholders({
     node,
@@ -40,6 +40,6 @@ function processTextNode(node, context) {
 exports.processTextNode = processTextNode;
 
 exports.__test__ = {
-  getChildNumber,
+  getTextChildNumber,
   findIsland,
 };

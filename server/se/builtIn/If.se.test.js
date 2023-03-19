@@ -19,7 +19,10 @@ describe("if condition", () => {
             </html>
         `);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -34,7 +37,10 @@ describe("if condition", () => {
             </html>
         `);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });

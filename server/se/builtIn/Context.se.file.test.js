@@ -25,6 +25,7 @@ describe("Context from file", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       dir: `${config.from}/test`,
+      __islands: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -43,6 +44,7 @@ describe("Context from file", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       dir: `${config.from}/test`,
+      __islands: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -61,6 +63,7 @@ describe("Context from file", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       dir: `${config.from}/test`,
+      __islands: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -79,6 +82,7 @@ describe("Context from file", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       dir: `${process.cwd()}/test`,
+      __islands: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -91,6 +95,7 @@ describe("Context fromFile", () => {
       Context.__test__.fromFile("/cannot/be/found", {
         filePath: `${config.from}/test/index.html`,
         dir: `${config.from}/test`,
+        __islands: {},
       })
     ).rejects.toThrow();
   });

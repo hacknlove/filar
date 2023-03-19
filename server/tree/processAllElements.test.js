@@ -18,7 +18,10 @@ describe("processAllElements", () => {
 `;
     const document = parser.parseFromString(html);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -38,7 +41,10 @@ describe("processAllElements", () => {
   `;
     const document = parser.parseFromString(html);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -53,7 +59,10 @@ describe("processAllElements", () => {
   `;
     const document = parser.parseFromString(html);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -67,7 +76,10 @@ describe("processAllElements", () => {
 
     const document = parser.parseFromString(html);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -81,7 +93,10 @@ describe("processAllElements", () => {
 
     const document = parser.parseFromString(html);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -120,7 +135,10 @@ describe("processAllElements", () => {
 
     ServerElementsMap.set("MyComponent", myComponent);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });

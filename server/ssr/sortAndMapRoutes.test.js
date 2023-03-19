@@ -44,6 +44,7 @@ describe("sortAndMapRoutes", () => {
   });
   it("throws an error if there are duplicate routes", () => {
     const routes = ["foo/index.html", "foo.html"];
+    jest.spyOn(console, "error").mockImplementation(() => {});
 
     expect(() => sortAndMapRoutes(routes)).toThrow();
   });

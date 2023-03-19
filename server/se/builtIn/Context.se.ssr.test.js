@@ -22,6 +22,7 @@ describe("Context ssr", () => {
 
     await processAllElements(document, {
       filePath: "test/index.html",
+      __islands: {},
     });
 
     expect(document.toString()).toMatchSnapshot();

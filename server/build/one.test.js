@@ -1,6 +1,8 @@
 const { buildOne } = require("./one");
 const { readFile, outputFile } = require("fs-extra");
 
+jest.spyOn(console, "log").mockImplementation(() => {});
+
 jest.mock("fs-extra", () => ({
   readFile: jest.fn(),
   outputFile: jest.fn(),

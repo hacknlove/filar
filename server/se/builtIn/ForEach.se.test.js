@@ -36,7 +36,10 @@ describe("ForEach", () => {
 
     ServerElementsMap.set("ForEach", ForEach);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -54,7 +57,10 @@ describe("ForEach", () => {
 
     ServerElementsMap.set("ForEach", ForEach);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });

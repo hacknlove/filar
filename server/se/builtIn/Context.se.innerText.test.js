@@ -22,7 +22,10 @@ describe("Context inner text", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -39,7 +42,10 @@ describe("Context inner text", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document);
+    await processAllElements(document, {
+      filePath: "test/index.html",
+      __islands: {},
+    });
 
     expect(document.toString()).toMatchSnapshot();
   });

@@ -52,7 +52,11 @@ function replaceIslandPlaceholders({
     return replacement;
   });
 
-  node.textContent = newText;
+  if (attribute.startsWith("t-")) {
+    node.textContent = newText;
+  } else {
+    node.setAttribute(attribute, newText);
+  }
 }
 
 exports.replaceIslandPlaceholders = replaceIslandPlaceholders;

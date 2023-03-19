@@ -31,6 +31,7 @@ describe("Context from api", () => {
 
     await processAllElements(document, {
       filePath: "test/index.html",
+      __islands: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
