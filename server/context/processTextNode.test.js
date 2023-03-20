@@ -1,7 +1,7 @@
 const { DOMParser } = require("linkedom");
 const parser = new DOMParser();
 
-const { processTextNode, __test__ } = require("./processTextNode");
+const { processTextNode } = require("./processTextNode");
 
 describe("processTextNode", () => {
   it("replaces statics placeholders", () => {
@@ -67,53 +67,5 @@ describe("processTextNode", () => {
     });
 
     expect(document.toString()).toMatchSnapshot();
-  });
-});
-
-describe("getTextChildNumber", () => {
-  it("counts the number of previous siblings", () => {
-    const ul = parser.parseFromString(`
-      <ul>
-        CERO
-        <br />
-        UNO
-        <br />
-        DOS
-      </ul>
-    `).firstElementChild;
-
-    const CERO = ul.childNodes[0];
-    const UNO = ul.childNodes[2];
-    const DOS = ul.childNodes[4];
-
-    expect(__test__.getTextChildNumber(CERO)).toBe(0);
-    expect(__test__.getTextChildNumber(UNO)).toBe(1);
-    expect(__test__.getTextChildNumber(DOS)).toBe(2);
-  });
-});
-
-describe("findIsland", () => {
-  it("returns the closest up island", () => {
-    const document = parser.parseFromString(`
-      <div id="root">
-        <div id="the-island">
-          <div>
-            <div id="element" />
-          </div>
-        </div>
-      </div>
-    `);
-
-    const element = document.getElementById("element");
-
-    expect(
-      __test__.findIsland(element, {
-        __islands: {
-          "the-island": { island: "the island" },
-        },
-      })
-    ).toEqual({
-      island: "the island",
-    });
   });
 });

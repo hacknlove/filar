@@ -2,6 +2,22 @@ const vm = require("node:vm");
 
 let currentNodeId = 0;
 
+function getTextChildNumber(node) {
+  let i = 0;
+  for (; (node = node.previousSibling); node.nodeType === 3 && i++);
+  return i;
+}
+
+function findIsland(node, context) {
+  while (node) {
+    if (context.__islands[node.id]) {
+      return context.__islands[node.id];
+    }
+    node = node.parentNode;
+  }
+  return null;
+}
+
 function replaceIslandPlaceholders({
   node,
   text,
@@ -13,9 +29,11 @@ function replaceIslandPlaceholders({
   let offset = 0;
   let replaceIndex = 0;
 
+  const target = attribute.startsWith("t-") ? node.parentNode : node;
+
   const newText = text.replace(contextRegexp, (match, expresion, index) => {
-    if (!node.parentNode.id) {
-      node.parentNode.id = `n-${currentNodeId++}`;
+    if (!target.id) {
+      target.id = `n-${currentNodeId++}`;
     }
 
     let replacement = expressions[expresion]?.value;
@@ -38,12 +56,12 @@ function replaceIslandPlaceholders({
       }
     }
 
-    offsets[node.parentNode.id] ??= {};
-    offsets[node.parentNode.id][attribute] ??= [];
-    offsets[node.parentNode.id][attribute].push(index + offset);
+    offsets[target.id] ??= {};
+    offsets[target.id][attribute] ??= [];
+    offsets[target.id][attribute].push(index + offset);
 
     expressions[expresion].replacements.unshift([
-      node.parentNode.id,
+      target.id,
       attribute,
       replaceIndex++,
     ]);
@@ -55,8 +73,10 @@ function replaceIslandPlaceholders({
   if (attribute.startsWith("t-")) {
     node.textContent = newText;
   } else {
-    node.setAttribute(attribute, newText);
+    target.setAttribute(attribute, newText);
   }
 }
 
 exports.replaceIslandPlaceholders = replaceIslandPlaceholders;
+exports.getTextChildNumber = getTextChildNumber;
+exports.findIsland = findIsland;

@@ -52,9 +52,12 @@ export function initExpression(island, expression, runtime) {
       const offset = island.offsets[nodeId][attribute][replaceIndex];
       const node = document.getElementById(nodeId);
 
-      const oldText = attribute.startsWith("t-")
-        ? getTextNode(node, attribute.slice(2)).textContent
-        : node.getAttribute(attribute);
+      let oldText;
+      if (attribute.startsWith("t-")) {
+        oldText = getTextNode(node, attribute.slice(2)).textContent;
+      } else {
+        oldText = node.getAttribute(attribute);
+      }
 
       const newText =
         oldText.slice(0, offset) +
@@ -100,8 +103,6 @@ export function initIsland([islandId, island]) {
   Object.entries(island.expressions).forEach(([expression, runtime]) =>
     initExpression(island, expression, runtime)
   );
-
-  //  Object.entries(island.nodes).forEach((node) => initNode(islandElement, node));
 }
 
 export default function initIslands(islands) {
