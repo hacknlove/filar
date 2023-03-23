@@ -2,9 +2,9 @@ const { resolve } = require("path");
 const config = require("../server/config");
 const { existsSync } = require("fs");
 
-async function generateConfig() {
+async function generateConfig(fromCli) {
   // Set defaults
-  Object.assign(config, {
+  Object.assign(config, fromCli, {
     from: process.env.FROM || "",
     port: process.env.PORT || 3000,
     host: process.env.HOST || "localhost",

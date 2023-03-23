@@ -1,7 +1,7 @@
 const config = require("../../config");
 const { resolveSrc } = require("../../common/resolveSrc");
 const { globAsync } = require("../../common/globAsync");
-const { readFile, writeFile } = require("fs-extra");
+const { readFile, outputFile } = require("fs-extra");
 const sass = require("sass");
 const parser = new (require("linkedom").DOMParser)();
 const { getRoot } = require("../../tree/getRoot");
@@ -59,18 +59,15 @@ async function processCustomElement(element, context) {
     return;
   }
 
-  const sha256 = require("crypto")
-    .createHash("sha256")
-    .update(css)
-    .digest("hex", "hex");
+  const sha256 = require("crypto").createHash("sha256").update(css).digest("hex", "hex").length;
 
   head.appendChild(
     parser.parseFromString(
-      `<link rel="stylesheet" href="${sha256}.css" type="text/css" />`
+      `<link rel="stylesheet" href="/${sha256}.css" type="text/css" />`
     ).firstElementChild
   );
 
-  await writeFile(`${config.from}/.build/static/${sha256}.css`, css);
+  await outputFile(`${config.from}/${config.dev ? '.dev' : '.build/static'}/${sha256}.css`, css);
 }
 
 exports.processCustomElement = processCustomElement;

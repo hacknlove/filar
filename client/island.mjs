@@ -27,6 +27,7 @@ const proxyHandler = {
 
     target.island.dispatchEvent(new CustomEvent("state"));
     target.island.refreshIsland();
+    return true;
   },
 };
 

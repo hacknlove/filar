@@ -8,7 +8,9 @@ const { generateConfig } = require("./argv");
 const { initializeServerElements } = require("../server/se/initialize");
 
 async function main() {
-  const config = await generateConfig();
+  const config = await generateConfig({
+    dev: true
+  });
 
   console.log(
     `Development mode from ${config.from} at ${config.host}:${config.port}`

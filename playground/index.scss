@@ -1,0 +1,38 @@
+// css variables for light mode
+:root {
+    --bg: #fff;
+    --text: #000;
+    --border: #ccc;
+}
+
+@media (prefers-color-scheme: dark) {
+    // css variables for dark mode
+    :root {
+        --bg: #111;
+        --text: #fff;
+        --border: #333;
+    }
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+}
+h1 {
+    font-size: 2em;
+    font-weight: 400;
+    margin: 0;
+}
+h2 {
+    font-size: 1.5em;
+    font-weight: 400;
+    margin: 0;
+}
+
+body>header {
+    padding: 1em;
+    border-bottom: 1px solid #333;
+}

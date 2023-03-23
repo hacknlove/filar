@@ -12,7 +12,7 @@ jest.mock("../../config", () => ({
 }));
 jest.mock("../../common/globAsync");
 
-const SassStyle = require("./SassStyle");
+const SassStyle = require("./SassStyle.se");
 
 ServerElementsMap.set("SassStyle", SassStyle);
 
