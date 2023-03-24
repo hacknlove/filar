@@ -6,7 +6,6 @@ async function processCustomElement(element, context) {
 
   const attributes = element.getAttributeNames();
   const parentNode = element.parentNode;
-  console.log(context.lastIslandId)
 
   const currentIslandId =
     parentNode.getAttribute("id") || `i-${context.lastIslandId++}`;
