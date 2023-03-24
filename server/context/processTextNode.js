@@ -22,6 +22,7 @@ function processTextNode(node, context) {
     text: node.textContent,
     island,
     attribute: `t-${childNumber}`,
+    context,
   });
 }
 

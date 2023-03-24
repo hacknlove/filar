@@ -1,7 +1,5 @@
 const vm = require("node:vm");
 
-let currentNodeId = 0;
-
 function getTextChildNumber(node) {
   let i = 0;
   for (; (node = node.previousSibling); node.nodeType === 3 && i++);
@@ -23,6 +21,7 @@ function replaceIslandPlaceholders({
   text,
   island: { state, expressions, offsets },
   attribute,
+  context
 }) {
   const contextRegexp = /{\((.+?)\)}/g;
 
@@ -33,7 +32,7 @@ function replaceIslandPlaceholders({
 
   const newText = text.replace(contextRegexp, (match, expresion, index) => {
     if (!target.id) {
-      target.id = `n-${currentNodeId++}`;
+      target.id = `n-${context.currentNodeId++}`;
     }
 
     let replacement = expressions[expresion]?.value;

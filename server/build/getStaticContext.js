@@ -8,6 +8,8 @@ async function getStaticContext(filePath) {
   const context = Object.create({
     filePath,
     dir,
+    lastIslandId: 0,
+    currentNodeId: 0,
     __islands: {},
   });
   if (isAModule(importPath)) {

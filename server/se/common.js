@@ -42,6 +42,7 @@ function remove(filePath) {
   const elementName = getElementName(filePath);
 
   ServerElementsMap.delete(elementName);
+  return Promise.resolve();
 }
 
 const ServerElements = new Proxy(ServerElementsMap, {

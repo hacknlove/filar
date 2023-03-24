@@ -24,7 +24,9 @@ describe("replaceIslandPlaceholders", () => {
         offsets: {},
       },
       attribute: "t-0",
-      childNumber: 0,
+      context: {
+        currentNodeId: 0,
+      }
     });
 
     expect(span.toString()).toBe('<span id="n-0">Hello world!</span>');
@@ -51,7 +53,9 @@ describe("replaceIslandPlaceholders", () => {
           offsets: {},
         },
         attribute: "t-0",
-        childNumber: 0,
+        context: {
+          currentNodeId: 0,
+        }
       })
     ).toThrow("Error while evaluating island");
   });

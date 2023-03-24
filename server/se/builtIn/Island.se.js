@@ -1,15 +1,15 @@
 const vm = require("vm");
 const { getRoot } = require("../../tree/getRoot");
 
-let lastIslandId = 0;
-
 async function processCustomElement(element, context) {
   const root = getRoot(element);
 
   const attributes = element.getAttributeNames();
   const parentNode = element.parentNode;
+  console.log(context.lastIslandId)
+
   const currentIslandId =
-    parentNode.getAttribute("id") || `i-${lastIslandId++}`;
+    parentNode.getAttribute("id") || `i-${context.lastIslandId++}`;
 
   const state = {};
 

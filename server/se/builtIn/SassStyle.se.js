@@ -59,7 +59,7 @@ async function processCustomElement(element, context) {
     return;
   }
 
-  const sha256 = require("crypto").createHash("sha256").update(css).digest("hex", "hex").length;
+  const sha256 = require("crypto").createHash("sha256").update(css).digest("hex", "hex");
 
   head.appendChild(
     parser.parseFromString(

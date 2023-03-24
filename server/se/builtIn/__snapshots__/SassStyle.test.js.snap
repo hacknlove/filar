@@ -3,7 +3,7 @@
 exports[`processCustomElement compiles and adds link to head 1`] = `
 "<?xml version="1.0" encoding="utf-8"?>
             <html>
-                <head><link rel="stylesheet" href="cb14b40216f1a7303bf59c768e9d616e8b5608db193cfe93324f4e159f4e2661.css" type="text/css" /></head>
+                <head><link rel="stylesheet" href="/cb14b40216f1a7303bf59c768e9d616e8b5608db193cfe93324f4e159f4e2661.css" type="text/css" /></head>
                 <body>
                     
                 </body>

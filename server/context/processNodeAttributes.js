@@ -18,6 +18,7 @@ exports.processNodeAttributes = function processNodeAttributes(node, context) {
         text,
         island,
         attribute: attr,
+        context,
       });
     }
     node.setAttribute(
