@@ -32,7 +32,7 @@ function replaceIslandPlaceholders({
 
   const newText = text.replace(contextRegexp, (match, expresion, index) => {
     if (!target.id) {
-      target.id = `n-${context.currentNodeId++}`;
+      target.id = `n-${context.indexes.currentNodeId++}`;
     }
 
     let replacement = expressions[expresion]?.value;

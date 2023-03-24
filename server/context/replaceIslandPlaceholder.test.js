@@ -29,7 +29,9 @@ describe("replaceIslandPlaceholders", () => {
       },
       attribute: "t-0",
       context: {
-        currentNodeId: 0,
+        indexes: {
+          currentNodeId: 0,
+        }
       },
     });
 
@@ -58,7 +60,9 @@ describe("replaceIslandPlaceholders", () => {
         },
         attribute: "t-0",
         context: {
-          currentNodeId: 0,
+          indexes: {
+            currentNodeId: 0,
+          }
         },
       })
     ).toThrow("Error while evaluating island");
