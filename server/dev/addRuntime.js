@@ -1,5 +1,5 @@
 const config = require("../config");
-const { outputFile } = require("fs-extra");
+const { saveIfDifferent } = require("../common/saveIfDifferent");
 const parser = new (require("linkedom").DOMParser)();
 
 async function addRuntime(req, res, next) {
@@ -30,7 +30,7 @@ _(${JSON.stringify(res.__islands, null, 4)})`;
 
   container.appendChild(islandRuntimeScript);
 
-  await outputFile(`${config.from}/.dev/${sha256}.mjs`, js);
+  await saveIfDifferent(`${config.from}/.dev/${sha256}.mjs`, js);
   next();
 }
 

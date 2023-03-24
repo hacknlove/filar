@@ -1,4 +1,8 @@
-const { replaceIslandPlaceholders, findIsland, getTextChildNumber } = require("./replaceIslandPlaceholders");
+const {
+  replaceIslandPlaceholders,
+  findIsland,
+  getTextChildNumber,
+} = require("./replaceIslandPlaceholders");
 
 const { DOMParser } = require("linkedom");
 const parser = new DOMParser();
@@ -26,7 +30,7 @@ describe("replaceIslandPlaceholders", () => {
       attribute: "t-0",
       context: {
         currentNodeId: 0,
-      }
+      },
     });
 
     expect(span.toString()).toBe('<span id="n-0">Hello world!</span>');
@@ -55,12 +59,11 @@ describe("replaceIslandPlaceholders", () => {
         attribute: "t-0",
         context: {
           currentNodeId: 0,
-        }
+        },
       })
     ).toThrow("Error while evaluating island");
   });
 });
-
 
 describe("getTextChildNumber", () => {
   it("counts the number of previous siblings", () => {

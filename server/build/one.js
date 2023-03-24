@@ -1,4 +1,5 @@
-const { readFile, outputFile } = require("fs-extra");
+const { readFile } = require("fs-extra");
+const { saveIfDifferent } = require("../common/saveIfDifferent");
 const { DOMParser } = require("linkedom");
 const { join } = require("path");
 
@@ -32,7 +33,7 @@ async function buildOne(filePath) {
 
   await processAllElements(document, context);
 
-  await outputFile(
+  await saveIfDifferent(
     join(
       config.from,
       ".build",

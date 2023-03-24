@@ -3,10 +3,12 @@ const { ServerElementsMap } = require("../common");
 const { processAllElements } = require("../../tree/processAllElements");
 const config = require("../../config");
 const { join } = require("path");
-const { readFile, outputFile } = require("fs-extra");
+const { readFile } = require("fs-extra");
+const { saveIfDifferent } = require("../../common/saveIfDifferent");
 const { globAsync } = require("../../common/globAsync");
 
 jest.mock("fs-extra");
+jest.mock("../../common/saveIfDifferent");
 jest.mock("../../config", () => ({
   from: __dirname,
 }));
@@ -65,7 +67,7 @@ describe("processCustomElement", () => {
 
     expect(document.querySelector("style")).toBeNull();
     expect(document.querySelector("link")).not.toBeNull();
-    expect(outputFile).toHaveBeenCalledWith(
+    expect(saveIfDifferent).toHaveBeenCalledWith(
       join(
         config.from,
         ".build",

@@ -27,4 +27,3 @@ function processTextNode(node, context) {
 }
 
 exports.processTextNode = processTextNode;
-

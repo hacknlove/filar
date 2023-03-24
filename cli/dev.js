@@ -9,7 +9,7 @@ const { initializeServerElements } = require("../server/se/initialize");
 
 async function main() {
   const config = await generateConfig({
-    dev: true
+    dev: true,
   });
 
   console.log(

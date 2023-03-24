@@ -1,11 +1,15 @@
 const { buildOne } = require("./one");
-const { readFile, outputFile } = require("fs-extra");
+const { readFile } = require("fs-extra");
+const { saveIfDifferent } = require("../common/saveIfDifferent");
 
 jest.spyOn(console, "log").mockImplementation(() => {});
 
 jest.mock("fs-extra", () => ({
   readFile: jest.fn(),
-  outputFile: jest.fn(),
+}));
+
+jest.mock("../common/saveIfDifferent", () => ({
+  saveIfDifferent: jest.fn(),
 }));
 
 jest.mock("../tree/processAllElements", () => ({
@@ -23,7 +27,7 @@ describe("buildOne", () => {
     await buildOne("filePath");
 
     expect(readFile).toHaveBeenCalledWith("from/filePath", "utf8");
-    expect(outputFile).toHaveBeenCalledWith(
+    expect(saveIfDifferent).toHaveBeenCalledWith(
       "from/.build/static/filePath",
       "<div />"
     );
@@ -34,7 +38,7 @@ describe("buildOne", () => {
     await buildOne("filePath");
 
     expect(readFile).toHaveBeenCalledWith("from/filePath", "utf8");
-    expect(outputFile).toHaveBeenCalledWith(
+    expect(saveIfDifferent).toHaveBeenCalledWith(
       "from/.build/ssr/filePath",
       "<div><SSR><div /></SSR></div>"
     );

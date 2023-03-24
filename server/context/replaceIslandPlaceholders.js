@@ -21,7 +21,7 @@ function replaceIslandPlaceholders({
   text,
   island: { state, expressions, offsets },
   attribute,
-  context
+  context,
 }) {
   const contextRegexp = /{\((.+?)\)}/g;
 
