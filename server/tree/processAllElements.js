@@ -33,7 +33,6 @@ async function processAllElements(element, context = {}) {
     }
 
     const newContext = getNewContext(node, context);
-
     processNodeAttributes(node, context);
 
     if (isCustomComponentRegex.test(node.tagName)) {

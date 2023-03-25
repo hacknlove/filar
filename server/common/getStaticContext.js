@@ -1,5 +1,5 @@
 const config = require("../config");
-const { isAModule } = require("../common/isAModule");
+const { isAModule } = require("./isAModule");
 const { dirname } = require("path");
 
 async function getStaticContext(filePath) {
@@ -8,13 +8,16 @@ async function getStaticContext(filePath) {
   const context = Object.create({
     filePath,
     dir,
-    indexes: {
+    Indexes: {
       lastIslandId: 0,
       currentNodeId: 0,
     },
     __islands: {},
   });
   if (isAModule(importPath)) {
+    if (config.dev) {
+      delete require.cache[require.resolve(importPath)];
+    }
     const requiredContext = require(importPath);
     if (typeof requiredContext === "function") {
       Object.assign(

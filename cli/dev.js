@@ -10,6 +10,7 @@ const { initializeServerElements } = require("../server/se/initialize");
 async function main() {
   const config = await generateConfig({
     dev: true,
+    staticDir: ".dev",
   });
 
   console.log(

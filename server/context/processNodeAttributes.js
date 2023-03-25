@@ -13,13 +13,14 @@ exports.processNodeAttributes = function processNodeAttributes(node, context) {
       context,
     });
     if (island) {
-      return replaceIslandPlaceholders({
+      replaceIslandPlaceholders({
         node,
         text,
         island,
         attribute: attr,
         context,
       });
+      continue;
     }
     node.setAttribute(
       attr,

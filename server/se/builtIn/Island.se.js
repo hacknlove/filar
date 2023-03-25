@@ -8,7 +8,7 @@ async function processCustomElement(element, context) {
   const parentNode = element.parentNode;
 
   const currentIslandId =
-    parentNode.getAttribute("id") || `i-${context.indexes.lastIslandId++}`;
+    parentNode.getAttribute("id") || `i-${context.Indexes.lastIslandId++}`;
 
   const state = {};
 

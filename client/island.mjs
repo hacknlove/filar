@@ -1,5 +1,5 @@
 const proxyHandler = {
-  get: (target, key, receriver) => {
+  get: (target, key, receiver) => {
     if (key === "__state__") {
       return target.state;
     }
@@ -7,9 +7,9 @@ const proxyHandler = {
       return Object.keys(target.state);
     }
 
-    const value = Reflect.get(target.state, key, receriver);
+    const value = Reflect.get(target.state, key, receiver);
     if (!value) {
-      return;
+      return value;
     }
     if (typeof value === "object") {
       return new Proxy(
@@ -25,7 +25,7 @@ const proxyHandler = {
   set: (target, key, value) => {
     Reflect.set(target.state, key, value, target.state);
 
-    target.island.dispatchEvent(new CustomEvent("state"));
+    target.island.debounceDispatchState();
     target.island.refreshIsland();
     return true;
   },
@@ -87,9 +87,18 @@ export function initExpression(island, expression, runtime) {
 export function initIsland([islandId, island]) {
   const islandElement = document.getElementById(islandId);
 
+  let dispatchEventTimeout;
+  function debounceDispatchState() {
+    clearTimeout(dispatchEventTimeout);
+    dispatchEventTimeout = setTimeout(() => {
+      islandElement.dispatchEvent(new CustomEvent("state"));
+    }, 100);
+  }
+
   islandElement.refreshIsland = () => {
     Object.values(island.expressions).forEach((runtime) => runtime.process());
   };
+  islandElement.debounceDispatchState = debounceDispatchState;
 
   islandElement.state = new Proxy(
     {
@@ -104,6 +113,8 @@ export function initIsland([islandId, island]) {
   Object.entries(island.expressions).forEach(([expression, runtime]) =>
     initExpression(island, expression, runtime)
   );
+
+  islandElement.dispatchEvent(new CustomEvent("island-ready"));
 }
 
 export default function initIslands(islands) {

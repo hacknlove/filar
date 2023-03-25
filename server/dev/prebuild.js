@@ -3,7 +3,7 @@ const parser = new (require("linkedom").DOMParser)();
 
 const config = require("../config");
 const { readFile } = require("fs-extra");
-const { getStaticContext } = require("../build/getStaticContext");
+const { getStaticContext } = require("../common/getStaticContext");
 const { processAllElements } = require("../tree/processAllElements");
 
 const autoRefreshScript = parser.parseFromString(`

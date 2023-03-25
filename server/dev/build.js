@@ -4,8 +4,7 @@ const { prebuild } = require("./prebuild");
 
 async function build(req, res, next) {
   console.log(`Building ${req.url}...`);
-
-  const { filePath, params } = await matchOne(req.url);
+  const { filePath, params } = await matchOne(req.path);
 
   if (!filePath) {
     return next();

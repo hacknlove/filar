@@ -11,6 +11,7 @@ jest.mock("fs-extra");
 jest.mock("../../common/saveIfDifferent");
 jest.mock("../../config", () => ({
   from: __dirname,
+  staticDir: '.build/static',
 }));
 jest.mock("../../common/globAsync");
 

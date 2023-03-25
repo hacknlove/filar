@@ -72,7 +72,7 @@ async function processCustomElement(element, context) {
   );
 
   await saveIfDifferent(
-    `${config.from}/${config.dev ? ".dev" : ".build/static"}/${sha256}.css`,
+    `${config.from}/${config.staticDir}/${sha256}.css`,
     css
   );
 }

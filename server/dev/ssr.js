@@ -1,4 +1,4 @@
-const { isStatic } = require("../build/isStatic");
+const { isStatic } = require("../common/isStatic");
 const { dirname } = require("path");
 const { processAllElements } = require("../tree/processAllElements");
 const { childrenIterator } = require("../common/childrenIterator");

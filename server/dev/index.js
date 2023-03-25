@@ -8,7 +8,7 @@ const { context } = require("./context");
 
 const { build } = require("./build");
 const { ssr } = require("./ssr");
-const { addRuntime } = require("./addRuntime");
+const { addRuntimeMiddleware } = require("./addRuntimeMiddleware");
 
 require("./watchSe").watchServerElements();
 
@@ -52,7 +52,7 @@ async function dev() {
     config.postProcess(req, res, next);
   });
 
-  app.use(addRuntime);
+  app.use(addRuntimeMiddleware);
 
   app.use((req, res, next) => {
     if (res.page) {
