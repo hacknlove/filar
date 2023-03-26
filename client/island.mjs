@@ -35,6 +35,9 @@ function getTextNode(elementNode, number) {
   for (const child of elementNode.childNodes) {
     if (child.nodeType === Node.TEXT_NODE && number-- === 0) return child;
   }
+  const textNode = document.createTextNode("");
+  elementNode.appendChild(textNode);
+  return textNode;
 }
 
 export function initExpression(island, expression, runtime) {

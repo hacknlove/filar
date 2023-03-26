@@ -8,7 +8,7 @@ async function addRuntimeMiddleware(req, res, next) {
     return next();
   }
 
-  await addRuntime(res.page, res.__islands);
+  await addRuntime(res.page, res);
   next();
 }
 

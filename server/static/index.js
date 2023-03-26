@@ -17,10 +17,7 @@ async function static() {
     resolve(__dirname, "../../client/island.mjs"),
     join(config.from, config.staticDir, "/_/island.mjs")
   );
-  await copy(
-    join(config.from, "public"),
-    join(config.from, config.staticDir)
-  );
+  await copy(join(config.from, "public"), join(config.from, config.staticDir));
 }
 
 exports.static = static;
