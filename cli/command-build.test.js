@@ -18,7 +18,7 @@ jest.mock("./argv", () => ({
 }));
 
 test("main no watch", async () => {
-  await require("../cli/build");
+  await require("./command-build");
 
   expect(rmdir).toHaveBeenCalledWith("test/.build", {
     recursive: true,

@@ -8,13 +8,11 @@ async function generateConfig(fromCli) {
     from: process.env.FROM || "",
     port: process.env.PORT || 3000,
     host: process.env.HOST || "localhost",
-    watch: process.env.WATCH || false,
-    livereload: process.env.LIVERELOAD || false,
     ...JSON.parse(process.env.CONFIG || "{}"),
   });
 
   // Override with command line arguments
-  const argv = require("minimist")(process.argv.slice(2));
+  const argv = require("minimist")(process.argv.slice(3));
   Object.assign(config, argv);
 
   // Resolve from

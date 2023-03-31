@@ -1,6 +1,6 @@
 {
   "name": "filar",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,8 +15,7 @@
     "preprettier": "npm run lint"
   },
   "bin": {
-    "filar-build": "./cli/build.js",
-    "filar-start": "./cli/start.js"
+    "filar": "./cli/index.js"
   },
   "author": "",
   "license": "ISC",

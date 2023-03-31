@@ -7,7 +7,7 @@ const sass = require("sass");
 const parser = new (require("linkedom").DOMParser)();
 const { getRoot } = require("../../tree/getRoot");
 
-async function processCustomElement(element, context) {
+async function SassStyle(element, context) {
   const cwd = resolveSrc({
     src: element.getAttribute("cwd"),
     root: config.from,
@@ -77,4 +77,4 @@ async function processCustomElement(element, context) {
   );
 }
 
-exports.processCustomElement = processCustomElement;
+exports.processCustomElement = SassStyle;

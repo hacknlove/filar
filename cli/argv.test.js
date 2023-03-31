@@ -3,11 +3,11 @@ const { generateConfig } = require("./argv");
 
 describe("argv", () => {
   beforeEach(() => {
-    process.argv = ["node", "filar"];
+    process.argv = ["node", "filar", "command"];
     process.env.FROM = "";
   });
   it("defaults from to cwd", async () => {
-    process.argv = ["node", "filar"];
+    process.argv = ["node", "filar", "command"];
     const config = await generateConfig();
     expect(config.from).toBe(process.cwd());
   });
@@ -18,19 +18,19 @@ describe("argv", () => {
   });
 
   it("takes from from --from paramter", async () => {
-    process.argv = ["node", "filar", "--from", "testparam"];
+    process.argv = ["node", "filar", "command", "--from", "testparam"];
     const config = await generateConfig();
     expect(config.from).toBe(resolve(process.cwd(), "testparam"));
   });
 
   it("resolves absolute paths", async () => {
-    process.argv = ["node", "filar", "--from", "/testparam"];
+    process.argv = ["node", "filar", "command", "--from", "/testparam"];
     const config = await generateConfig();
     expect(config.from).toBe("/testparam");
   });
 
   it("Overrides with filar.config.js", async () => {
-    process.argv = ["node", "filar", "--from", "test/argv"];
+    process.argv = ["node", "filar", "command", "--from", "test/argv"];
     jest.mock(
       resolve(process.cwd(), "test/argv", "filar.config.js"),
       () => (config) => {
@@ -42,7 +42,7 @@ describe("argv", () => {
   });
 
   it("requires and attaches middleware, if it exists", async () => {
-    process.argv = ["node", "filar", "--from", "test/argv"];
+    process.argv = ["node", "filar", "command", "--from", "test/argv"];
     jest.mock(
       resolve(process.cwd(), "test/argv", "middleware.js"),
       () => () => {}
@@ -55,6 +55,7 @@ describe("argv", () => {
     process.argv = [
       "node",
       "filar",
+      "command",
       "--from",
       "test/argv",
       "--middleware",
@@ -69,7 +70,7 @@ describe("argv", () => {
   });
 
   it("requires and attaches router, if it exists", async () => {
-    process.argv = ["node", "filar", "--from", "test/argv"];
+    process.argv = ["node", "filar", "command", "--from", "test/argv"];
     jest.mock(resolve(process.cwd(), "test/argv", "router.js"), () => () => {});
     const config = await generateConfig();
     expect(typeof config.router).toBe("function");
@@ -79,6 +80,7 @@ describe("argv", () => {
     process.argv = [
       "node",
       "filar",
+      "command",
       "--from",
       "test/argv",
       "--router",
