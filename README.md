@@ -2,6 +2,8 @@
 
 Filar is an HTML framework specifically designed to minimize the reliance on JavaScript, making web development more accessible to the common folk.
 
+## Documentation
+[filar/docs](https://github.com/hacknlove/filar/tree/master/docs)
 ## Why?
 
 The Web is broken, if we attend to its original ideas and goals.
@@ -157,8 +159,7 @@ Notice that styles are hoisted to the head of the page.
 
 It's a learning game for public speaking.
 
-## Documentation
-[filar/docs](https://github.com/hacknlove/filar/tree/master/docs)
+
 ## Status
 
 Filar is still being prototyped, and you should not use it in production.
