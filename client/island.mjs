@@ -125,6 +125,7 @@ export default function initIslands(islands) {
   document.addEventListener("DOMContentLoaded", () => {
     Object.entries(islands).forEach(initIsland);
   });
+  document.dispatchEvent(new CustomEvent("islands-ready"));
 }
 
 window.closestIsland = function closestIsland(element) {

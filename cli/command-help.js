@@ -13,7 +13,7 @@ Options:
     --port <port>   Port to listen on (default: 3000) Only for dev
     --host <host>   Host to listen on (default: localhost) Only for dev
 
-    Any other option will be used as default for the context.
+    Any other option will be included into the config object, which is accesible in the context.
 
 Environment variables:
     FROM    same as --from
