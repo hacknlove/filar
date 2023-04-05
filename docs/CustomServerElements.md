@@ -25,6 +25,7 @@ In the basic usage of slots, all the children of the server custom element are p
 
 Example:
 `SomeCustomServerElement.se.html`
+
 ```html
 <div>
     <h1>{{Title}}</div>
@@ -34,6 +35,7 @@ Example:
 ```
 
 `some-page.html`
+
 ```html
 <SomeCustomServerElement
   Title="`My Element's Title`"
@@ -44,6 +46,7 @@ Example:
 ```
 
 This will render
+
 ```html
 <div class="SomeCustomServerElement">
     <h1>My Element's Title</div>
@@ -61,6 +64,7 @@ The children who don't have the `slot` attribute will be passed to the default s
 
 Example:
 `SomeCustomServerElement.se.html`
+
 ```html
 <div>
     <h1>{{Title}}</div>
@@ -70,6 +74,7 @@ Example:
 ```
 
 `some-page.html`
+
 ```html
 <SomeCustomServerElement Title="`My Element's Title`">
   <a href="#" slot="subtitle">My Subtitle</a>
@@ -78,6 +83,7 @@ Example:
 ```
 
 This will render
+
 ```html
 <div class="SomeCustomServerElement">
     <h1>My Element's Title</div>
@@ -92,6 +98,7 @@ Any children of the slot will be the default content of the slot.
 
 Example:
 `SomeCustomServerElement.se.html`
+
 ```html
 <div>
     <h1>{{Title}}</div>
@@ -124,6 +131,7 @@ If you have multiple slots with the same name, the content will be passed to all
 
 Example:
 `SomeCustomServerElement.se.html`
+
 ```html
 <div>
     <h1>{{Title}}</div>
@@ -145,6 +153,7 @@ Example:
 ```
 
 This will render
+
 ```html
 <div class="SomeCustomServerElement">
     <h1>My Element's Title</div>
@@ -181,4 +190,3 @@ It does not return anything.
 It is worth mentioning that the `element` is a [`linkedom`](https://github.com/WebReflection/linkedom) node, which is quite compatible with the DOM API, but it's not intended to be used as a DOM replacement, so there are some differences, because it aims to be as fast as possible and lightweight as possible.
 
 You might find useful to take a look at the built-in server custom elements, which are located in the [`SE/builtin`](./SE/builtIn/) folder.
-

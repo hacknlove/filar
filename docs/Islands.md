@@ -16,6 +16,7 @@ attribute:
   <input onchange="event => {foo.state.title = event.target.value}">
 </div>
 ```
+
 ## Interpolation.
 
 The island interpolation is done with `{(` and `)}`, like `{(some expresion here)}` syntax, to keep it different from the server side context interpolation.
@@ -42,7 +43,6 @@ If you want to use something from the parent Island in the child island, you can
 **Example**
 
 ```html
-```html
 <article>
   <Island foo="42" />
   <p>{(foo)}</p>
@@ -54,6 +54,7 @@ If you want to use something from the parent Island in the child island, you can
 ```
 
 **Output**
+
 ```html
 <article>
   <p>42</p>
@@ -70,6 +71,7 @@ In a similar way, you can also share state between islands by its ID with the he
 In this case, the origin island needs to have and `id` and to be initialized before the destination island.
 
 **Example**
+
 ```html
 <div>
   <Island id="island1" foo="42">
@@ -84,6 +86,7 @@ In this case, the origin island needs to have and `id` and to be initialized bef
 ```
 
 **Output**
+
 ```html
 <div>
   <p>42</p>
@@ -100,23 +103,21 @@ Usually, "initialized before" means that the island is declared before the other
 ## Events
 
 Islands emit the following events:
-* `state`: when the state is updated.
-* `island-ready`: when the island is ready to be used.
+
+- `state`: when the state is updated.
+- `island-ready`: when the island is ready to be used.
 
 The `document` emits the `islands-ready` event when all the islands are ready.
 
 ```js
-const island = document.getElementById('foo');
-island.addEventListener('state', event => {
+const island = document.getElementById("foo");
+island.addEventListener("state", (event) => {
   //
 });
-island.addEventListener('island-ready', event => {
+island.addEventListener("island-ready", (event) => {
   //
 });
-document.addEventListener('islands-ready', event => {
+document.addEventListener("islands-ready", (event) => {
   //
 });
 ```
-
-
-

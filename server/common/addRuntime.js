@@ -9,7 +9,11 @@ async function addRuntime(document, context) {
     return;
   }
 
-  const js = `import _ from"/_/island.mjs";_(${JSON.stringify(context.__islands, null, config.dev && 4)})`;
+  const js = `import _ from"/_/island.mjs";_(${JSON.stringify(
+    context.__islands,
+    null,
+    config.dev && 4
+  )})`;
 
   const container =
     document.head ||

@@ -3,7 +3,9 @@
 Filar is an HTML framework specifically designed to minimize the reliance on JavaScript, making web development more accessible to the common folk.
 
 ## Documentation
+
 [filar/docs](https://github.com/hacknlove/filar/tree/master/docs)
+
 ## Why?
 
 The Web is broken, if we attend to its original ideas and goals.
@@ -25,10 +27,11 @@ For these people, I decided to create Filar, to bring them back the simplicity o
 Filar translates the development experience of a JavaScript framework to a HTML framework:
 
 To list a few:
-* Reusable components
-* Dynamic Routing
-* Reactive state
-* Modular CSS
+
+- Reusable components
+- Dynamic Routing
+- Reactive state
+- Modular CSS
 
 ## Quick Examples
 
@@ -65,6 +68,7 @@ No JavaScript required at all.
 It follows the Filesystem routing pattern.
 
 **/blog/[id].html**
+
 ```html
 <SSR>
   <div>
@@ -76,6 +80,7 @@ It follows the Filesystem routing pattern.
 **Output**
 
 **http://localhost:3000/blog/1**
+
 ```html
 <div>
   <h1>This is a blog 1</h1>
@@ -90,21 +95,22 @@ The context from the request is only available in the SSR components.
 You can declare reactive islands, whose state can be used by all its children.
 
 **/pages/index.html**
-```html
-  <div id="foo">
-    <Island likes=0 dislikes=0  />
-    <h1>Likes: {(likes)} Dislikes: {(dislikes)}</h1>
-    <button onclick="foo.state.likes++">Like</button>
-    <button onclick="foo.state.dislikes++">Dislike</button>
-  </div>
-```
-The built-in `Island` Server Element makes its parent element reactive, and initializes the state.
 
+```html
+<div id="foo">
+  <Island likes="0" dislikes="0" />
+  <h1>Likes: {(likes)} Dislikes: {(dislikes)}</h1>
+  <button onclick="foo.state.likes++">Like</button>
+  <button onclick="foo.state.dislikes++">Dislike</button>
+</div>
+```
+
+The built-in `Island` Server Element makes its parent element reactive, and initializes the state.
 
 **Output**
 
 ```html
-<script type="module" src="/[hash].mjs"> </script>
+<script type="module" src="/[hash].mjs"></script>
 ...
 <div id="foo">
   <h1>Likes: 0 Dislikes: 0</h1>
@@ -113,33 +119,37 @@ The built-in `Island` Server Element makes its parent element reactive, and init
 </div>
 ```
 
-
 ### Modular CSS
 
 Just drop your CSS or (SCSS) files anywhere in the project, and they will be automatically loaded.
+
 ```html
-<SassStyle /> 
+<SassStyle />
 ```
 
 You can set a directory and a pattern to SassStyle to load only the files you want.
+
 ```html
 <SassStyle cwd="components" pattern="*.scss" />
 ```
 
 **Output**
+
 ```html
 <head>
   ...
-  <link rel="stylesheet" href="[hash].css" type="text/css">
+  <link rel="stylesheet" href="[hash].css" type="text/css" />
 </head>
 ```
 
 Add the attribute `embedded` to embed the CSS in the page.
+
 ```html
 <SassStyle embedded />
 ```
 
 **Output**
+
 ```html
 <head>
   ...
@@ -154,11 +164,11 @@ Notice that styles are hoisted to the head of the page.
 ## Live Examples
 
 ### The Masterful Speaker's Journey
-* Source: https://github.com/hacknlove/tmsj/
-* Live: https://tmsj.hacknlove.org/
+
+- Source: https://github.com/hacknlove/tmsj/
+- Live: https://tmsj.hacknlove.org/
 
 It's a learning game for public speaking.
-
 
 ## Status
 
@@ -168,15 +178,15 @@ You can play with it, and contribute with code or ideas.
 
 ## Roadmap
 
-* [ ] Client Elements
-* [ ] Server directives
-* [ ] API endpoints
-* [ ] Builder for dynamic sites
-* [ ] More examples
-* [ ] Tutorials
-* [ ] Deploy static site GitHub pages
-* [ ] Deploy static site to Cloudflare
-* [ ] Deploy dynamic site to Cloudflare
+- [ ] Client Elements
+- [ ] Server directives
+- [ ] API endpoints
+- [ ] Builder for dynamic sites
+- [ ] More examples
+- [ ] Tutorials
+- [ ] Deploy static site GitHub pages
+- [ ] Deploy static site to Cloudflare
+- [ ] Deploy dynamic site to Cloudflare
 
 ## Requests and Suggestions
 

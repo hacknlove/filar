@@ -1,5 +1,7 @@
 console.log(`
-filar version ${require("../package.json").version} Not suitable for production use.
+filar version ${
+  require("../package.json").version
+} Not suitable for production use.
 
 Usage: filar <command> [options]
 
@@ -23,4 +25,4 @@ Environment variables:
 
 More information:
 https://github.com/hacknlove/filar
-`)
+`);

@@ -35,7 +35,6 @@ filar dev --foo bar
 <p>bar</p>
 ```
 
-
 ## Development
 
 Runs a server with live-reload and file watching.
@@ -51,7 +50,6 @@ filar dev
 - `--port` - Port to run the server on. Default: `3000`
 - `--host` - Host to run the server on. Default: `localhost`
 
-
 ## Static
 
 Builds the project and outputs it to the `./static` directory.
@@ -61,4 +59,3 @@ Errors when dynamic routes or SSR tag is found.
 ```bash
 filar static
 ```
-

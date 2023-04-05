@@ -44,7 +44,7 @@ By default, the context receives some static context like:
   [Context files](#context-files).
 
 The context of children of the built-in server element `SSR` will be enhanced
-with some extra fields coming from the request: *see [SSR](Built-inServerElements.md#ssr)*.
+with some extra fields coming from the request: _see [SSR](Built-inServerElements.md#ssr)_.
 
 - `isSSR` will be `true`
 - `body` equals to `req.body`
@@ -173,8 +173,7 @@ Response of `GET https://some.api.com/endpoint`
 ```html
 <div>
   <Context src="https://some.api.com/endpoint">
-    contest.Title = context.data.title;
-    delete context.data;
+    contest.Title = context.data.title; delete context.data;
   </Context>
   <div Slug="Title.toLowercase().replace(/ /g, '-')">
     <a title="{{Title}}" href="foo/{{Slug}}">{{Title}}</a>
@@ -224,6 +223,7 @@ Example
 ```
 
 JS exporting an object:
+
 ```js
 // /foo/bar/baz.html.context.js
 module.exports = {
@@ -232,6 +232,7 @@ module.exports = {
 ```
 
 JS exporting a function:
+
 ```js
 // /foo/bar/baz.html.context.js
 module.exports = (context) => {
