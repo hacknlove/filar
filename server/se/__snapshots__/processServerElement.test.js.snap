@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`processCustomElement adds children to template if slot not found 1`] = `
+exports[`processServerElement adds children to template if slot not found 1`] = `
 "<div>
       <div class="CustomElement">
     <div>content</div></div>
     </div>"
 `;
 
-exports[`processCustomElement duplicates child in multiple slots with the same name 1`] = `
+exports[`processServerElement duplicates child in multiple slots with the same name 1`] = `
 "<div>
       <div class="CustomElement">
       <h1>
@@ -20,11 +20,11 @@ exports[`processCustomElement duplicates child in multiple slots with the same n
     </div>"
 `;
 
-exports[`processCustomElement processes the js custom elements 1`] = `"<div><div>processed custom element</div></div>"`;
+exports[`processServerElement processes the js custom elements 1`] = `"<div><div>processed custom element</div></div>"`;
 
-exports[`processCustomElement replaces the element with the custom element 1`] = `"<div><div class="CustomElement">custom element content</div></div>"`;
+exports[`processServerElement replaces the element with the custom element 1`] = `"<div><div class="CustomElement">custom element content</div></div>"`;
 
-exports[`processCustomElement slot children 1`] = `
+exports[`processServerElement slot children 1`] = `
 "<div>
         <div class="CustomElement">
         <div>slot1 content</div>
@@ -32,7 +32,7 @@ exports[`processCustomElement slot children 1`] = `
       </div>"
 `;
 
-exports[`processCustomElement slot children into unnamed slot 1`] = `
+exports[`processServerElement slot children into unnamed slot 1`] = `
 "<div>
       <div class="CustomElement">
       <div>slot1 content</div>
@@ -40,7 +40,7 @@ exports[`processCustomElement slot children into unnamed slot 1`] = `
     </div>"
 `;
 
-exports[`processCustomElement uses the default value of the slot if no child is provided 1`] = `
+exports[`processServerElement uses the default value of the slot if no child is provided 1`] = `
 "<div>
         <div class="CustomElement">
         <p>default slot content</p>

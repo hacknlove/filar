@@ -2,7 +2,7 @@ const vm = require("vm");
 
 const { childrenIterator } = require("../../common/childrenIterator");
 
-async function processCustomElement(element, context, processAllElements) {
+async function processServerElement(element, context, processAllElements) {
   const key = element.getAttribute("key");
   const iterator = element.getAttribute("of");
   const filter = element.getAttribute("filter");
@@ -42,4 +42,4 @@ async function processCustomElement(element, context, processAllElements) {
   element.remove();
 }
 
-exports.processCustomElement = processCustomElement;
+exports.processServerElement = processServerElement;

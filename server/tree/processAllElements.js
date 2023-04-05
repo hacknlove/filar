@@ -3,7 +3,7 @@ const { processTextNode } = require("../context/processTextNode");
 const { prepareSSR } = require("../build/prepareSSR");
 const { processNodeAttributes } = require("../context/processNodeAttributes");
 const { getNewContext } = require("../context/getNewContext");
-const { processCustomElement } = require("../se/processCustomElement");
+const { processServerElement } = require("../se/processServerElement");
 
 const isCustomComponentRegex = /^([A-Z][a-z]+)+$/;
 
@@ -36,7 +36,7 @@ async function processAllElements(element, context = {}) {
     processNodeAttributes(node, context);
 
     if (isCustomComponentRegex.test(node.tagName)) {
-      await processCustomElement(node, newContext, processAllElements);
+      await processServerElement(node, newContext, processAllElements);
     }
     await processAllElements(node, newContext);
   }

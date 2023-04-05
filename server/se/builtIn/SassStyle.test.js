@@ -19,7 +19,7 @@ const SassStyle = require("./SassStyle.se");
 
 ServerElementsMap.set("SassStyle", SassStyle);
 
-describe("processCustomElement", () => {
+describe("processServerElement", () => {
   it("compiles and adds style to head", async () => {
     const document = parser.parseFromString(`
             <html>

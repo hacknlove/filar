@@ -1,10 +1,10 @@
-const processCustomElement = require("./processCustomElement");
+const processServerElement = require("./processServerElement");
 const { ServerElementsMap } = require("./common");
 
 const { DOMParser } = require("linkedom");
 const parser = new DOMParser();
 
-describe("processCustomElement", () => {
+describe("processServerElement", () => {
   it("replaces the element with the custom element", () => {
     const document = parser.parseFromString(
       `<div><CustomElement /></div>`
@@ -15,7 +15,7 @@ describe("processCustomElement", () => {
         .firstElementChild
     );
 
-    processCustomElement.processCustomElement(
+    processServerElement.processServerElement(
       document.querySelector("CustomElement"),
       {},
       () => {}
@@ -36,7 +36,7 @@ describe("processCustomElement", () => {
 
     const processElements = jest.fn();
 
-    processCustomElement.processCustomElement(
+    processServerElement.processServerElement(
       document.querySelector("CustomElement"),
       {},
       processElements
@@ -50,7 +50,7 @@ describe("processCustomElement", () => {
       `<div><CustomElement /></div>`
     ).firstElementChild;
     ServerElementsMap.set("CustomElement", {
-      processCustomElement: jest.fn((component) =>
+      processServerElement: jest.fn((component) =>
         component.parentNode.replaceChild(
           parser.parseFromString(`<div>processed custom element</div>`)
             .firstElementChild,
@@ -61,14 +61,14 @@ describe("processCustomElement", () => {
 
     const processElements = jest.fn();
 
-    processCustomElement.processCustomElement(
+    processServerElement.processServerElement(
       document.querySelector("CustomElement"),
       {},
       processElements
     );
 
     expect(
-      ServerElementsMap.get("CustomElement").processCustomElement
+      ServerElementsMap.get("CustomElement").processServerElement
     ).toHaveBeenCalled();
     expect(document.toString()).toMatchSnapshot();
   });
@@ -91,7 +91,7 @@ describe("processCustomElement", () => {
     `).firstElementChild
     );
 
-    processCustomElement.processCustomElement(
+    processServerElement.processServerElement(
       document.querySelector("CustomElement"),
       {},
       () => {}
@@ -118,7 +118,7 @@ describe("processCustomElement", () => {
   `).firstElementChild
     );
 
-    processCustomElement.processCustomElement(
+    processServerElement.processServerElement(
       document.querySelector("CustomElement"),
       {},
       () => {}
@@ -146,7 +146,7 @@ describe("processCustomElement", () => {
     );
 
     await expect(() =>
-      processCustomElement.processCustomElement(
+      processServerElement.processServerElement(
         document.querySelector("CustomElement"),
         {},
         () => {}
@@ -171,7 +171,7 @@ describe("processCustomElement", () => {
   `).firstElementChild
     );
 
-    processCustomElement.processCustomElement(
+    processServerElement.processServerElement(
       document.querySelector("CustomElement"),
       {},
       () => {}
@@ -203,7 +203,7 @@ describe("processCustomElement", () => {
   `).firstElementChild
     );
 
-    processCustomElement.processCustomElement(
+    processServerElement.processServerElement(
       document.querySelector("CustomElement"),
       {},
       () => {}
@@ -231,7 +231,7 @@ describe("processCustomElement", () => {
     `).firstElementChild
     );
 
-    processCustomElement.processCustomElement(
+    processServerElement.processServerElement(
       document.querySelector("CustomElement"),
       {},
       () => {}

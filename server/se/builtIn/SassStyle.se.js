@@ -77,4 +77,4 @@ async function SassStyle(element, context) {
   );
 }
 
-exports.processCustomElement = SassStyle;
+exports.processServerElement = SassStyle;

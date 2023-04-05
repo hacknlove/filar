@@ -1,10 +1,10 @@
-const { processCustomElement } = require("./TestJsElement.se.js");
+const { processServerElement } = require("./TestJsElement.se.js");
 
 describe("useless", () => {
   it("useless", () => {
-    processCustomElement({
+    processServerElement({
       remove: () => {},
     });
-    expect(processCustomElement).toEqual(processCustomElement);
+    expect(processServerElement).toEqual(processServerElement);
   });
 });

@@ -1,7 +1,7 @@
 const vm = require("vm");
 const { childrenIterator } = require("../../common/childrenIterator");
 
-async function processCustomElement(element, context, processAllElements) {
+async function processServerElement(element, context, processAllElements) {
   const condition = element.getAttribute("condition");
 
   if (condition) {
@@ -20,4 +20,4 @@ async function processCustomElement(element, context, processAllElements) {
   element.remove();
 }
 
-exports.processCustomElement = processCustomElement;
+exports.processServerElement = processServerElement;

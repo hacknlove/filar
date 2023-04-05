@@ -72,7 +72,7 @@ async function fromFile(src, context) {
   Object.assign(context, required);
 }
 
-async function processCustomElement(element, context) {
+async function processServerElement(element, context) {
   if (element.getAttribute("ssr") && !element.getAttribute("build")) {
     return;
   }
@@ -95,7 +95,7 @@ async function processCustomElement(element, context) {
   }
 }
 
-exports.processCustomElement = processCustomElement;
+exports.processServerElement = processServerElement;
 
 exports.__test__ = {
   fromFile,

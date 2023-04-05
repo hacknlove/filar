@@ -68,11 +68,11 @@ function defaultSlots(templateSlots) {
   }
 }
 
-async function processCustomElement(component, context, processElements) {
+async function processServerElement(component, context, processElements) {
   const customElement = ServerElements[component.tagName];
 
-  if (customElement.processCustomElement) {
-    await customElement.processCustomElement(
+  if (customElement.processServerElement) {
+    await customElement.processServerElement(
       component,
       context,
       processElements
@@ -98,4 +98,4 @@ async function processCustomElement(component, context, processElements) {
   await processElements(customElement, context);
 }
 
-exports.processCustomElement = processCustomElement;
+exports.processServerElement = processServerElement;

@@ -61,7 +61,7 @@ const ServerElements = new Proxy(ServerElementsMap, {
       return element.cloneNode(true);
     }
 
-    if (element.processCustomElement) {
+    if (element.processServerElement) {
       return element;
     }
 

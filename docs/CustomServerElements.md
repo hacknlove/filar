@@ -161,12 +161,12 @@ Same for the default slot.
 
 ## `se.js` server components
 
-In the case of `.se.js` files, they are cjs modules that exports a function named `processCustomElement` which accepts three arguments, the `element`, the `context` and `processAllElements` function.
+In the case of `.se.js` files, they are cjs modules that exports a function named `processServerElement` which accepts three arguments, the `element`, the `context` and `processAllElements` function.
 
 Example: `SomeCustomServerElement.se.js`
 
 ```js
-exports.processCustomElement = function processCustomElement(
+exports.processServerElement = function processServerElement(
   element,
   context,
   processAllElements

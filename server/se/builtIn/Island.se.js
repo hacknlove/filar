@@ -1,7 +1,7 @@
 const vm = require("vm");
 const { getRoot } = require("../../tree/getRoot");
 
-async function processCustomElement(element, context) {
+async function processServerElement(element, context) {
   const root = getRoot(element);
 
   const attributes = element.getAttributeNames();
@@ -71,4 +71,4 @@ async function processCustomElement(element, context) {
   };
 }
 
-exports.processCustomElement = processCustomElement;
+exports.processServerElement = processServerElement;
