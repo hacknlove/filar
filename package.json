@@ -6,10 +6,10 @@
   "scripts": {
     "test:client": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test": "jest",
-    "build": "node cli/build --from ./playground",
-    "start": "node cli/start --from ./playground",
-    "dev": "node cli/dev --from ./playground",
-    "dev:watch": "node --watch cli/dev --from ./playground",
+    "build": "node cli build --from ./playground",
+    "start": "node cli start --from ./playground",
+    "dev": "node cli dev --from ./playground",
+    "dev:watch": "node --watch cli dev --from ./playground",
     "lint": "eslint . --fix",
     "prettier": "prettier --write **/*.{mjs,js,css,scss,html,json,md}",
     "preprettier": "npm run lint"
