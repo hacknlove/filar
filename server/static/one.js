@@ -36,6 +36,7 @@ async function buildOne(filePath) {
 
   const context = await getStaticContext(fullFilePath);
   context.__islands = {};
+  context.__ce = {};
 
   await processAllElements(document, context);
 

@@ -110,6 +110,7 @@ describe("findIsland", () => {
         __islands: {
           "the-island": { island: "the island" },
         },
+        __ce: {},
       })
     ).toEqual({
       island: "the island",

@@ -39,6 +39,7 @@ describe("processServerElement", () => {
       filePath: __filename,
       dir: __dirname,
       __islands: {},
+      __ce: {},
     });
 
     expect(document.querySelector("style")).not.toBeNull();
@@ -64,6 +65,7 @@ describe("processServerElement", () => {
       filePath: __filename,
       dir: __dirname,
       __islands: {},
+      __ce: {},
     });
 
     expect(document.querySelector("style")).toBeNull();

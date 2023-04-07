@@ -12,6 +12,7 @@ describe("processNodeAttributes", () => {
       Title: "My title",
       Height: 1080,
       __islands: {},
+      __ce: {},
     });
 
     expect(node.toString()).toMatchSnapshot();

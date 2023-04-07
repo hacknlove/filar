@@ -21,6 +21,7 @@ describe("processAllElements", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -44,6 +45,7 @@ describe("processAllElements", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -62,6 +64,7 @@ describe("processAllElements", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -79,6 +82,7 @@ describe("processAllElements", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -96,6 +100,7 @@ describe("processAllElements", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -138,6 +143,7 @@ describe("processAllElements", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();

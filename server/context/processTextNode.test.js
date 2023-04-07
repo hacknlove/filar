@@ -11,6 +11,7 @@ describe("processTextNode", () => {
     const context = {
       Name: "John",
       __islands: {},
+      __ce: {},
     };
     processTextNode(node, context);
     expect(node.textContent).toBe("Hello, John!");
@@ -36,6 +37,7 @@ describe("processTextNode", () => {
           offsets: {},
         },
       },
+      __ce: {},
     });
 
     expect(document).toMatchSnapshot();
@@ -64,6 +66,7 @@ describe("processTextNode", () => {
           offsets: {},
         },
       },
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();

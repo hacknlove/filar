@@ -25,6 +25,7 @@ describe("Context inner text", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -45,6 +46,7 @@ describe("Context inner text", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();

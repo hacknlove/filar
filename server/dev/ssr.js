@@ -18,6 +18,7 @@ async function ssr(req, res, next) {
     cookies: req.cookies || {},
     headers: req.headers || {},
     __islands: res.__islands || {},
+    __ce: res.__ce || {},
   };
 
   const SSRTags = res.page.querySelectorAll("SSR");

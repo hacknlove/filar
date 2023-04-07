@@ -13,6 +13,7 @@ async function getStaticContext(filePath) {
       currentNodeId: 0,
     },
     __islands: {},
+    __ce: {},
   });
   if (isAModule(importPath)) {
     if (config.dev) {

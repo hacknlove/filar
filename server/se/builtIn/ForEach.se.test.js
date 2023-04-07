@@ -39,6 +39,7 @@ describe("ForEach", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -60,6 +61,7 @@ describe("ForEach", () => {
     await processAllElements(document, {
       filePath: "test/index.html",
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();

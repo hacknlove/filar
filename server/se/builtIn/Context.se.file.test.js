@@ -26,6 +26,7 @@ describe("Context from file", () => {
       filePath: "test/index.html",
       dir: `${config.from}/test`,
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -45,6 +46,7 @@ describe("Context from file", () => {
       filePath: "test/index.html",
       dir: `${config.from}/test`,
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -64,6 +66,7 @@ describe("Context from file", () => {
       filePath: "test/index.html",
       dir: `${config.from}/test`,
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -83,6 +86,7 @@ describe("Context from file", () => {
       filePath: "test/index.html",
       dir: `${process.cwd()}/test`,
       __islands: {},
+      __ce: {},
     });
 
     expect(document.toString()).toMatchSnapshot();
@@ -96,6 +100,7 @@ describe("Context fromFile", () => {
         filePath: `${config.from}/test/index.html`,
         dir: `${config.from}/test`,
         __islands: {},
+        __ce: {},
       })
     ).rejects.toThrow();
   });

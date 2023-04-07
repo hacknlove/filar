@@ -6,6 +6,7 @@ const { dev } = require("../server/dev");
 
 const { generateConfig } = require("./argv");
 const { initializeServerElements } = require("../server/se/initialize");
+const { initializeClientElements } = require("../server/ce/initialize");
 
 async function main() {
   const config = await generateConfig({
@@ -14,7 +15,7 @@ async function main() {
   });
 
   console.log(
-    `Development mode from ${config.from} at ${config.host}:${config.port}`
+    `Development mode from ${config.from} at http://${config.host}:${config.port}`
   );
 
   await rm(join(config.from, ".dev"), {
@@ -22,7 +23,7 @@ async function main() {
     force: true,
   }).catch(() => {});
 
-  await initializeServerElements();
+  await Promise.all([initializeServerElements(), initializeClientElements()]);
 
   return dev();
 }

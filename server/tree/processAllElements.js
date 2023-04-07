@@ -4,8 +4,10 @@ const { prepareSSR } = require("../build/prepareSSR");
 const { processNodeAttributes } = require("../context/processNodeAttributes");
 const { getNewContext } = require("../context/getNewContext");
 const { processServerElement } = require("../se/processServerElement");
+const { processClientElement } = require("../ce/processClientElement");
 
-const isCustomComponentRegex = /^([A-Z][a-z]+)+$/;
+const isServerElementRegex = /^([A-Z][a-z]+)+$/;
+const isClientElementRegex = /^([a-z]+-)+[a-z]+$/;
 
 async function processAllElements(element, context = {}) {
   for (const node of childrenIterator(element)) {
@@ -35,8 +37,10 @@ async function processAllElements(element, context = {}) {
     const newContext = getNewContext(node, context);
     processNodeAttributes(node, context);
 
-    if (isCustomComponentRegex.test(node.tagName)) {
+    if (isServerElementRegex.test(node.tagName)) {
       await processServerElement(node, newContext, processAllElements);
+    } else if (isClientElementRegex.test(node.tagName)) {
+      await processClientElement(node, newContext, processAllElements);
     }
     await processAllElements(node, newContext);
   }
