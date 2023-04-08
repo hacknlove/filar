@@ -7,7 +7,7 @@ exports[`processAllElements does not replaces the context in text for SSR 1`] = 
       <title>My title</title>
     </head>
     <body>
-      <SSR><script class="ssr" type="application/json">{"Title":"My title"}</script>
+      <SSR><script class="ssr" type="application/json">{"Title":"My title","Indexes":{"lastIslandId":0,"currentNodeId":0}}</script>
         <h1>{{Title}}</h1>
       </SSR>
     </body>

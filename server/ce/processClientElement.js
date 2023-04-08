@@ -19,7 +19,7 @@ function getTemplateSlots(template) {
   return slots;
 }
 
-function sendChildToSlot({ child, templateSlots, customElement, component }) {
+function sendChildToSlot({ child, templateSlots, clientElement, component }) {
   const slotName = child.getAttribute?.("slot") ?? "";
   child.removeAttribute?.("slot");
   child.remove();
@@ -36,7 +36,7 @@ function sendChildToSlot({ child, templateSlots, customElement, component }) {
       });
     }
 
-    customElement.appendChild(child);
+    clientElement.appendChild(child);
     return;
   }
 
@@ -69,33 +69,26 @@ function defaultSlots(templateSlots) {
 }
 
 async function processClientElement(component, context, processElements) {
-  const customElement = ClientElements[component.tagName];
+  const { dom, js } = ClientElements[component.tagName];
 
-  if (customElement.processClientElement) {
-    await customElement.processClientElement(
-      component,
-      context,
-      processElements
-    );
-    return;
-  }
-
-  const templateSlots = getTemplateSlots(customElement);
+  const templateSlots = getTemplateSlots(dom);
 
   for (const child of childrenIterator(component)) {
     if (child.nodeType === 3 && !child.textContent.trim()) {
       continue;
     }
-    sendChildToSlot({ child, templateSlots, customElement, component });
+    sendChildToSlot({ child, templateSlots, dom, component });
   }
 
   defaultSlots(templateSlots);
 
-  customElement.classList.add(component.tagName);
+  component.replaceChildren(...dom.childNodes);
 
-  component.parentNode.replaceChild(customElement, component);
+  if (js) {
+    context.__ce[component.tagName] = js;
+  }
 
-  await processElements(customElement, context);
+  await processElements(dom, context);
 }
 
 exports.processClientElement = processClientElement;

@@ -1,5 +1,6 @@
 const { DOMParser } = require("linkedom");
 const parser = new DOMParser();
+const { createFakeContext } = require("../../test/fakeContext");
 
 const { processTextNode } = require("./processTextNode");
 
@@ -8,12 +9,12 @@ describe("processTextNode", () => {
     const node = {
       textContent: "Hello, {{Name}}!",
     };
-    const context = {
-      Name: "John",
-      __islands: {},
-      __ce: {},
-    };
-    processTextNode(node, context);
+    processTextNode(
+      node,
+      createFakeContext({
+        Name: "John",
+      })
+    );
     expect(node.textContent).toBe("Hello, John!");
   });
 
@@ -29,16 +30,18 @@ describe("processTextNode", () => {
     const span = document.getElementById("span");
     const textNode = span.firstChild;
 
-    processTextNode(textNode, {
-      __islands: {
-        island: {
-          state: { foo: "Hola" },
-          expressions: {},
-          offsets: {},
+    processTextNode(
+      textNode,
+      createFakeContext({
+        __islands: {
+          island: {
+            state: { foo: "Hola" },
+            expressions: {},
+            offsets: {},
+          },
         },
-      },
-      __ce: {},
-    });
+      })
+    );
 
     expect(document).toMatchSnapshot();
   });
@@ -58,16 +61,18 @@ describe("processTextNode", () => {
 
     island.island = { foo: "Hola" };
 
-    processTextNode(textNode, {
-      __islands: {
-        island: {
-          state: { foo: "Hola" },
-          expressions: {},
-          offsets: {},
+    processTextNode(
+      textNode,
+      createFakeContext({
+        __islands: {
+          island: {
+            state: { foo: "Hola" },
+            expressions: {},
+            offsets: {},
+          },
         },
-      },
-      __ce: {},
-    });
+      })
+    );
 
     expect(document.toString()).toMatchSnapshot();
   });

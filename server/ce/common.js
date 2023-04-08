@@ -1,14 +1,12 @@
 const { readFile } = require("fs-extra");
 const { DOMParser } = require("linkedom");
+const { isAModule } = require("../common/isAModule");
 
 const parser = new DOMParser();
 
-const extractElementNameRegExp =
-  /(?<elementName>([a-z]+-)+[a-z]+)\.ce\.html$/;
+const extractElementNameRegExp = /(?<elementName>([a-z]+-)+[a-z]+)\.ce\.html$/;
 
 const ClientElementsMap = new Map();
-
-const emptyComment = parser.parseFromString("<!-- -->").firstChild;
 
 function getElementName(filePath) {
   const filePathParsed = filePath.match(extractElementNameRegExp);
@@ -27,15 +25,12 @@ function getElementName(filePath) {
 async function addOrChange(filePath) {
   const elementName = getElementName(filePath);
 
-  if (filePath.endsWith(".js")) {
-    ClientElementsMap.set(elementName, require(filePath));
-    return;
-  }
-
-  ClientElementsMap.set(
-    elementName,
-    parser.parseFromString(await readFile(filePath, "utf8")).firstChild
-  );
+  const jsPath = filePath.replace(/\.ce\.html$/, ".ce.mjs");
+  ClientElementsMap.set(elementName, {
+    dom: parser.parseFromString(`<div>${await readFile(filePath, "utf8")}</div`)
+      .firstChild,
+    js: isAModule(jsPath) && jsPath,
+  });
 }
 
 function remove(filePath) {
@@ -55,19 +50,12 @@ const ClientElements = new Proxy(ClientElementsMap, {
       });
     }
 
-    const element = target.get(name);
+    const { js, dom } = target.get(name);
 
-    if (element.cloneNode) {
-      return element.cloneNode(true);
-    }
-
-    if (element.processClientElement) {
-      return element;
-    }
-
-    const response = emptyComment.cloneNode(true);
-    response.textContent = `${name} is not a valid custom element`;
-    return response;
+    return {
+      js,
+      dom: dom.cloneNode(true),
+    };
   },
 });
 

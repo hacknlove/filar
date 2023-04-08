@@ -4,6 +4,7 @@ const { ServerElementsMap } = require("../common");
 const parser = new DOMParser();
 
 const ForEach = require("./ForEach.se");
+const { createFakeContext } = require("../../../test/fakeContext");
 
 describe("ForEach", () => {
   it("throws if the iterator is empty", async () => {
@@ -36,11 +37,7 @@ describe("ForEach", () => {
 
     ServerElementsMap.set("ForEach", ForEach);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -58,11 +55,7 @@ describe("ForEach", () => {
 
     ServerElementsMap.set("ForEach", ForEach);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });

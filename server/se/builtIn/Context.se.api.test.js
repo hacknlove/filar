@@ -4,6 +4,7 @@ const { ServerElementsMap } = require("../common");
 const parser = new DOMParser();
 
 const Context = require("./Context.se");
+const { createFakeContext } = require("../../../test/fakeContext");
 
 describe("Context from api", () => {
   beforeAll(() => {
@@ -29,11 +30,7 @@ describe("Context from api", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });

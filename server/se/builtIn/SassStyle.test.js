@@ -6,6 +6,7 @@ const { join } = require("path");
 const { readFile } = require("fs-extra");
 const { saveIfDifferent } = require("../../common/saveIfDifferent");
 const { globAsync } = require("../../common/globAsync");
+const { createFakeContext } = require("../../../test/fakeContext");
 
 jest.mock("fs-extra");
 jest.mock("../../common/saveIfDifferent");
@@ -35,12 +36,7 @@ describe("processServerElement", () => {
     readFile.mockResolvedValueOnce(`h1 { color: var(--color1); }`);
     readFile.mockResolvedValueOnce(`h2 { color: var(--color2); }`);
 
-    await processAllElements(document, {
-      filePath: __filename,
-      dir: __dirname,
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.querySelector("style")).not.toBeNull();
     expect(document.toString()).toMatchSnapshot();
@@ -61,12 +57,7 @@ describe("processServerElement", () => {
     readFile.mockResolvedValueOnce(`h1 { color: var(--color1); }`);
     readFile.mockResolvedValueOnce(`h2 { color: var(--color2); }`);
 
-    await processAllElements(document, {
-      filePath: __filename,
-      dir: __dirname,
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.querySelector("style")).toBeNull();
     expect(document.querySelector("link")).not.toBeNull();

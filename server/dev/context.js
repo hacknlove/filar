@@ -1,10 +1,7 @@
-const config = require("../config");
-
 function context(req, res, next) {
-  req.filar = {
-    config: Object.create(config),
-    context: {},
-  };
+  res.__islands = {};
+  res.__ce = {};
+  res.__promises = [];
   next();
 }
 

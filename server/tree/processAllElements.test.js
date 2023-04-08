@@ -4,6 +4,7 @@ const { DOMParser } = require("linkedom");
 const parser = new DOMParser();
 
 const { ServerElementsMap } = require("../se/common");
+const { createFakeContext } = require("../../test/fakeContext");
 
 describe("processAllElements", () => {
   it("replaces the context in texts", async () => {
@@ -18,11 +19,7 @@ describe("processAllElements", () => {
 `;
     const document = parser.parseFromString(html);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -42,11 +39,7 @@ describe("processAllElements", () => {
   `;
     const document = parser.parseFromString(html);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -61,11 +54,7 @@ describe("processAllElements", () => {
   `;
     const document = parser.parseFromString(html);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -79,11 +68,7 @@ describe("processAllElements", () => {
 
     const document = parser.parseFromString(html);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -97,11 +82,7 @@ describe("processAllElements", () => {
 
     const document = parser.parseFromString(html);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -140,11 +121,7 @@ describe("processAllElements", () => {
 
     ServerElementsMap.set("MyComponent", myComponent);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });

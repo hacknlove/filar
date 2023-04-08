@@ -3,6 +3,7 @@ const {
   findIsland,
   getTextChildNumber,
 } = require("./replaceIslandPlaceholders");
+const { createFakeContext } = require("../../test/fakeContext");
 
 const { DOMParser } = require("linkedom");
 const parser = new DOMParser();
@@ -106,12 +107,14 @@ describe("findIsland", () => {
     const element = document.getElementById("element");
 
     expect(
-      findIsland(element, {
-        __islands: {
-          "the-island": { island: "the island" },
-        },
-        __ce: {},
-      })
+      findIsland(
+        element,
+        createFakeContext({
+          __islands: {
+            "the-island": { island: "the island" },
+          },
+        })
+      )
     ).toEqual({
       island: "the island",
     });

@@ -6,6 +6,7 @@ const parser = new DOMParser();
 const If = require("./If.se");
 
 ServerElementsMap.set("If", If);
+const { createFakeContext } = require("../../../test/fakeContext");
 
 describe("if condition", () => {
   it("renders the content if the condition evaluates to truthy", async () => {
@@ -19,11 +20,7 @@ describe("if condition", () => {
             </html>
         `);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -38,11 +35,7 @@ describe("if condition", () => {
             </html>
         `);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });

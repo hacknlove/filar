@@ -14,6 +14,7 @@ async function getStaticContext(filePath) {
     },
     __islands: {},
     __ce: {},
+    __promises: [],
   });
   if (isAModule(importPath)) {
     if (config.dev) {

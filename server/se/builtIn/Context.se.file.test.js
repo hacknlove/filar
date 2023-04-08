@@ -1,4 +1,5 @@
 const parser = new (require("linkedom").DOMParser)();
+const { createFakeContext } = require("../../../test/fakeContext");
 
 const { processAllElements } = require("../../tree/processAllElements");
 const { ServerElementsMap } = require("../common");
@@ -22,12 +23,13 @@ describe("Context from file", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      dir: `${config.from}/test`,
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(
+      document,
+      createFakeContext({
+        filePath: "test/index.html",
+        dir: `${config.from}/test`,
+      })
+    );
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -42,12 +44,13 @@ describe("Context from file", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      dir: `${config.from}/test`,
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(
+      document,
+      createFakeContext({
+        filePath: "test/index.html",
+        dir: `${config.from}/test`,
+      })
+    );
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -62,12 +65,13 @@ describe("Context from file", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      dir: `${config.from}/test`,
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(
+      document,
+      createFakeContext({
+        filePath: "test/index.html",
+        dir: `${config.from}/test`,
+      })
+    );
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -82,12 +86,13 @@ describe("Context from file", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      dir: `${process.cwd()}/test`,
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(
+      document,
+      createFakeContext({
+        filePath: "test/index.html",
+        dir: `${process.cwd()}/test`,
+      })
+    );
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -96,30 +101,24 @@ describe("Context from file", () => {
 describe("Context fromFile", () => {
   it("throws if the src cannot be found", async () => {
     await expect(
-      Context.__test__.fromFile("/cannot/be/found", {
-        filePath: `${config.from}/test/index.html`,
-        dir: `${config.from}/test`,
-        __islands: {},
-        __ce: {},
-      })
+      Context.__test__.fromFile(
+        "/cannot/be/found",
+        createFakeContext({
+          filePath: `${config.from}/test/index.html`,
+        })
+      )
     ).rejects.toThrow();
   });
 
   it("throws if the src cannot be parsed", async () => {
     await expect(
-      Context.__test__.fromFile("/test/wrong.json", {
-        filePath: `${config.from}/test/index.html`,
-        dir: `${config.from}/test`,
-      })
+      Context.__test__.fromFile("/test/wrong.json", createFakeContext())
     ).rejects.toThrow();
   });
 
   it("throws if there is a transform function, and it errors", async () => {
     await expect(
-      Context.__test__.fromFile("/test/wrongTransform.js", {
-        filePath: `${config.from}/test/index.html`,
-        dir: `${config.from}/test`,
-      })
+      Context.__test__.fromFile("/test/wrongTransform.js", createFakeContext())
     ).rejects.toThrow();
   });
 });

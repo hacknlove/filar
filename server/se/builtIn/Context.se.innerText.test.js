@@ -4,6 +4,7 @@ const { ServerElementsMap } = require("../common");
 const parser = new DOMParser();
 
 const Context = require("./Context.se");
+const { createFakeContext } = require("../../../test/fakeContext");
 
 describe("Context inner text", () => {
   it("changes parent context from JSON", async () => {
@@ -22,11 +23,7 @@ describe("Context inner text", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });
@@ -43,11 +40,7 @@ describe("Context inner text", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });

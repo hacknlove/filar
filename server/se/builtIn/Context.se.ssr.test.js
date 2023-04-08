@@ -4,6 +4,7 @@ const { ServerElementsMap } = require("../common");
 const parser = new DOMParser();
 
 const Context = require("./Context.se");
+const { createFakeContext } = require("../../../test/fakeContext");
 
 jest.mock("../../config", () => ({
   from: "server/se/builtIn",
@@ -20,11 +21,7 @@ describe("Context ssr", () => {
 
     ServerElementsMap.set("Context", Context);
 
-    await processAllElements(document, {
-      filePath: "test/index.html",
-      __islands: {},
-      __ce: {},
-    });
+    await processAllElements(document, createFakeContext());
 
     expect(document.toString()).toMatchSnapshot();
   });

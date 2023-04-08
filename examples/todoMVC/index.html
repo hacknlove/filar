@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-framework="javascript">
+  <head>
+    <meta charset="utf-8" />
+    <title>VanillaJS • TodoMVC</title>
+    <link rel="stylesheet" href="//unpkg.com/todomvc-common/base.css" />
+    <link rel="stylesheet" href="//unpkg.com/todomvc-app-css/index.css" />
+    <script src="/main.js"></script>
+  </head>
+
+  <body>
+    <Island todos="[]" filter="'all'"></Island>
+    <section class="todoapp">
+      <header class="header">
+        <h1>todos</h1>
+        <div>{(JSON.stringify(todos))}</div>
+        <input
+          id="newTodo"
+          class="new-todo"
+          placeholder="What needs to be done?"
+          autofocus
+        />
+      </header>
+      <section
+        class="main"
+        style="display: {(todos.length === 0 ? 'none' : 'block')}"
+      >
+        <input id="toggle-all" class="toggle-all" type="checkbox" />
+        <label for="toggle-all">Mark all as complete</label>
+        <ul class="todo-list">
+          <for-each key="item" of="todos">
+            <li data-id="1680277373144" class="">
+              <div class="view">
+                <input class="toggle" type="checkbox" />
+                <label>mono</label>
+                <button class="destroy"></button>
+              </div>
+            </li>
+          </for-each>
+        </ul>
+      </section>
+      <footer class="footer {(todos.length === 0 && 'hidden')}">
+        <span class="todo-count"></span>
+        <ul class="filters">
+          <li>
+            <a href="#/" class="selected">All</a>
+          </li>
+          <li>
+            <a href="#/active">Active</a>
+          </li>
+          <li>
+            <a href="#/completed">Completed</a>
+          </li>
+        </ul>
+        <button class="clear-completed">Clear completed</button>
+      </footer>
+    </section>
+    <footer class="info">
+      <p>Double-click to edit a todo</p>
+      <p>
+        Created by <a href="http://twitter.com/oscargodson">Oscar Godson</a>
+      </p>
+      <p>
+        Refactored by
+        <a href="https://github.com/cburgmer">Christoph Burgmer</a>
+      </p>
+      <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+    </footer>
+  </body>
+</html>
