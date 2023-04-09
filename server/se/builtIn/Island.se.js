@@ -1,39 +1,43 @@
 const vm = require("vm");
-const { getRoot } = require("../../tree/getRoot");
 
-async function processServerElement(element, context) {
-  const root = getRoot(element);
+function elementAttributesToObject(element) {
+  const attributes = {};
 
-  const attributes = element.getAttributeNames();
-  const parentNode = element.parentNode;
+  for (const attribute of element.attributes) {
+    attributes[attribute.name] = attribute.value;
+  }
 
+  return attributes;
+}
+
+async function makeAnIsland(targetElement, attributes, context) {
   const currentIslandId =
-    parentNode.getAttribute("id") || `i-${context.Indexes.lastIslandId++}`;
+    targetElement.getAttribute("id") || `i-${context.Indexes.lastIslandId++}`;
 
   const state = {};
 
   const external = [];
 
-  for (const attribute of attributes) {
+  for (const attribute in attributes) {
     const from = (islandId, expression) => {
-      const islandScriptElement = root.getElementById(islandId);
+      const fromState = context.__islands[islandId].state;
 
-      if (!islandScriptElement) {
+      if (!fromState) {
         throw new Error("Island not found", {
           cause: {
             islandId,
             attribute,
-            value: element.getAttribute(attribute),
+            value: attributes[attribute],
           },
         });
       }
 
       external.push([attribute, islandId, expression]);
 
-      return vm.runInContext(expression, islandScriptElement.parent.island);
+      return vm.runInNewContext(expression, fromState);
     };
     const parent = (expression) => {
-      let node = element.parentNode.parentNode;
+      let node = targetElement.parentNode;
       while (node && !node.island) {
         node = node.parentNode;
       }
@@ -42,7 +46,7 @@ async function processServerElement(element, context) {
         throw new Error("Parent island not found", {
           cause: {
             attribute,
-            value: element.getAttribute(attribute),
+            value: attributes[attribute],
           },
         });
       }
@@ -51,18 +55,25 @@ async function processServerElement(element, context) {
     };
     const vmContext = Object.create(context);
     Object.assign(vmContext, { parent, from });
-    state[attribute] = await vm.runInNewContext(
-      element.getAttribute(attribute),
-      vmContext
-    );
+    try {
+      state[attribute] = await vm.runInNewContext(
+        attributes[attribute],
+        vmContext
+      );
+    } catch (error) {
+      throw new Error("Error in island", {
+        cause: {
+          attribute,
+          value: attributes[attribute],
+          error,
+        },
+      });
+    }
   }
 
-  if (!parentNode.getAttribute("id")) {
-    parentNode.setAttribute("id", currentIslandId);
+  if (!targetElement.getAttribute("id")) {
+    targetElement.setAttribute("id", currentIslandId);
   }
-
-  element.remove();
-
   context.__islands[currentIslandId] = {
     state,
     external,
@@ -71,4 +82,18 @@ async function processServerElement(element, context) {
   };
 }
 
+async function processServerElement(element, context) {
+  const targetElement = element.parentNode;
+
+  await makeAnIsland(
+    targetElement,
+    elementAttributesToObject(element),
+    context
+  );
+
+  element.remove();
+}
+
 exports.processServerElement = processServerElement;
+exports.makeAnIsland = makeAnIsland;
+exports.elementAttributesToObject = elementAttributesToObject;

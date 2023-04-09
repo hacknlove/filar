@@ -14,7 +14,7 @@ async function main() {
     staticDir: ".dev",
   });
 
-  console.log(
+  console.info(
     `Development mode from ${config.from} at http://${config.host}:${config.port}`
   );
 

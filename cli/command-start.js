@@ -9,7 +9,7 @@ async function main() {
   const config = await generateConfig();
   const { from, host, port } = config;
 
-  console.log(`Serving from ${from} at ${host}:${port}`);
+  console.info(`Serving from ${from} at ${host}:${port}`);
 
   await initializeServerElements();
 

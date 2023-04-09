@@ -1,1 +1,1 @@
-alert("hola");
+export const observedAttributes = ["contenido"];

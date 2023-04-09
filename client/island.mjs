@@ -87,6 +87,10 @@ export function initExpression(island, expression, runtime) {
   };
 }
 
+function from(islandId, expression) {
+  return document.getElementById(islandId).evaluate(expression);
+}
+
 export function initIsland([islandId, island]) {
   const islandElement = document.getElementById(islandId);
 
@@ -110,6 +114,23 @@ export function initIsland([islandId, island]) {
     },
     proxyHandler
   );
+
+  islandElement.evaluate = (expression) => {
+    const fn = new Function(
+      ["_state", "from", "parent"],
+      `\
+        const { ${Object.keys(islandElement.state).join(", ")} } = _state;
+        return ${expression};\n`
+    );
+    const parent = (expression) => {
+      const parentIsland = window.closestIsland(islandElement.parentElement);
+      if (!parentIsland) {
+        throw new Error("No parent island");
+      }
+      return parentIsland.evaluate(expression);
+    };
+    return fn(islandElement.state, from, parent);
+  };
 
   islandElement.island = island;
 

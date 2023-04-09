@@ -1,4 +1,4 @@
-console.log(`
+console.info(`
 filar version ${
   require("../package.json").version
 } Not suitable for production use.

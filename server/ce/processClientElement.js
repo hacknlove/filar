@@ -1,4 +1,8 @@
 const { childrenIterator } = require("../common/childrenIterator");
+const {
+  makeAnIsland,
+  elementAttributesToObject,
+} = require("../se/builtIn/Island.se");
 const { ClientElements } = require("./");
 
 function getTemplateSlots(template) {
@@ -19,7 +23,7 @@ function getTemplateSlots(template) {
   return slots;
 }
 
-function sendChildToSlot({ child, templateSlots, clientElement, component }) {
+function sendChildToSlot({ child, templateSlots, clientElement, element }) {
   const slotName = child.getAttribute?.("slot") ?? "";
   child.removeAttribute?.("slot");
   child.remove();
@@ -31,7 +35,7 @@ function sendChildToSlot({ child, templateSlots, clientElement, component }) {
       throw new Error("Slot not found", {
         cause: {
           slotName,
-          tagName: component.tagName,
+          tagName: element.tagName,
         },
       });
     }
@@ -68,24 +72,26 @@ function defaultSlots(templateSlots) {
   }
 }
 
-async function processClientElement(component, context, processElements) {
-  const { dom, js } = ClientElements[component.tagName];
+async function processClientElement(element, context, processElements) {
+  const { dom, js } = ClientElements[element.tagName];
+
+  makeAnIsland(element, elementAttributesToObject(element), context);
 
   const templateSlots = getTemplateSlots(dom);
 
-  for (const child of childrenIterator(component)) {
+  for (const child of childrenIterator(element)) {
     if (child.nodeType === 3 && !child.textContent.trim()) {
       continue;
     }
-    sendChildToSlot({ child, templateSlots, dom, component });
+    sendChildToSlot({ child, templateSlots, dom, element });
   }
 
   defaultSlots(templateSlots);
 
-  component.replaceChildren(...dom.childNodes);
+  element.replaceChildren(...dom.childNodes);
 
   if (js) {
-    context.__ce[component.tagName] = js;
+    context.__ce[element.tagName] = js;
   }
 
   await processElements(dom, context);

@@ -5,6 +5,7 @@ const { processNodeAttributes } = require("../context/processNodeAttributes");
 const { getNewContext } = require("../context/getNewContext");
 const { processServerElement } = require("../se/processServerElement");
 const { processClientElement } = require("../ce/processClientElement");
+const { islandAttributes } = require("./islandAttributes");
 
 const isServerElementRegex = /^([A-Z][a-z]+)+$/;
 const isClientElementRegex = /^([a-z]+-)+[a-z]+$/;
@@ -36,6 +37,7 @@ async function processAllElements(element, context = {}) {
 
     const newContext = getNewContext(node, context);
     processNodeAttributes(node, context);
+    await islandAttributes(node, context);
 
     if (isServerElementRegex.test(node.tagName)) {
       await processServerElement(node, newContext, processAllElements);

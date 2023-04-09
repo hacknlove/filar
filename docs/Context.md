@@ -6,7 +6,7 @@ parent components to their descendants in a hierarchical manner.
 Here's a simple example:
 
 ```html
-<div Title="'The foo bar thing'">
+<div title="'The foo bar thing'">
   <div Slug="Title.toLowerCase().replace(/ /g, '-')">
     <a title="{{Title}}" href="foo/{{Slug}}">{{Title}}</a>
   </div>

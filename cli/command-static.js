@@ -12,7 +12,7 @@ async function main() {
     staticDir: ".static",
   });
 
-  console.log(`Building static site from ${config.from}`);
+  console.info(`Building static site from ${config.from}`);
 
   await rmdir(join(config.from, ".static"), {
     recursive: true,

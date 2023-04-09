@@ -3,7 +3,8 @@
     <title>Pykiss</title>
     <SassStyle />
   </head>
-  <body>
+
+  <body id="header" __ foo="'bar'">
     <script>
       function clickthis(element, event) {
         const state = closestIsland(element);
@@ -16,10 +17,9 @@
       }
     </script>
     <MainHeader />
-    <div>
-      <Island clicks="1" item="''" />
+    <div __ clicks="1" item="''" foo="from('header', 'foo')">
       <h2 class="count{(clicks)}">This is an island</h2>
-      <div>{(clicks)} {(item)} {(clicks)}</div>
+      <div>{(clicks)} {(item)} {(clicks)} -- {(foo)}</div>
       <button onclick="clickthis(this)">+</button>
       <input type="text" oninput="setItem(this)" />
     </div>
@@ -32,6 +32,6 @@
       <button onclick="clickthis(this)">+</button>
       <input type="text" oninput="setItem(this)" />
     </div>
-    <client-element> </client-element>
+    <client-element contenido="'una de mero'"> </client-element>
   </body>
 </html>

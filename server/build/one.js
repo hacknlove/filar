@@ -11,7 +11,7 @@ const { getStaticContext } = require("../common/getStaticContext");
 const { isStatic } = require("../common/isStatic");
 
 async function buildOne(filePath) {
-  console.log(`Building ${filePath}...`);
+  console.info(`Building ${filePath}...`);
   const fullFilePath = join(config.from, filePath);
   const file = await readFile(fullFilePath, "utf8").catch((error) => ({
     error,

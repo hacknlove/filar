@@ -16,7 +16,7 @@ async function buildOne(filePath) {
     console.warn(`Skipping ${filePath}, not a static file`);
     return;
   }
-  console.log(`Building ${filePath}...`);
+  console.info(`Building ${filePath}...`);
   const fullFilePath = join(config.from, filePath);
   const file = await readFile(fullFilePath, "utf8").catch((error) => ({
     error,
