@@ -10,13 +10,13 @@ function elementAttributesToObject(element) {
   return attributes;
 }
 
-async function makeAnIsland(targetElement, attributes, context) {
+async function makeAnIsland(element, attributes, context) {
   const currentIslandId =
-    targetElement.getAttribute("id") || `i-${context.Indexes.lastIslandId++}`;
+    element.getAttribute("id") || `i-${context.Indexes.lastIslandId++}`;
 
   const state = {};
 
-  const external = [];
+  const external = {};
 
   for (const attribute in attributes) {
     const from = (islandId, expression) => {
@@ -32,12 +32,17 @@ async function makeAnIsland(targetElement, attributes, context) {
         });
       }
 
-      external.push([attribute, islandId, expression]);
+      external[attribute] ??= {
+        raw: attributes[attribute],
+      };
+
+      external[attribute].ids ??= [];
+      external[attribute].ids.push(islandId);
 
       return vm.runInNewContext(expression, fromState);
     };
     const parent = (expression) => {
-      let node = targetElement.parentNode;
+      let node = element.parentNode;
       while (node && !node.island) {
         node = node.parentNode;
       }
@@ -71,8 +76,8 @@ async function makeAnIsland(targetElement, attributes, context) {
     }
   }
 
-  if (!targetElement.getAttribute("id")) {
-    targetElement.setAttribute("id", currentIslandId);
+  if (!element.getAttribute("id")) {
+    element.setAttribute("id", currentIslandId);
   }
   context.__islands[currentIslandId] = {
     state,
@@ -82,18 +87,5 @@ async function makeAnIsland(targetElement, attributes, context) {
   };
 }
 
-async function processServerElement(element, context) {
-  const targetElement = element.parentNode;
-
-  await makeAnIsland(
-    targetElement,
-    elementAttributesToObject(element),
-    context
-  );
-
-  element.remove();
-}
-
-exports.processServerElement = processServerElement;
 exports.makeAnIsland = makeAnIsland;
 exports.elementAttributesToObject = elementAttributesToObject;

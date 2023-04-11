@@ -94,6 +94,23 @@ function from(islandId, expression) {
 export function initIsland([islandId, island]) {
   const islandElement = document.getElementById(islandId);
 
+  if (!islandElement) {
+    console.warn(`Island ${islandId} not found`);
+    return;
+  }
+
+  islandElement.events = [];
+
+  for (const [externalIslandId, key, expression] of island.external) {
+    const eventHandler = () => {
+      island.state[key] = island.evaluate(expression);
+    };
+    islandElement.events.push([externalIslandId, eventHandler]);
+    document
+      .getElementById(externalIslandId)
+      .addEventListener("state", eventHandler);
+  }
+
   let dispatchEventTimeout;
   function debounceDispatchState() {
     clearTimeout(dispatchEventTimeout);
@@ -147,6 +164,30 @@ export default function initIslands(islands) {
     Object.entries(islands).forEach(initIsland);
   });
   document.dispatchEvent(new CustomEvent("islands-ready"));
+
+  // Observer
+  const observer = new MutationObserver(
+    (mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type !== "childList") {
+          continue;
+        }
+        for (const node of mutation.removedNodes) {
+          if (!node.island) {
+            continue;
+          }
+          for (const [islandId, eventHandler] of node.island.events) {
+            document
+              .getElementById(islandId)
+              ?.removeEventListener("state", eventHandler);
+          }
+        }
+      }
+    },
+    { subtree: true, childList: true }
+  );
+
+  observer.observe(document.body, { subtree: true, childList: true });
 }
 
 window.closestIsland = function closestIsland(element) {

@@ -97,8 +97,7 @@ You can declare reactive islands, whose state can be used by all its children.
 **/pages/index.html**
 
 ```html
-<div id="foo">
-  <Island likes="0" dislikes="0" />
+<div id="foo" -- likes="0" dislikes="0">
   <h1>Likes: {(likes)} Dislikes: {(dislikes)}</h1>
   <button onclick="foo.state.likes++">Like</button>
   <button onclick="foo.state.dislikes++">Dislike</button>

@@ -1,4 +1,4 @@
-const { makeAnIsland } = require("../se/builtIn/Island.se");
+const { makeAnIsland } = require("../Island");
 
 function islandAttributes(node, context) {
   if (!node.hasAttribute("__")) {

@@ -96,8 +96,7 @@ interpolation is done at server side as well, to avoid flickering on the client
 side rendering.
 
 ```html
-<div id="foo">
-  <Island likes="0" dislikes="0" />
+<div id="foo" __ likes="0" dislikes="0">
   <h1>Likes: {(likes)} Dislikes: {(dislikes)}</h1>
   <button onclick="foo.state.likes++">Like</button>
   <button onclick="foo.state.dislikes++">Dislike</button>

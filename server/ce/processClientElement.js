@@ -1,8 +1,5 @@
 const { childrenIterator } = require("../common/childrenIterator");
-const {
-  makeAnIsland,
-  elementAttributesToObject,
-} = require("../se/builtIn/Island.se");
+const { makeAnIsland, elementAttributesToObject } = require("../Island");
 const { ClientElements } = require("./");
 
 function getTemplateSlots(template) {
