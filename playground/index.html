@@ -4,7 +4,7 @@
     <SassStyle />
   </head>
 
-  <body id="header" __ foo="'bar'">
+  <body Hola="'Mundo'" title="test" __ foo="'Fool'">
     <script>
       function clickthis(element, event) {
         const state = closestIsland(element);
@@ -17,10 +17,11 @@
       }
     </script>
     <MainHeader />
-    <div __ clicks="1" item="''" foo="from('header', 'foo')">
+    <h1>{{Hola}}</h1>
+    <div __ clicks="1" item="''" hola="Hola" fuu="foo">
       <h2 class="count{(clicks)}">This is an island</h2>
-      <div>{(clicks)} {(item)} {(clicks)} -- {(foo)}</div>
-      <button onclick="clickthis(this)">+</button>
+      <div>{(clicks)} {(item)} {(clicks)} -- {(foo.toUpperCase())}</div>
+      <button onclick="clickthis(this)">{(fuu)} + {(hola)}</button>
       <input type="text" oninput="setItem(this)" />
     </div>
     <br />
@@ -31,6 +32,6 @@
       <button onclick="clickthis(this)">+</button>
       <input type="text" oninput="setItem(this)" />
     </div>
-    <client-element contenido="'una de mero'"> </client-element>
+    <client-element __ contenido="'una de mero'"> </client-element>
   </body>
 </html>

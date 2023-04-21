@@ -1,4 +1,13 @@
 const vm = require("vm");
+const { fullIslandState } = require("../common/fullIslandState");
+
+function tryExpresionInContext(expression, context, isLive) {
+  try {
+    return [vm.runInNewContext(expression, context), isLive];
+  } catch {
+    //
+  }
+}
 
 function elementAttributesToObject(element) {
   const attributes = {};
@@ -15,64 +24,26 @@ async function makeAnIsland(element, attributes, context) {
     element.getAttribute("id") || `i-${context.Indexes.lastIslandId++}`;
 
   const state = {};
+  const live = {};
 
-  const external = {};
+  const vmClientContext = fullIslandState(element, context);
+  const vmServerContext = Object.assign({}, vmClientContext, context);
 
   for (const attribute in attributes) {
-    const from = (islandId, expression) => {
-      const fromState = context.__islands[islandId].state;
+    const expression = attributes[attribute];
+    const [value, isLive] = tryExpresionInContext(
+      expression,
+      vmClientContext,
+      true
+    ) ||
+      tryExpresionInContext(expression, vmServerContext, false) || [
+        expression,
+        false,
+      ];
 
-      if (!fromState) {
-        throw new Error("Island not found", {
-          cause: {
-            islandId,
-            attribute,
-            value: attributes[attribute],
-          },
-        });
-      }
-
-      external[attribute] ??= {
-        raw: attributes[attribute],
-      };
-
-      external[attribute].ids ??= [];
-      external[attribute].ids.push(islandId);
-
-      return vm.runInNewContext(expression, fromState);
-    };
-    const parent = (expression) => {
-      let node = element.parentNode;
-      while (node && !node.island) {
-        node = node.parentNode;
-      }
-
-      if (!node) {
-        throw new Error("Parent island not found", {
-          cause: {
-            attribute,
-            value: attributes[attribute],
-          },
-        });
-      }
-
-      return from(node.islandId, expression);
-    };
-    const vmContext = Object.create(context);
-    Object.assign(vmContext, { parent, from });
-    try {
-      state[attribute] = await vm.runInNewContext(
-        attributes[attribute],
-        vmContext
-      );
-    } catch (error) {
-      throw new Error("Error in island", {
-        cause: {
-          attribute,
-          value: attributes[attribute],
-          error,
-        },
-      });
+    state[attribute] = value;
+    if (isLive) {
+      live[attribute] = expression;
     }
   }
 
@@ -81,7 +52,7 @@ async function makeAnIsland(element, attributes, context) {
   }
   context.__islands[currentIslandId] = {
     state,
-    external,
+    live,
     expressions: {},
     offsets: {},
   };

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:client": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:client": "NODE_OPTIONS=--experimental-vm-modules jest --config client-jest.config.js",
     "test": "jest",
     "build": "node cli build --from ./playground",
     "start": "node cli start --from ./playground",

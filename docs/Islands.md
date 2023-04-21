@@ -49,63 +49,41 @@ The island state is updated by changing any element attribute after `__`
 
 ## Nesting
 
-Islands can be nested, but state is not automatically inherit.
+Islands can be nested, but state is not inherit at all. Each islands stays isolated.
 
-If you want to use something from the parent Island in the child island, you can use `parent(expression)`
+## Share state between islands
 
-**Example**
-
-```html
-<article __ foo="42">
-  <p>{(foo)}</p>
-  <section __ bar="parent(foo * 2)">
-    <p>{(bar)}</p>
-  </section>
-</article>
-```
-
-**Output**
+At server side, the best way to share state between islands is to set the values at a shared ancestor's context.
 
 ```html
-<article>
-  <p>42</p>
-  <section>
-    <p>84</p>
-  </section>
-</article>
-```
-
-## Cross island
-
-In a similar way, you can also share state between islands by its ID with the helper `from(islandId, expression)`
-
-In this case, the origin island needs to have and `id` and to be initialized before the destination island.
-
-**Example**
-
-```html
-<div id="island1" __ foo="42">
-  <p>{(foo)}</p>
-</div>
-<div id="island2" __ bar="from('island1', foo * 2)">
-  <p>{(bar)}</p>
+<div UserName="John">
+  <p __ username="UserName">{(username)}</p>
+  <input value="{(username)}" __ username="UserName" />
 </div>
 ```
 
-**Output**
+At client side, you need js to share state between islands.
+Listen to the `state` event of the island you want to share the state with, and update the state of the other island.
 
 ```html
-<div>
-  <p>42</p>
-</div>
-<div>
-  <p>84</p>
+<div UserName="John">
+  <p __ nick="UserName.toLowerCase()">Nick: {(nick)}</p>
+  <input value="{(username)}" __ username="UserName" />
+  <script>
+    const input = document.currentScript.previousElementSibling;
+    const p = input.previousElementSibling;
+
+    input.addEventListener("input", (event) => {
+      input.state.username = event.target.value;
+    });
+    input.addEventListener("state", (event) => {
+      p.state.nick = input.state.username.toLowerCase();
+    });
+  </script>
 </div>
 ```
 
-### Heads up
-
-Usually, "initialized before" means that the island is declared before the other island in the HTML, but islands inside SSR tags are initialized after the SSR tag is rendered.
+This exampls is stupid, because it would be better to make only one island at the div. But, there would be other times where you won't be able to do this.
 
 ## Events
 

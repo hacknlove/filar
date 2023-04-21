@@ -13,8 +13,8 @@ describe("replaceIslandPlaceholders", () => {
     const text = "Hello {(name)}!";
 
     const span = parser.parseFromString(
-      `<span>${text}</span>`
-    ).firstElementChild;
+      `<div id="i-1"><span id="n-0">${text}</span></div>`
+    ).firstElementChild.firstElementChild;
 
     const island = {
       name: "world",
@@ -24,12 +24,16 @@ describe("replaceIslandPlaceholders", () => {
       node: span.firstChild,
       text,
       island: {
-        state: island,
         expressions: {},
         offsets: {},
       },
       attribute: "t-0",
       context: {
+        __islands: {
+          "i-1": {
+            state: island,
+          },
+        },
         Indexes: {
           currentNodeId: 0,
         },
@@ -50,23 +54,23 @@ describe("replaceIslandPlaceholders", () => {
       name: "world",
     };
 
-    expect(() =>
-      replaceIslandPlaceholders({
-        node: span.firstChild,
-        text,
-        island: {
-          state: island,
-          expressions: {},
-          offsets: {},
+    replaceIslandPlaceholders({
+      node: span.firstChild,
+      text,
+      island: {
+        state: island,
+        expressions: {},
+        offsets: {},
+      },
+      attribute: "t-0",
+      context: {
+        __islands: {},
+        Indexes: {
+          currentNodeId: 0,
         },
-        attribute: "t-0",
-        context: {
-          Indexes: {
-            currentNodeId: 0,
-          },
-        },
-      })
-    ).toThrow("Error while evaluating island");
+      },
+    });
+    expect(span.innerText).toBe("Hello wrong expression!");
   });
 });
 

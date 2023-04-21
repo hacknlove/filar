@@ -15,11 +15,21 @@ function findIsland(node, context) {
   }
   return null;
 }
+function fullState(node, context) {
+  let state = {};
+  while (node) {
+    if (context.__islands[node.id]) {
+      state = Object.assign({}, context.__islands[node.id].state, state);
+    }
+    node = node.parentNode;
+  }
+  return state;
+}
 
 function replaceIslandPlaceholders({
   node,
   text,
-  island: { state, expressions, offsets },
+  island: { expressions, offsets },
   attribute,
   context,
 }) {
@@ -38,20 +48,19 @@ function replaceIslandPlaceholders({
     let replacement = expressions[expresion]?.value;
 
     if (expressions[expresion] === undefined) {
+      const vmState = fullState(node, context);
       try {
-        replacement = vm.runInNewContext(expresion, state).toString();
+        replacement = vm.runInNewContext(expresion, vmState).toString();
         expressions[expresion] = {
           value: replacement,
           replacements: [],
         };
       } catch (error) {
-        throw new Error("Error while evaluating island", {
-          cause: {
-            text,
-            expresion,
-            state,
-          },
-        });
+        replacement = expresion;
+        expressions[expresion] = {
+          value: replacement,
+          replacements: [],
+        };
       }
     }
 

@@ -1,5 +1,4 @@
 const { childrenIterator } = require("../common/childrenIterator");
-const { makeAnIsland, elementAttributesToObject } = require("../Island");
 const { ClientElements } = require("./");
 
 function getTemplateSlots(template) {
@@ -71,8 +70,6 @@ function defaultSlots(templateSlots) {
 
 async function processClientElement(element, context, processElements) {
   const { dom, js } = ClientElements[element.tagName];
-
-  makeAnIsland(element, elementAttributesToObject(element), context);
 
   const templateSlots = getTemplateSlots(dom);
 
