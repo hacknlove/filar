@@ -1,8 +1,6 @@
 const { replaceStaticPlaceholders } = require("./replaceStaticPlaceholders");
-const {
-  replaceIslandPlaceholders,
-  findIsland,
-} = require("./replaceIslandPlaceholders");
+const { replaceIslandPlaceholders } = require("./replaceIslandPlaceholders");
+const { findIsland } = require("../Island/findIsland");
 
 exports.processNodeAttributes = function processNodeAttributes(node, context) {
   const island = findIsland(node, context);

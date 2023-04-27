@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "todoMVC:dev": "node cli dev --from ./examples/todoMVC",
     "test:client": "NODE_OPTIONS=--experimental-vm-modules jest --config client-jest.config.js",
     "test": "jest",
     "build": "node cli build --from ./playground",

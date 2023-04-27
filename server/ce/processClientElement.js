@@ -19,7 +19,7 @@ function getTemplateSlots(template) {
   return slots;
 }
 
-function sendChildToSlot({ child, templateSlots, clientElement, element }) {
+function sendChildToSlot({ child, templateSlots, dom, element }) {
   const slotName = child.getAttribute?.("slot") ?? "";
   child.removeAttribute?.("slot");
   child.remove();
@@ -36,7 +36,7 @@ function sendChildToSlot({ child, templateSlots, clientElement, element }) {
       });
     }
 
-    clientElement.appendChild(child);
+    dom.appendChild(child);
     return;
   }
 

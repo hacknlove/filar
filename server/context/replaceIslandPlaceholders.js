@@ -6,15 +6,6 @@ function getTextChildNumber(node) {
   return i;
 }
 
-function findIsland(node, context) {
-  while (node) {
-    if (context.__islands[node.id]) {
-      return context.__islands[node.id];
-    }
-    node = node.parentNode;
-  }
-  return null;
-}
 function fullState(node, context) {
   let state = {};
   while (node) {
@@ -87,4 +78,3 @@ function replaceIslandPlaceholders({
 
 exports.replaceIslandPlaceholders = replaceIslandPlaceholders;
 exports.getTextChildNumber = getTextChildNumber;
-exports.findIsland = findIsland;

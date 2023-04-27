@@ -43,7 +43,7 @@ function remove(filePath) {
 const ClientElements = new Proxy(ClientElementsMap, {
   get(target, name) {
     if (!target.has(name)) {
-      throw new Error("Custom element not found", {
+      throw new Error("Client element not found", {
         cause: {
           name,
         },

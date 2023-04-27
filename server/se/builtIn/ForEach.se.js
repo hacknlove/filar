@@ -2,17 +2,17 @@ const vm = require("vm");
 
 const { childrenIterator } = require("../../common/childrenIterator");
 
-async function processServerElement(element, context, processAllElements) {
-  const key = element.getAttribute("key");
-  const iterator = element.getAttribute("of");
-  const filter = element.getAttribute("filter");
+async function processServerElement(node, context, processAllElements) {
+  const key = node.getAttribute("key");
+  const iterator = node.getAttribute("of");
+  const filter = node.getAttribute("filter");
 
   if (!iterator || !key) {
-    element.remove();
+    node.remove();
     return;
   }
 
-  const children = Array.from(childrenIterator(element), (child) => {
+  const children = Array.from(childrenIterator(node), (child) => {
     child.remove();
     return child;
   });
@@ -27,7 +27,7 @@ async function processServerElement(element, context, processAllElements) {
       continue;
     }
 
-    const div = element.ownerDocument.createElement("div");
+    const div = node.ownerDocument.createElement("div");
 
     for (const child of children) {
       const newChild = child.cloneNode(true);
@@ -35,11 +35,11 @@ async function processServerElement(element, context, processAllElements) {
     }
     await processAllElements(div, newContext);
     for (const newChild of childrenIterator(div)) {
-      element.parentNode.insertBefore(newChild, element);
+      node.parentNode.insertBefore(newChild, node);
     }
   }
 
-  element.remove();
+  node.remove();
 }
 
 exports.processServerElement = processServerElement;

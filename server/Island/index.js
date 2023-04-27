@@ -27,7 +27,11 @@ async function makeAnIsland(element, attributes, context) {
   const live = {};
 
   const vmClientContext = fullIslandState(element, context);
-  const vmServerContext = Object.assign({}, vmClientContext, context);
+  const vmServerContext = Object.assign({}, vmClientContext);
+
+  for (const k in context) {
+    vmServerContext[k] = context[k];
+  }
 
   for (const attribute in attributes) {
     const expression = attributes[attribute];

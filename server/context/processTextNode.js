@@ -1,9 +1,10 @@
 const {
   replaceIslandPlaceholders,
-  findIsland,
   getTextChildNumber,
 } = require("./replaceIslandPlaceholders");
 const { replaceStaticPlaceholders } = require("./replaceStaticPlaceholders");
+
+const { findIsland } = require("../Island/findIsland");
 
 function processTextNode(node, context) {
   const island = findIsland(node, context);
